@@ -1,0 +1,27 @@
+{
+  "_data_files": [
+    {
+      "filename": "data-00000-of-00001.arrow"
+    }
+  ],
+  "_fingerprint": "67efed9808249b61",
+  "_format_columns": [
+    "attention_mask",
+    "classifier_score",
+    "fre_score_words",
+    "input_ids",
+    "label",
+    "perplexity",
+    "sentence_length_words",
+    "shannon_entropy_words",
+    "special_tokens_mask",
+    "text",
+    "token_type_ids",
+    "ttr_words",
+    "word_rarity_words"
+  ],
+  "_format_kwargs": {},
+  "_format_type": null,
+  "_output_all_columns": false,
+  "_split": null
+}

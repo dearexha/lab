@@ -1,0 +1,47 @@
+# General config file
+# Note: Paths are managed dynamically and therefore specified in main.py
+
+seed: 32
+
+# ----------------------------
+# BERT model config
+# ----------------------------
+bert_config:
+  vocab_size: 30522  # length of the current tokenizer
+  hidden_size: 128
+  num_hidden_layers: 2
+  num_attention_heads: 2
+  intermediate_size: 512
+  max_position_embeddings: 512
+  type_vocab_size: 2
+
+# ----------------------------
+# CL strategies
+# ----------------------------
+label_based: true  # boolean specifying is the current CL strategy is label or competence based
+
+# =======label based CL=======
+label_schedule: [[0], [1]]  # corresponds to a sequential schedule
+
+# =====competence based CL====
+# current options: "sentence_length_words", "word_rarity_words","fre_score_words", "shannon_entropy_words", "ttr_words", "perplexity", "classifier_score"
+difficulty_metric: "fre_score_words"
+update_every_competence: 5000 # the distance between steps where the competence is updated
+# competence function params
+T: 50000
+c0: 0.05
+
+# ----------------------------
+# Other Training Params
+# ----------------------------
+batch_size: 8
+learning_rate: 1.0e-4
+patience: 3 # patience in epochs/steps/update_every_steps ? TODO
+max_steps: 500000 # the max number of gradient descent steps when training
+update_every_conv: 25000 # number of steps between checking for convergence/increasing patience (-> used for determining the convergence for the current label subset and for competence based training after the competence reaches 1)
+
+
+
+
+
+

@@ -1,0 +1,76 @@
+{
+  "citation": "",
+  "description": "",
+  "features": {
+    "text": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "label": {
+      "names": [
+        "Ele",
+        "Int",
+        "Adv"
+      ],
+      "_type": "ClassLabel"
+    },
+    "input_ids": {
+      "feature": {
+        "dtype": "int32",
+        "_type": "Value"
+      },
+      "_type": "List"
+    },
+    "token_type_ids": {
+      "feature": {
+        "dtype": "int8",
+        "_type": "Value"
+      },
+      "_type": "List"
+    },
+    "attention_mask": {
+      "feature": {
+        "dtype": "int8",
+        "_type": "Value"
+      },
+      "_type": "List"
+    },
+    "special_tokens_mask": {
+      "feature": {
+        "dtype": "int8",
+        "_type": "Value"
+      },
+      "_type": "List"
+    },
+    "sentence_length_words": {
+      "dtype": "int64",
+      "_type": "Value"
+    },
+    "word_rarity_words": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "fre_score_words": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "shannon_entropy_words": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "ttr_words": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "perplexity": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "classifier_score": {
+      "dtype": "float64",
+      "_type": "Value"
+    }
+  },
+  "homepage": "",
+  "license": ""
+}

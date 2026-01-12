@@ -1,0 +1,39 @@
+version: 1
+disable_existing_loggers: False
+
+formatters:
+  standard:
+    format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    datefmt: "%Y-%m-%d %H:%M:%S"
+  simple:
+    format: "%(name)s - %(levelname)s - %(message)s"
+  csv_format:
+    format: "%(message)s"
+
+handlers:
+  console:
+    class: logging.StreamHandler
+    level: DEBUG
+    formatter: simple
+    stream: ext://sys.stdout
+
+  training_log_file:
+    class:  logging.FileHandler     #logging.handlers.RotatingFileHandler
+    level: INFO
+    formatter: csv_format
+    filename: training.csv  # this is just a placeholder will be updated dynamically in the main script
+    mode: "w"   # a new filename will be created every run anyway
+    # maxBytes: 10485760 # 10MB
+    # backupCount: 5
+    # encoding: utf8
+
+loggers:
+  # specific configuration for the training script
+  training_csv_logger:
+    level: INFO
+    handlers: [training_log_file]
+    propagate: no  # prevents propagation to console
+
+root:
+  level: INFO
+  handlers: [console]
