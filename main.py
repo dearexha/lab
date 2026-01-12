@@ -45,8 +45,8 @@ def setup_logging():
 
 SW_NAME = "SimpleWikipedia"
 OSE_NAME = "OneStopEnglish"
-SW_SAVE_PATH = os.path.join(utils.get_project_dir(), "results/hf_datasets/SimpleWikipedia")
-OSE_SAVE_PATH = os.path.join(utils.get_project_dir(), "results/hf_datasets/OneStopEnglish")
+SW_SAVE_PATH = os.path.join(utils.get_project_dir(), "hf_datasets/SimpleWikipedia")
+OSE_SAVE_PATH = os.path.join(utils.get_project_dir(), "hf_datasets/OneStopEnglish")
 TRAIN_VAL_TEST_SPLIT_SEED = 42 # seed use for creating the split
 TRAIN_VAL_TEST_SPLIT = (0.8, 0.1, 0.1)
 MAX_LENGTH = 512  # max context size
