@@ -119,7 +119,7 @@ if __name__=="__main__":
     tokenizer = BertTokenizerFast.from_pretrained(model_id)
 
     # Load dataset
-    SW_SAVE_PATH = os.path.join(utils.get_project_dir(), "results/hf_datasets/SimpleWikipedia")
+    SW_SAVE_PATH = os.path.join(utils.get_project_dir(), "hf_datasets/SimpleWikipedia")
     sw_dataset_dict = load_from_disk(SW_SAVE_PATH)
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
