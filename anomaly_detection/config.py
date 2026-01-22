@@ -7,9 +7,13 @@ from pathlib import Path
 # ============================================================================
 # PATHS
 # ============================================================================
-PROJECT_ROOT = Path("/home/user/lab")
+# Dynamically determine project root (parent of anomaly_detection directory)
+_current_file = Path(__file__).resolve()
+_anomaly_detection_dir = _current_file.parent
+PROJECT_ROOT = _anomaly_detection_dir.parent
+
 DATA_DIR = PROJECT_ROOT / "datasets" / "SimpleWikipedia_v2"
-OUTPUT_DIR = PROJECT_ROOT / "anomaly_detection" / "outputs"
+OUTPUT_DIR = _anomaly_detection_dir / "outputs"
 EMBEDDINGS_DIR = PROJECT_ROOT / "embeddings"
 
 # Create output directories
