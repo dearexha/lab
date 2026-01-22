@@ -23,13 +23,88 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-def load_glove_from_huggingface() -> Dict[str, np.ndarray]:
+def load_glove_from_file(filepath: str) -> Dict[str, np.ndarray]:
     """
-    Load GloVe embeddings from HuggingFace.
+    Load GloVe embeddings from text file.
+
+    Args:
+        filepath: Path to GloVe text file (e.g., glove.6B.300d.txt)
+
+    Returns:
+        Dictionary mapping word -> embedding vector
+    """
+    glove_dict = {}
+
+    logger.info(f"Loading GloVe from file: {filepath}")
+
+    with open(filepath, 'r', encoding='utf-8') as f:
+        for line in tqdm(f, desc="Loading GloVe embeddings"):
+            values = line.split()
+            word = values[0]
+            vector = np.array(values[1:], dtype=np.float32)
+            glove_dict[word] = vector
+
+    logger.info(f"Loaded {len(glove_dict):,} word embeddings ({len(vector)}-dim)")
+    return glove_dict
+
+
+def download_glove_direct() -> Dict[str, np.ndarray]:
+    """
+    Download GloVe embeddings directly from Stanford's server.
 
     Returns:
         Dictionary mapping word -> embedding vector (300-dim)
     """
+    import urllib.request
+    import zipfile
+    import tempfile
+
+    logger.info("Downloading GloVe 6B from Stanford NLP...")
+
+    # Download URL
+    url = "https://nlp.stanford.edu/data/glove.6B.zip"
+
+    # Download to temporary file
+    with tempfile.NamedTemporaryFile(delete=False, suffix='.zip') as tmp_file:
+        tmp_path = tmp_file.name
+        logger.info(f"Downloading {url} ...")
+
+        # Download with progress
+        def reporthook(block_num, block_size, total_size):
+            downloaded = block_num * block_size
+            percent = min(downloaded / total_size * 100, 100)
+            if block_num % 100 == 0:  # Update every 100 blocks
+                logger.info(f"  Downloaded: {downloaded / 1024 / 1024:.1f} MB / {total_size / 1024 / 1024:.1f} MB ({percent:.1f}%)")
+
+        urllib.request.urlretrieve(url, tmp_path, reporthook)
+        logger.info("Download complete!")
+
+    # Extract 300d file
+    logger.info("Extracting glove.6B.300d.txt...")
+    with zipfile.ZipFile(tmp_path, 'r') as zip_ref:
+        # Extract only the 300d file to embeddings directory
+        target_file = 'glove.6B.300d.txt'
+        zip_ref.extract(target_file, config.EMBEDDINGS_DIR)
+
+    # Load the extracted file
+    glove_file_path = config.EMBEDDINGS_DIR / target_file
+    glove_dict = load_glove_from_file(glove_file_path)
+
+    # Clean up temp file
+    import os
+    os.remove(tmp_path)
+
+    return glove_dict
+
+
+def load_glove_from_huggingface() -> Dict[str, np.ndarray]:
+    """
+    Load GloVe embeddings (tries multiple methods).
+
+    Returns:
+        Dictionary mapping word -> embedding vector (300-dim)
+    """
+    # Check cache first
     if config.GLOVE_CACHE_FILE.exists():
         logger.info(f"Loading cached GloVe embeddings from {config.GLOVE_CACHE_FILE}")
         with open(config.GLOVE_CACHE_FILE, 'rb') as f:
@@ -37,47 +112,37 @@ def load_glove_from_huggingface() -> Dict[str, np.ndarray]:
         logger.info(f"Loaded {len(glove_dict):,} word embeddings")
         return glove_dict
 
-    logger.info("Downloading GloVe embeddings from HuggingFace...")
+    # Check if already downloaded as text file
+    glove_text_file = config.EMBEDDINGS_DIR / 'glove.6B.300d.txt'
+    if glove_text_file.exists():
+        logger.info(f"Found existing GloVe file: {glove_text_file}")
+        glove_dict = load_glove_from_file(str(glove_text_file))
 
-    try:
-        from datasets import load_dataset
-
-        # Load GloVe dataset from HuggingFace
-        dataset = load_dataset(
-            config.GLOVE_HF_DATASET,
-            config.GLOVE_HF_CONFIG,
-            split='train'
-        )
-
-        logger.info(f"Downloaded dataset with {len(dataset):,} entries")
-
-        # Extract embeddings for 300-dimensional version
-        glove_dict = {}
-
-        for entry in tqdm(dataset, desc="Building GloVe dictionary"):
-            word = entry['word']
-            # GloVe 6B has multiple dimensions: 50, 100, 200, 300
-            # We want the 300-dimensional version
-            if '300' in entry and entry['300'] is not None:
-                embedding = np.array(entry['300'], dtype=np.float32)
-                glove_dict[word] = embedding
-
-        logger.info(f"Extracted {len(glove_dict):,} word embeddings (300-dim)")
-
-        # Cache for future use
+        # Cache for faster future loading
         logger.info(f"Caching GloVe embeddings to {config.GLOVE_CACHE_FILE}")
         with open(config.GLOVE_CACHE_FILE, 'wb') as f:
             pickle.dump(glove_dict, f)
 
-    except ImportError:
-        logger.error("HuggingFace 'datasets' library not installed. Install with: pip install datasets")
-        raise
-    except Exception as e:
-        logger.error(f"Failed to load GloVe from HuggingFace: {e}")
-        logger.info("Attempting alternative: manual download...")
-        raise
+        return glove_dict
 
-    return glove_dict
+    # Try direct download from Stanford
+    logger.info("GloVe not found locally. Downloading from Stanford NLP...")
+    try:
+        glove_dict = download_glove_direct()
+
+        # Cache for faster future loading
+        logger.info(f"Caching GloVe embeddings to {config.GLOVE_CACHE_FILE}")
+        with open(config.GLOVE_CACHE_FILE, 'wb') as f:
+            pickle.dump(glove_dict, f)
+
+        return glove_dict
+
+    except Exception as e:
+        logger.error(f"Failed to download GloVe: {e}")
+        logger.error("Please manually download GloVe from:")
+        logger.error("  https://nlp.stanford.edu/data/glove.6B.zip")
+        logger.error(f"Extract glove.6B.300d.txt to: {config.EMBEDDINGS_DIR}/")
+        raise
 
 
 def tokenize(text: str) -> List[str]:
