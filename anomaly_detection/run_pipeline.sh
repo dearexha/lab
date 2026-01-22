@@ -102,10 +102,26 @@ echo "Memory: $SLURM_MEM_PER_NODE MB"
 echo ""
 
 # --- Change to project directory ---
-cd $SLURM_SUBMIT_DIR/anomaly_detection || {
+# Try multiple paths to find anomaly_detection directory
+if [ -d "$SLURM_SUBMIT_DIR/anomaly_detection" ]; then
+    cd "$SLURM_SUBMIT_DIR/anomaly_detection"
+elif [ -d "$SLURM_SUBMIT_DIR" ] && [ "$(basename $SLURM_SUBMIT_DIR)" = "anomaly_detection" ]; then
+    cd "$SLURM_SUBMIT_DIR"
+elif [ -f "$SLURM_SUBMIT_DIR/run_pipeline.sh" ]; then
+    # We're already in anomaly_detection directory
+    cd "$SLURM_SUBMIT_DIR"
+else
     echo "ERROR: Could not find anomaly_detection directory"
+    echo "SLURM_SUBMIT_DIR: $SLURM_SUBMIT_DIR"
+    echo "Current directory: $(pwd)"
+    echo ""
+    echo "Please submit the job from one of these locations:"
+    echo "  1. From repository root: sbatch anomaly_detection/run_pipeline.sh"
+    echo "  2. From anomaly_detection/: sbatch run_pipeline.sh"
     exit 1
-}
+fi
+
+echo "Working directory: $(pwd)"
 
 # --- Create outputs directory if it doesn't exist ---
 echo "=================================================="
