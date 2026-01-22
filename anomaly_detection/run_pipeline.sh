@@ -1,108 +1,251 @@
 #!/bin/bash
-#SBATCH --job-name=isolation_forest_glove
-#SBATCH --output=slurm-%j.out
-#SBATCH --error=slurm-%j.err
-#SBATCH --time=04:00:00
-#SBATCH --ntasks=1
-#SBATCH --cpus-per-task=16
-#SBATCH --mem=32G
-#SBATCH --partition=batch
+#SBATCH --job-name=ad_iforest_glove      # Job name
+#SBATCH --output=slurm_%j.out            # Standard output log (%j = job ID)
+#SBATCH --error=slurm_%j.err             # Standard error log (%j = job ID)
+#SBATCH --partition=A40short             # Partition (adjust if different for CPU jobs)
+#SBATCH --time=4:00:00                   # Time limit (4 hours)
+#SBATCH --nodes=1                        # Number of nodes
+#SBATCH --ntasks=1                       # Number of tasks
+#SBATCH --cpus-per-task=16               # CPUs per task (Isolation Forest benefits from parallelization)
+#SBATCH --mem=32GB                       # Memory allocation
 
-# ============================================================================
-# SLURM Job Script for Anomaly Detection Pipeline
-# Isolation Forest + GloVe Embeddings
-# ============================================================================
-
+# --- Print job info ---
+echo "=================================================="
+echo "Starting SLURM Job: $SLURM_JOB_NAME (ID: $SLURM_JOB_ID)"
+echo "Run on host: $(hostname)"
+echo "Node: $SLURM_NODELIST"
+echo "Partition: $SLURM_JOB_PARTITION"
 echo "Job started at: $(date)"
-echo "Running on node: $(hostname)"
-echo "Job ID: $SLURM_JOB_ID"
-echo "Number of CPUs: $SLURM_CPUS_PER_TASK"
-echo "Memory allocated: $SLURM_MEM_PER_NODE MB"
-echo "============================================================================"
+echo "Working Directory: $SLURM_SUBMIT_DIR"
+echo "=================================================="
 
-# ============================================================================
-# ENVIRONMENT SETUP
-# ============================================================================
+# --- Module setup ---
+module purge
+module load Python
+module list
 
-# Load modules (adjust based on your HPC environment)
-# module load python/3.9
-# module load gcc/11.2.0
+# --- Python environment setup ---
+VENV_DIR="$HOME/ad_pipeline_env"
 
-# Activate virtual environment if using one
-# source /path/to/venv/bin/activate
+# Create venv if it does not exist
+if [ ! -d "$VENV_DIR" ]; then
+    echo "Creating virtual environment..."
+    python -m venv "$VENV_DIR"
+fi
 
-# Or use conda environment
-# conda activate your_env_name
+# Activate virtual environment
+source "$VENV_DIR/bin/activate"
 
-# Set environment variables
+# Upgrade pip
+echo "Upgrading pip..."
+pip install --upgrade pip setuptools wheel
+
+# Install required packages for Anomaly Detection pipeline
+echo "Installing packages from requirements.txt..."
+pip install --no-cache-dir \
+    numpy \
+    scikit-learn \
+    datasets \
+    tqdm \
+    matplotlib \
+    seaborn \
+    pandas
+
+# Install additional dependencies
+echo "Installing additional dependencies..."
+pip install --no-cache-dir \
+    pyarrow \
+    dill \
+    filelock \
+    requests \
+    regex \
+    packaging \
+    pillow \
+    python-dateutil \
+    pytz \
+    urllib3 \
+    idna \
+    certifi \
+    charset-normalizer \
+    MarkupSafe \
+    Jinja2 \
+    joblib \
+    xxhash \
+    multiprocess \
+    fsspec
+
+# Verify critical packages are installed
+echo "=================================================="
+echo "Verifying package installations..."
+echo "=================================================="
+python -c "import numpy; print(f'✓ NumPy {numpy.__version__}')" || echo "✗ NumPy not installed"
+python -c "import sklearn; print(f'✓ scikit-learn {sklearn.__version__}')" || echo "✗ scikit-learn not installed"
+python -c "import datasets; print(f'✓ HuggingFace Datasets {datasets.__version__}')" || echo "✗ Datasets not installed"
+python -c "import tqdm; print(f'✓ tqdm {tqdm.__version__}')" || echo "✗ tqdm not installed"
+python -c "import matplotlib; print(f'✓ Matplotlib {matplotlib.__version__}')" || echo "✗ Matplotlib not installed"
+python -c "import seaborn; print(f'✓ Seaborn {seaborn.__version__}')" || echo "✗ Seaborn not installed"
+python -c "import pandas; print(f'✓ Pandas {pandas.__version__}')" || echo "✗ Pandas not installed"
+
+# --- Environment variables ---
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 export MKL_NUM_THREADS=$SLURM_CPUS_PER_TASK
 export OPENBLAS_NUM_THREADS=$SLURM_CPUS_PER_TASK
 
-# ============================================================================
-# WORKING DIRECTORY
-# ============================================================================
-
-cd /home/user/lab/anomaly_detection || exit 1
-
-echo "Working directory: $(pwd)"
+# --- Print environment info ---
+echo "=================================================="
+echo "Environment Information:"
+echo "=================================================="
+echo "Python: $(which python)"
 echo "Python version: $(python --version)"
-echo "============================================================================"
-
-# ============================================================================
-# INSTALL DEPENDENCIES (if needed)
-# ============================================================================
-
-# Uncomment if dependencies not installed
-# echo "Installing dependencies..."
-# pip install -r requirements.txt --user
-# echo "Dependencies installed"
-# echo "============================================================================"
-
-# ============================================================================
-# RUN PIPELINE
-# ============================================================================
-
-echo "Starting pipeline..."
+echo "CPUs available: $SLURM_CPUS_PER_TASK"
+echo "Memory: $SLURM_MEM_PER_NODE MB"
 echo ""
 
-# Default: Full pipeline with hyperparameter tuning
-python main.py
+# --- Change to project directory ---
+cd $SLURM_SUBMIT_DIR/anomaly_detection || {
+    echo "ERROR: Could not find anomaly_detection directory"
+    exit 1
+}
 
-# Alternative options:
-# python main.py --quick                    # Quick test (no tuning, no plots)
-# python main.py --no-tuning               # Skip hyperparameter tuning
-# python main.py --no-plots                # Skip plot generation
-# python main.py --reload-data             # Force reload data
-# python main.py --reload-embeddings       # Force recompute embeddings
-
-EXIT_CODE=$?
-
+# --- Create outputs directory if it doesn't exist ---
+echo "=================================================="
+echo "Setting up output directory structure..."
+echo "=================================================="
+mkdir -p outputs
+echo "Output directory ready"
 echo ""
-echo "============================================================================"
-echo "Pipeline finished with exit code: $EXIT_CODE"
-echo "Job ended at: $(date)"
-echo "============================================================================"
 
-# ============================================================================
-# SUMMARY
-# ============================================================================
+# --- Check for required datasets ---
+echo "=================================================="
+echo "Checking for required datasets..."
+echo "=================================================="
 
-if [ $EXIT_CODE -eq 0 ]; then
+SW_SIMPLE="../datasets/SimpleWikipedia_v2/simple.aligned"
+SW_NORMAL="../datasets/SimpleWikipedia_v2/normal.aligned"
+
+HAS_SIMPLE=$(test -f "$SW_SIMPLE" && echo "yes" || echo "no")
+HAS_NORMAL=$(test -f "$SW_NORMAL" && echo "yes" || echo "no")
+
+echo "SimpleWikipedia simple.aligned exists: $HAS_SIMPLE"
+echo "SimpleWikipedia normal.aligned exists: $HAS_NORMAL"
+echo ""
+
+if [ "$HAS_SIMPLE" = "no" ] || [ "$HAS_NORMAL" = "no" ]; then
+    echo "=================================================="
+    echo "ERROR: Required datasets not found!"
+    echo "=================================================="
+    echo "The pipeline requires:"
+    echo "  - ../datasets/SimpleWikipedia_v2/simple.aligned"
+    echo "  - ../datasets/SimpleWikipedia_v2/normal.aligned"
     echo ""
-    echo "SUCCESS! Check outputs in: /home/user/lab/anomaly_detection/outputs/"
+    echo "Please ensure the datasets directory is in the project root."
     echo ""
-    echo "Key files:"
-    echo "  - Model: outputs/best_isolation_forest.pkl"
-    echo "  - Results: outputs/evaluation_results.json"
-    echo "  - Hyperparameters: outputs/hyperparameter_tuning_results.json"
-    echo "  - Plots: outputs/*.png"
-    echo "  - Log: outputs/pipeline.log"
-    echo ""
-else
-    echo ""
-    echo "FAILED! Check the log for errors: outputs/pipeline.log"
+    exit 1
+fi
+
+# Check dataset size
+echo "Dataset information:"
+SIMPLE_SIZE=$(wc -l < "$SW_SIMPLE" 2>/dev/null || echo "unknown")
+NORMAL_SIZE=$(wc -l < "$SW_NORMAL" 2>/dev/null || echo "unknown")
+echo "  Simple texts: $SIMPLE_SIZE lines"
+echo "  Normal texts: $NORMAL_SIZE lines"
+echo ""
+
+# --- Run setup test ---
+echo "=================================================="
+echo "Running setup verification..."
+echo "=================================================="
+python test_setup.py
+SETUP_EXIT=$?
+
+if [ $SETUP_EXIT -ne 0 ]; then
+    echo "⚠ WARNING: Setup test failed, but continuing anyway..."
     echo ""
 fi
 
-exit $EXIT_CODE
+# --- Run Anomaly Detection Pipeline ---
+echo "=================================================="
+echo "Starting Anomaly Detection Pipeline"
+echo "Started at: $(date)"
+echo "=================================================="
+echo ""
+echo "Pipeline configuration (from config.py):"
+python -c "
+import config
+print(f'  Random seed: {config.RANDOM_SEED}')
+print(f'  Data split: {config.TRAIN_RATIO}/{config.VAL_RATIO}/{config.TEST_RATIO} (train/val/test)')
+print(f'  GloVe model: {config.GLOVE_MODEL}')
+print(f'  GloVe dimensions: {config.GLOVE_DIM}')
+print(f'  OOV strategy: {config.OOV_STRATEGY}')
+print(f'  Hyperparameter grid:')
+print(f'    n_estimators: {config.IFOREST_PARAM_GRID[\"n_estimators\"]}')
+print(f'    contamination: {config.IFOREST_PARAM_GRID[\"contamination\"]}')
+" 2>/dev/null || echo "  (could not read config.py)"
+echo ""
+
+# Run the pipeline
+# Options:
+#   --quick              : Skip hyperparameter tuning and plots (fast test)
+#   --no-tuning          : Skip hyperparameter tuning (use defaults)
+#   --no-plots           : Skip plot generation
+#   --reload-data        : Force reload data from raw files
+#   --reload-embeddings  : Force recompute embeddings
+
+python main.py
+PIPELINE_EXIT_CODE=$?
+
+echo ""
+echo "=================================================="
+echo "Pipeline completed at: $(date)"
+echo "Exit code: $PIPELINE_EXIT_CODE"
+echo "=================================================="
+
+# Show results location
+if [ $PIPELINE_EXIT_CODE -eq 0 ]; then
+    echo ""
+    echo "✓ Pipeline completed successfully!"
+    echo ""
+    echo "Output files saved to: $(pwd)/outputs/"
+    echo ""
+
+    if [ -d "outputs" ]; then
+        echo "Files created:"
+        ls -lh outputs/ 2>/dev/null | grep -v "^total" | grep -v "^d" | awk '{print "  " $9 " (" $5 ")"}'
+        echo ""
+
+        # Show key results if evaluation_results.json exists
+        if [ -f "outputs/evaluation_results.json" ]; then
+            echo "Key Results:"
+            python -c "
+import json
+try:
+    with open('outputs/evaluation_results.json', 'r') as f:
+        results = json.load(f)
+    print(f\"  AUROC: {results.get('auroc', 'N/A'):.4f}\")
+    print(f\"  Best F1: {results.get('best_f1', 'N/A'):.4f}\")
+    print(f\"  Precision: {results.get('precision_at_optimal', 'N/A'):.4f}\")
+    print(f\"  Recall: {results.get('recall_at_optimal', 'N/A'):.4f}\")
+except:
+    print('  (results file could not be read)')
+" 2>/dev/null
+            echo ""
+        fi
+    fi
+else
+    echo ""
+    echo "⚠ WARNING: Pipeline exited with error code $PIPELINE_EXIT_CODE"
+    echo "Check the log files for details:"
+    echo "  - slurm_${SLURM_JOB_ID}.out"
+    echo "  - slurm_${SLURM_JOB_ID}.err"
+    echo "  - outputs/pipeline.log"
+    echo ""
+fi
+
+echo "=================================================="
+echo "Job finished at: $(date)"
+echo "=================================================="
+
+# --- Deactivate virtual environment ---
+deactivate
+
+exit $PIPELINE_EXIT_CODE
