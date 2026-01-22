@@ -1,0 +1,1226 @@
+
+Currently Loaded Modules:
+  1) GCCcore/13.3.0                   7) Tcl/8.6.14-GCCcore-13.3.0
+  2) zlib/1.3.1-GCCcore-13.3.0        8) SQLite/3.45.3-GCCcore-13.3.0
+  3) binutils/2.42-GCCcore-13.3.0     9) XZ/5.4.5-GCCcore-13.3.0
+  4) bzip2/1.0.8-GCCcore-13.3.0      10) libffi/3.4.5-GCCcore-13.3.0
+  5) ncurses/6.5-GCCcore-13.3.0      11) OpenSSL/3
+  6) libreadline/8.2-GCCcore-13.3.0  12) Python/3.12.3-GCCcore-13.3.0
+
+ 
+
+2026-01-22 21:45:03,061 - data_preparation - INFO - Loading texts from /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/datasets/SimpleWikipedia_v2/simple.aligned
+2026-01-22 21:45:03,654 - data_preparation - INFO - Loaded 167689 texts
+2026-01-22 21:45:03,654 - data_preparation - INFO - Loading texts from /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/datasets/SimpleWikipedia_v2/normal.aligned
+2026-01-22 21:45:04,271 - data_preparation - INFO - Loaded 167689 texts
+2026-01-22 21:59:35,944 - __main__ - INFO - ======================================================================
+2026-01-22 21:59:35,948 - __main__ - INFO - ANOMALY DETECTION PIPELINE - ISOLATION FOREST + GLOVE
+2026-01-22 21:59:35,948 - __main__ - INFO - ======================================================================
+2026-01-22 21:59:35,948 - __main__ - INFO - Output directory: /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection/outputs
+2026-01-22 21:59:35,948 - __main__ - INFO - 
+2026-01-22 21:59:35,948 - __main__ - INFO - STEP 1/5: Data Preparation
+2026-01-22 21:59:35,948 - __main__ - INFO - ----------------------------------------------------------------------
+2026-01-22 21:59:35,952 - data_preparation - INFO - Loading cached data splits from /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection/outputs/data_splits.pkl
+2026-01-22 21:59:36,655 - data_preparation - INFO - Cached splits loaded successfully
+2026-01-22 21:59:36,655 - __main__ - INFO - 
+2026-01-22 21:59:36,655 - __main__ - INFO - STEP 2/5: Embedding Extraction
+2026-01-22 21:59:36,655 - __main__ - INFO - ----------------------------------------------------------------------
+2026-01-22 21:59:36,678 - embedding_extraction - INFO - GloVe not found locally. Downloading from Stanford NLP...
+2026-01-22 21:59:36,678 - embedding_extraction - INFO - Downloading GloVe 6B from Stanford NLP...
+2026-01-22 21:59:36,678 - embedding_extraction - INFO - Downloading https://nlp.stanford.edu/data/glove.6B.zip ...
+2026-01-22 21:59:39,680 - embedding_extraction - INFO -   Downloaded: 0.0 MB / 822.2 MB (0.0%)
+2026-01-22 21:59:40,457 - embedding_extraction - INFO -   Downloaded: 0.8 MB / 822.2 MB (0.1%)
+2026-01-22 21:59:40,770 - embedding_extraction - INFO -   Downloaded: 1.6 MB / 822.2 MB (0.2%)
+2026-01-22 21:59:41,082 - embedding_extraction - INFO -   Downloaded: 2.3 MB / 822.2 MB (0.3%)
+2026-01-22 21:59:41,390 - embedding_extraction - INFO -   Downloaded: 3.1 MB / 822.2 MB (0.4%)
+2026-01-22 21:59:41,699 - embedding_extraction - INFO -   Downloaded: 3.9 MB / 822.2 MB (0.5%)
+2026-01-22 21:59:42,160 - embedding_extraction - INFO -   Downloaded: 4.7 MB / 822.2 MB (0.6%)
+2026-01-22 21:59:42,472 - embedding_extraction - INFO -   Downloaded: 5.5 MB / 822.2 MB (0.7%)
+2026-01-22 21:59:42,785 - embedding_extraction - INFO -   Downloaded: 6.2 MB / 822.2 MB (0.8%)
+2026-01-22 21:59:43,132 - embedding_extraction - INFO -   Downloaded: 7.0 MB / 822.2 MB (0.9%)
+2026-01-22 21:59:43,559 - embedding_extraction - INFO -   Downloaded: 7.8 MB / 822.2 MB (1.0%)
+2026-01-22 21:59:43,872 - embedding_extraction - INFO -   Downloaded: 8.6 MB / 822.2 MB (1.0%)
+2026-01-22 21:59:44,183 - embedding_extraction - INFO -   Downloaded: 9.4 MB / 822.2 MB (1.1%)
+2026-01-22 21:59:44,495 - embedding_extraction - INFO -   Downloaded: 10.2 MB / 822.2 MB (1.2%)
+2026-01-22 21:59:44,806 - embedding_extraction - INFO -   Downloaded: 10.9 MB / 822.2 MB (1.3%)
+2026-01-22 21:59:45,118 - embedding_extraction - INFO -   Downloaded: 11.7 MB / 822.2 MB (1.4%)
+2026-01-22 21:59:45,574 - embedding_extraction - INFO -   Downloaded: 12.5 MB / 822.2 MB (1.5%)
+2026-01-22 21:59:46,032 - embedding_extraction - INFO -   Downloaded: 13.3 MB / 822.2 MB (1.6%)
+2026-01-22 21:59:46,508 - embedding_extraction - INFO -   Downloaded: 14.1 MB / 822.2 MB (1.7%)
+2026-01-22 21:59:47,122 - embedding_extraction - INFO -   Downloaded: 14.8 MB / 822.2 MB (1.8%)
+2026-01-22 21:59:47,594 - embedding_extraction - INFO -   Downloaded: 15.6 MB / 822.2 MB (1.9%)
+2026-01-22 21:59:48,090 - embedding_extraction - INFO -   Downloaded: 16.4 MB / 822.2 MB (2.0%)
+2026-01-22 21:59:48,670 - embedding_extraction - INFO -   Downloaded: 17.2 MB / 822.2 MB (2.1%)
+2026-01-22 21:59:49,136 - embedding_extraction - INFO -   Downloaded: 18.0 MB / 822.2 MB (2.2%)
+2026-01-22 21:59:49,605 - embedding_extraction - INFO -   Downloaded: 18.8 MB / 822.2 MB (2.3%)
+2026-01-22 21:59:50,071 - embedding_extraction - INFO -   Downloaded: 19.5 MB / 822.2 MB (2.4%)
+2026-01-22 21:59:50,567 - embedding_extraction - INFO -   Downloaded: 20.3 MB / 822.2 MB (2.5%)
+2026-01-22 21:59:51,144 - embedding_extraction - INFO -   Downloaded: 21.1 MB / 822.2 MB (2.6%)
+2026-01-22 21:59:51,611 - embedding_extraction - INFO -   Downloaded: 21.9 MB / 822.2 MB (2.7%)
+2026-01-22 21:59:52,078 - embedding_extraction - INFO -   Downloaded: 22.7 MB / 822.2 MB (2.8%)
+2026-01-22 21:59:52,546 - embedding_extraction - INFO -   Downloaded: 23.4 MB / 822.2 MB (2.9%)
+2026-01-22 21:59:53,012 - embedding_extraction - INFO -   Downloaded: 24.2 MB / 822.2 MB (2.9%)
+2026-01-22 21:59:53,481 - embedding_extraction - INFO -   Downloaded: 25.0 MB / 822.2 MB (3.0%)
+2026-01-22 21:59:53,945 - embedding_extraction - INFO -   Downloaded: 25.8 MB / 822.2 MB (3.1%)
+2026-01-22 21:59:54,403 - embedding_extraction - INFO -   Downloaded: 26.6 MB / 822.2 MB (3.2%)
+2026-01-22 21:59:54,864 - embedding_extraction - INFO -   Downloaded: 27.3 MB / 822.2 MB (3.3%)
+2026-01-22 21:59:55,326 - embedding_extraction - INFO -   Downloaded: 28.1 MB / 822.2 MB (3.4%)
+2026-01-22 21:59:55,647 - embedding_extraction - INFO -   Downloaded: 28.9 MB / 822.2 MB (3.5%)
+2026-01-22 21:59:56,100 - embedding_extraction - INFO -   Downloaded: 29.7 MB / 822.2 MB (3.6%)
+2026-01-22 21:59:56,412 - embedding_extraction - INFO -   Downloaded: 30.5 MB / 822.2 MB (3.7%)
+2026-01-22 21:59:56,724 - embedding_extraction - INFO -   Downloaded: 31.2 MB / 822.2 MB (3.8%)
+2026-01-22 21:59:57,040 - embedding_extraction - INFO -   Downloaded: 32.0 MB / 822.2 MB (3.9%)
+2026-01-22 21:59:57,345 - embedding_extraction - INFO -   Downloaded: 32.8 MB / 822.2 MB (4.0%)
+2026-01-22 21:59:57,652 - embedding_extraction - INFO -   Downloaded: 33.6 MB / 822.2 MB (4.1%)
+2026-01-22 21:59:57,959 - embedding_extraction - INFO -   Downloaded: 34.4 MB / 822.2 MB (4.2%)
+2026-01-22 21:59:58,197 - embedding_extraction - INFO -   Downloaded: 35.2 MB / 822.2 MB (4.3%)
+2026-01-22 21:59:58,427 - embedding_extraction - INFO -   Downloaded: 35.9 MB / 822.2 MB (4.4%)
+2026-01-22 21:59:58,733 - embedding_extraction - INFO -   Downloaded: 36.7 MB / 822.2 MB (4.5%)
+2026-01-22 21:59:58,891 - embedding_extraction - INFO -   Downloaded: 37.5 MB / 822.2 MB (4.6%)
+2026-01-22 21:59:59,125 - embedding_extraction - INFO -   Downloaded: 38.3 MB / 822.2 MB (4.7%)
+2026-01-22 21:59:59,354 - embedding_extraction - INFO -   Downloaded: 39.1 MB / 822.2 MB (4.8%)
+2026-01-22 21:59:59,511 - embedding_extraction - INFO -   Downloaded: 39.8 MB / 822.2 MB (4.8%)
+2026-01-22 21:59:59,704 - embedding_extraction - INFO -   Downloaded: 40.6 MB / 822.2 MB (4.9%)
+2026-01-22 21:59:59,940 - embedding_extraction - INFO -   Downloaded: 41.4 MB / 822.2 MB (5.0%)
+2026-01-22 22:00:00,128 - embedding_extraction - INFO -   Downloaded: 42.2 MB / 822.2 MB (5.1%)
+2026-01-22 22:00:00,284 - embedding_extraction - INFO -   Downloaded: 43.0 MB / 822.2 MB (5.2%)
+2026-01-22 22:00:00,440 - embedding_extraction - INFO -   Downloaded: 43.8 MB / 822.2 MB (5.3%)
+2026-01-22 22:00:00,601 - embedding_extraction - INFO -   Downloaded: 44.5 MB / 822.2 MB (5.4%)
+2026-01-22 22:00:00,789 - embedding_extraction - INFO -   Downloaded: 45.3 MB / 822.2 MB (5.5%)
+2026-01-22 22:00:01,059 - embedding_extraction - INFO -   Downloaded: 46.1 MB / 822.2 MB (5.6%)
+2026-01-22 22:00:01,217 - embedding_extraction - INFO -   Downloaded: 46.9 MB / 822.2 MB (5.7%)
+2026-01-22 22:00:01,449 - embedding_extraction - INFO -   Downloaded: 47.7 MB / 822.2 MB (5.8%)
+2026-01-22 22:00:01,678 - embedding_extraction - INFO -   Downloaded: 48.4 MB / 822.2 MB (5.9%)
+2026-01-22 22:00:01,836 - embedding_extraction - INFO -   Downloaded: 49.2 MB / 822.2 MB (6.0%)
+2026-01-22 22:00:02,062 - embedding_extraction - INFO -   Downloaded: 50.0 MB / 822.2 MB (6.1%)
+2026-01-22 22:00:02,288 - embedding_extraction - INFO -   Downloaded: 50.8 MB / 822.2 MB (6.2%)
+2026-01-22 22:00:02,513 - embedding_extraction - INFO -   Downloaded: 51.6 MB / 822.2 MB (6.3%)
+2026-01-22 22:00:02,739 - embedding_extraction - INFO -   Downloaded: 52.3 MB / 822.2 MB (6.4%)
+2026-01-22 22:00:02,964 - embedding_extraction - INFO -   Downloaded: 53.1 MB / 822.2 MB (6.5%)
+2026-01-22 22:00:03,190 - embedding_extraction - INFO -   Downloaded: 53.9 MB / 822.2 MB (6.6%)
+2026-01-22 22:00:03,418 - embedding_extraction - INFO -   Downloaded: 54.7 MB / 822.2 MB (6.7%)
+2026-01-22 22:00:03,645 - embedding_extraction - INFO -   Downloaded: 55.5 MB / 822.2 MB (6.7%)
+2026-01-22 22:00:03,870 - embedding_extraction - INFO -   Downloaded: 56.2 MB / 822.2 MB (6.8%)
+2026-01-22 22:00:04,097 - embedding_extraction - INFO -   Downloaded: 57.0 MB / 822.2 MB (6.9%)
+2026-01-22 22:00:04,323 - embedding_extraction - INFO -   Downloaded: 57.8 MB / 822.2 MB (7.0%)
+2026-01-22 22:00:04,547 - embedding_extraction - INFO -   Downloaded: 58.6 MB / 822.2 MB (7.1%)
+2026-01-22 22:00:04,786 - embedding_extraction - INFO -   Downloaded: 59.4 MB / 822.2 MB (7.2%)
+2026-01-22 22:00:05,011 - embedding_extraction - INFO -   Downloaded: 60.2 MB / 822.2 MB (7.3%)
+2026-01-22 22:00:05,236 - embedding_extraction - INFO -   Downloaded: 60.9 MB / 822.2 MB (7.4%)
+2026-01-22 22:00:05,462 - embedding_extraction - INFO -   Downloaded: 61.7 MB / 822.2 MB (7.5%)
+2026-01-22 22:00:05,703 - embedding_extraction - INFO -   Downloaded: 62.5 MB / 822.2 MB (7.6%)
+2026-01-22 22:00:05,929 - embedding_extraction - INFO -   Downloaded: 63.3 MB / 822.2 MB (7.7%)
+2026-01-22 22:00:06,154 - embedding_extraction - INFO -   Downloaded: 64.1 MB / 822.2 MB (7.8%)
+2026-01-22 22:00:06,378 - embedding_extraction - INFO -   Downloaded: 64.8 MB / 822.2 MB (7.9%)
+2026-01-22 22:00:06,603 - embedding_extraction - INFO -   Downloaded: 65.6 MB / 822.2 MB (8.0%)
+2026-01-22 22:00:06,828 - embedding_extraction - INFO -   Downloaded: 66.4 MB / 822.2 MB (8.1%)
+2026-01-22 22:00:07,054 - embedding_extraction - INFO -   Downloaded: 67.2 MB / 822.2 MB (8.2%)
+2026-01-22 22:00:07,279 - embedding_extraction - INFO -   Downloaded: 68.0 MB / 822.2 MB (8.3%)
+2026-01-22 22:00:07,503 - embedding_extraction - INFO -   Downloaded: 68.8 MB / 822.2 MB (8.4%)
+2026-01-22 22:00:07,729 - embedding_extraction - INFO -   Downloaded: 69.5 MB / 822.2 MB (8.5%)
+2026-01-22 22:00:07,953 - embedding_extraction - INFO -   Downloaded: 70.3 MB / 822.2 MB (8.6%)
+2026-01-22 22:00:08,178 - embedding_extraction - INFO -   Downloaded: 71.1 MB / 822.2 MB (8.6%)
+2026-01-22 22:00:08,404 - embedding_extraction - INFO -   Downloaded: 71.9 MB / 822.2 MB (8.7%)
+2026-01-22 22:00:08,629 - embedding_extraction - INFO -   Downloaded: 72.7 MB / 822.2 MB (8.8%)
+2026-01-22 22:00:08,854 - embedding_extraction - INFO -   Downloaded: 73.4 MB / 822.2 MB (8.9%)
+2026-01-22 22:00:09,090 - embedding_extraction - INFO -   Downloaded: 74.2 MB / 822.2 MB (9.0%)
+2026-01-22 22:00:09,316 - embedding_extraction - INFO -   Downloaded: 75.0 MB / 822.2 MB (9.1%)
+2026-01-22 22:00:09,542 - embedding_extraction - INFO -   Downloaded: 75.8 MB / 822.2 MB (9.2%)
+2026-01-22 22:00:09,767 - embedding_extraction - INFO -   Downloaded: 76.6 MB / 822.2 MB (9.3%)
+2026-01-22 22:00:10,007 - embedding_extraction - INFO -   Downloaded: 77.3 MB / 822.2 MB (9.4%)
+2026-01-22 22:00:10,234 - embedding_extraction - INFO -   Downloaded: 78.1 MB / 822.2 MB (9.5%)
+2026-01-22 22:00:10,460 - embedding_extraction - INFO -   Downloaded: 78.9 MB / 822.2 MB (9.6%)
+2026-01-22 22:00:10,684 - embedding_extraction - INFO -   Downloaded: 79.7 MB / 822.2 MB (9.7%)
+2026-01-22 22:00:10,910 - embedding_extraction - INFO -   Downloaded: 80.5 MB / 822.2 MB (9.8%)
+2026-01-22 22:00:11,135 - embedding_extraction - INFO -   Downloaded: 81.2 MB / 822.2 MB (9.9%)
+2026-01-22 22:00:11,360 - embedding_extraction - INFO -   Downloaded: 82.0 MB / 822.2 MB (10.0%)
+2026-01-22 22:00:11,585 - embedding_extraction - INFO -   Downloaded: 82.8 MB / 822.2 MB (10.1%)
+2026-01-22 22:00:11,811 - embedding_extraction - INFO -   Downloaded: 83.6 MB / 822.2 MB (10.2%)
+2026-01-22 22:00:12,035 - embedding_extraction - INFO -   Downloaded: 84.4 MB / 822.2 MB (10.3%)
+2026-01-22 22:00:12,261 - embedding_extraction - INFO -   Downloaded: 85.2 MB / 822.2 MB (10.4%)
+2026-01-22 22:00:12,485 - embedding_extraction - INFO -   Downloaded: 85.9 MB / 822.2 MB (10.5%)
+2026-01-22 22:00:12,712 - embedding_extraction - INFO -   Downloaded: 86.7 MB / 822.2 MB (10.5%)
+2026-01-22 22:00:12,937 - embedding_extraction - INFO -   Downloaded: 87.5 MB / 822.2 MB (10.6%)
+2026-01-22 22:00:13,171 - embedding_extraction - INFO -   Downloaded: 88.3 MB / 822.2 MB (10.7%)
+2026-01-22 22:00:13,396 - embedding_extraction - INFO -   Downloaded: 89.1 MB / 822.2 MB (10.8%)
+2026-01-22 22:00:13,622 - embedding_extraction - INFO -   Downloaded: 89.8 MB / 822.2 MB (10.9%)
+2026-01-22 22:00:13,847 - embedding_extraction - INFO -   Downloaded: 90.6 MB / 822.2 MB (11.0%)
+2026-01-22 22:00:14,073 - embedding_extraction - INFO -   Downloaded: 91.4 MB / 822.2 MB (11.1%)
+2026-01-22 22:00:14,305 - embedding_extraction - INFO -   Downloaded: 92.2 MB / 822.2 MB (11.2%)
+2026-01-22 22:00:14,528 - embedding_extraction - INFO -   Downloaded: 93.0 MB / 822.2 MB (11.3%)
+2026-01-22 22:00:14,754 - embedding_extraction - INFO -   Downloaded: 93.8 MB / 822.2 MB (11.4%)
+2026-01-22 22:00:14,977 - embedding_extraction - INFO -   Downloaded: 94.5 MB / 822.2 MB (11.5%)
+2026-01-22 22:00:15,201 - embedding_extraction - INFO -   Downloaded: 95.3 MB / 822.2 MB (11.6%)
+2026-01-22 22:00:15,425 - embedding_extraction - INFO -   Downloaded: 96.1 MB / 822.2 MB (11.7%)
+2026-01-22 22:00:15,649 - embedding_extraction - INFO -   Downloaded: 96.9 MB / 822.2 MB (11.8%)
+2026-01-22 22:00:15,874 - embedding_extraction - INFO -   Downloaded: 97.7 MB / 822.2 MB (11.9%)
+2026-01-22 22:00:16,099 - embedding_extraction - INFO -   Downloaded: 98.4 MB / 822.2 MB (12.0%)
+2026-01-22 22:00:16,324 - embedding_extraction - INFO -   Downloaded: 99.2 MB / 822.2 MB (12.1%)
+2026-01-22 22:00:16,549 - embedding_extraction - INFO -   Downloaded: 100.0 MB / 822.2 MB (12.2%)
+2026-01-22 22:00:16,773 - embedding_extraction - INFO -   Downloaded: 100.8 MB / 822.2 MB (12.3%)
+2026-01-22 22:00:16,998 - embedding_extraction - INFO -   Downloaded: 101.6 MB / 822.2 MB (12.4%)
+2026-01-22 22:00:17,225 - embedding_extraction - INFO -   Downloaded: 102.3 MB / 822.2 MB (12.4%)
+2026-01-22 22:00:17,455 - embedding_extraction - INFO -   Downloaded: 103.1 MB / 822.2 MB (12.5%)
+2026-01-22 22:00:17,680 - embedding_extraction - INFO -   Downloaded: 103.9 MB / 822.2 MB (12.6%)
+2026-01-22 22:00:17,904 - embedding_extraction - INFO -   Downloaded: 104.7 MB / 822.2 MB (12.7%)
+2026-01-22 22:00:18,132 - embedding_extraction - INFO -   Downloaded: 105.5 MB / 822.2 MB (12.8%)
+2026-01-22 22:00:18,356 - embedding_extraction - INFO -   Downloaded: 106.2 MB / 822.2 MB (12.9%)
+2026-01-22 22:00:18,580 - embedding_extraction - INFO -   Downloaded: 107.0 MB / 822.2 MB (13.0%)
+2026-01-22 22:00:18,816 - embedding_extraction - INFO -   Downloaded: 107.8 MB / 822.2 MB (13.1%)
+2026-01-22 22:00:19,040 - embedding_extraction - INFO -   Downloaded: 108.6 MB / 822.2 MB (13.2%)
+2026-01-22 22:00:19,266 - embedding_extraction - INFO -   Downloaded: 109.4 MB / 822.2 MB (13.3%)
+2026-01-22 22:00:19,490 - embedding_extraction - INFO -   Downloaded: 110.2 MB / 822.2 MB (13.4%)
+2026-01-22 22:00:19,715 - embedding_extraction - INFO -   Downloaded: 110.9 MB / 822.2 MB (13.5%)
+2026-01-22 22:00:19,940 - embedding_extraction - INFO -   Downloaded: 111.7 MB / 822.2 MB (13.6%)
+2026-01-22 22:00:20,164 - embedding_extraction - INFO -   Downloaded: 112.5 MB / 822.2 MB (13.7%)
+2026-01-22 22:00:20,389 - embedding_extraction - INFO -   Downloaded: 113.3 MB / 822.2 MB (13.8%)
+2026-01-22 22:00:20,614 - embedding_extraction - INFO -   Downloaded: 114.1 MB / 822.2 MB (13.9%)
+2026-01-22 22:00:20,838 - embedding_extraction - INFO -   Downloaded: 114.8 MB / 822.2 MB (14.0%)
+2026-01-22 22:00:21,061 - embedding_extraction - INFO -   Downloaded: 115.6 MB / 822.2 MB (14.1%)
+2026-01-22 22:00:21,287 - embedding_extraction - INFO -   Downloaded: 116.4 MB / 822.2 MB (14.2%)
+2026-01-22 22:00:21,512 - embedding_extraction - INFO -   Downloaded: 117.2 MB / 822.2 MB (14.3%)
+2026-01-22 22:00:21,740 - embedding_extraction - INFO -   Downloaded: 118.0 MB / 822.2 MB (14.3%)
+2026-01-22 22:00:21,967 - embedding_extraction - INFO -   Downloaded: 118.8 MB / 822.2 MB (14.4%)
+2026-01-22 22:00:22,193 - embedding_extraction - INFO -   Downloaded: 119.5 MB / 822.2 MB (14.5%)
+2026-01-22 22:00:22,418 - embedding_extraction - INFO -   Downloaded: 120.3 MB / 822.2 MB (14.6%)
+2026-01-22 22:00:22,642 - embedding_extraction - INFO -   Downloaded: 121.1 MB / 822.2 MB (14.7%)
+2026-01-22 22:00:22,866 - embedding_extraction - INFO -   Downloaded: 121.9 MB / 822.2 MB (14.8%)
+2026-01-22 22:00:23,094 - embedding_extraction - INFO -   Downloaded: 122.7 MB / 822.2 MB (14.9%)
+2026-01-22 22:00:23,318 - embedding_extraction - INFO -   Downloaded: 123.4 MB / 822.2 MB (15.0%)
+2026-01-22 22:00:23,542 - embedding_extraction - INFO -   Downloaded: 124.2 MB / 822.2 MB (15.1%)
+2026-01-22 22:00:23,765 - embedding_extraction - INFO -   Downloaded: 125.0 MB / 822.2 MB (15.2%)
+2026-01-22 22:00:23,989 - embedding_extraction - INFO -   Downloaded: 125.8 MB / 822.2 MB (15.3%)
+2026-01-22 22:00:24,212 - embedding_extraction - INFO -   Downloaded: 126.6 MB / 822.2 MB (15.4%)
+2026-01-22 22:00:24,435 - embedding_extraction - INFO -   Downloaded: 127.3 MB / 822.2 MB (15.5%)
+2026-01-22 22:00:24,659 - embedding_extraction - INFO -   Downloaded: 128.1 MB / 822.2 MB (15.6%)
+2026-01-22 22:00:24,884 - embedding_extraction - INFO -   Downloaded: 128.9 MB / 822.2 MB (15.7%)
+2026-01-22 22:00:25,111 - embedding_extraction - INFO -   Downloaded: 129.7 MB / 822.2 MB (15.8%)
+2026-01-22 22:00:25,336 - embedding_extraction - INFO -   Downloaded: 130.5 MB / 822.2 MB (15.9%)
+2026-01-22 22:00:25,560 - embedding_extraction - INFO -   Downloaded: 131.2 MB / 822.2 MB (16.0%)
+2026-01-22 22:00:25,785 - embedding_extraction - INFO -   Downloaded: 132.0 MB / 822.2 MB (16.1%)
+2026-01-22 22:00:26,011 - embedding_extraction - INFO -   Downloaded: 132.8 MB / 822.2 MB (16.2%)
+2026-01-22 22:00:26,235 - embedding_extraction - INFO -   Downloaded: 133.6 MB / 822.2 MB (16.2%)
+2026-01-22 22:00:26,460 - embedding_extraction - INFO -   Downloaded: 134.4 MB / 822.2 MB (16.3%)
+2026-01-22 22:00:26,684 - embedding_extraction - INFO -   Downloaded: 135.2 MB / 822.2 MB (16.4%)
+2026-01-22 22:00:26,907 - embedding_extraction - INFO -   Downloaded: 135.9 MB / 822.2 MB (16.5%)
+2026-01-22 22:00:27,132 - embedding_extraction - INFO -   Downloaded: 136.7 MB / 822.2 MB (16.6%)
+2026-01-22 22:00:27,360 - embedding_extraction - INFO -   Downloaded: 137.5 MB / 822.2 MB (16.7%)
+2026-01-22 22:00:27,585 - embedding_extraction - INFO -   Downloaded: 138.3 MB / 822.2 MB (16.8%)
+2026-01-22 22:00:27,808 - embedding_extraction - INFO -   Downloaded: 139.1 MB / 822.2 MB (16.9%)
+2026-01-22 22:00:28,033 - embedding_extraction - INFO -   Downloaded: 139.8 MB / 822.2 MB (17.0%)
+2026-01-22 22:00:28,256 - embedding_extraction - INFO -   Downloaded: 140.6 MB / 822.2 MB (17.1%)
+2026-01-22 22:00:28,481 - embedding_extraction - INFO -   Downloaded: 141.4 MB / 822.2 MB (17.2%)
+2026-01-22 22:00:28,707 - embedding_extraction - INFO -   Downloaded: 142.2 MB / 822.2 MB (17.3%)
+2026-01-22 22:00:28,930 - embedding_extraction - INFO -   Downloaded: 143.0 MB / 822.2 MB (17.4%)
+2026-01-22 22:00:29,155 - embedding_extraction - INFO -   Downloaded: 143.8 MB / 822.2 MB (17.5%)
+2026-01-22 22:00:29,379 - embedding_extraction - INFO -   Downloaded: 144.5 MB / 822.2 MB (17.6%)
+2026-01-22 22:00:29,608 - embedding_extraction - INFO -   Downloaded: 145.3 MB / 822.2 MB (17.7%)
+2026-01-22 22:00:29,831 - embedding_extraction - INFO -   Downloaded: 146.1 MB / 822.2 MB (17.8%)
+2026-01-22 22:00:30,054 - embedding_extraction - INFO -   Downloaded: 146.9 MB / 822.2 MB (17.9%)
+2026-01-22 22:00:30,278 - embedding_extraction - INFO -   Downloaded: 147.7 MB / 822.2 MB (18.0%)
+2026-01-22 22:00:30,501 - embedding_extraction - INFO -   Downloaded: 148.4 MB / 822.2 MB (18.1%)
+2026-01-22 22:00:30,725 - embedding_extraction - INFO -   Downloaded: 149.2 MB / 822.2 MB (18.1%)
+2026-01-22 22:00:30,949 - embedding_extraction - INFO -   Downloaded: 150.0 MB / 822.2 MB (18.2%)
+2026-01-22 22:00:31,174 - embedding_extraction - INFO -   Downloaded: 150.8 MB / 822.2 MB (18.3%)
+2026-01-22 22:00:31,401 - embedding_extraction - INFO -   Downloaded: 151.6 MB / 822.2 MB (18.4%)
+2026-01-22 22:00:31,628 - embedding_extraction - INFO -   Downloaded: 152.3 MB / 822.2 MB (18.5%)
+2026-01-22 22:00:31,851 - embedding_extraction - INFO -   Downloaded: 153.1 MB / 822.2 MB (18.6%)
+2026-01-22 22:00:32,077 - embedding_extraction - INFO -   Downloaded: 153.9 MB / 822.2 MB (18.7%)
+2026-01-22 22:00:32,304 - embedding_extraction - INFO -   Downloaded: 154.7 MB / 822.2 MB (18.8%)
+2026-01-22 22:00:32,528 - embedding_extraction - INFO -   Downloaded: 155.5 MB / 822.2 MB (18.9%)
+2026-01-22 22:00:32,751 - embedding_extraction - INFO -   Downloaded: 156.2 MB / 822.2 MB (19.0%)
+2026-01-22 22:00:32,975 - embedding_extraction - INFO -   Downloaded: 157.0 MB / 822.2 MB (19.1%)
+2026-01-22 22:00:33,200 - embedding_extraction - INFO -   Downloaded: 157.8 MB / 822.2 MB (19.2%)
+2026-01-22 22:00:33,425 - embedding_extraction - INFO -   Downloaded: 158.6 MB / 822.2 MB (19.3%)
+2026-01-22 22:00:33,650 - embedding_extraction - INFO -   Downloaded: 159.4 MB / 822.2 MB (19.4%)
+2026-01-22 22:00:33,875 - embedding_extraction - INFO -   Downloaded: 160.2 MB / 822.2 MB (19.5%)
+2026-01-22 22:00:34,100 - embedding_extraction - INFO -   Downloaded: 160.9 MB / 822.2 MB (19.6%)
+2026-01-22 22:00:34,322 - embedding_extraction - INFO -   Downloaded: 161.7 MB / 822.2 MB (19.7%)
+2026-01-22 22:00:34,547 - embedding_extraction - INFO -   Downloaded: 162.5 MB / 822.2 MB (19.8%)
+2026-01-22 22:00:34,771 - embedding_extraction - INFO -   Downloaded: 163.3 MB / 822.2 MB (19.9%)
+2026-01-22 22:00:34,997 - embedding_extraction - INFO -   Downloaded: 164.1 MB / 822.2 MB (20.0%)
+2026-01-22 22:00:35,222 - embedding_extraction - INFO -   Downloaded: 164.8 MB / 822.2 MB (20.0%)
+2026-01-22 22:00:35,447 - embedding_extraction - INFO -   Downloaded: 165.6 MB / 822.2 MB (20.1%)
+2026-01-22 22:00:35,671 - embedding_extraction - INFO -   Downloaded: 166.4 MB / 822.2 MB (20.2%)
+2026-01-22 22:00:35,899 - embedding_extraction - INFO -   Downloaded: 167.2 MB / 822.2 MB (20.3%)
+2026-01-22 22:00:36,124 - embedding_extraction - INFO -   Downloaded: 168.0 MB / 822.2 MB (20.4%)
+2026-01-22 22:00:36,348 - embedding_extraction - INFO -   Downloaded: 168.8 MB / 822.2 MB (20.5%)
+2026-01-22 22:00:36,572 - embedding_extraction - INFO -   Downloaded: 169.5 MB / 822.2 MB (20.6%)
+2026-01-22 22:00:36,795 - embedding_extraction - INFO -   Downloaded: 170.3 MB / 822.2 MB (20.7%)
+2026-01-22 22:00:37,019 - embedding_extraction - INFO -   Downloaded: 171.1 MB / 822.2 MB (20.8%)
+2026-01-22 22:00:37,245 - embedding_extraction - INFO -   Downloaded: 171.9 MB / 822.2 MB (20.9%)
+2026-01-22 22:00:37,469 - embedding_extraction - INFO -   Downloaded: 172.7 MB / 822.2 MB (21.0%)
+2026-01-22 22:00:37,693 - embedding_extraction - INFO -   Downloaded: 173.4 MB / 822.2 MB (21.1%)
+2026-01-22 22:00:37,936 - embedding_extraction - INFO -   Downloaded: 174.2 MB / 822.2 MB (21.2%)
+2026-01-22 22:00:38,161 - embedding_extraction - INFO -   Downloaded: 175.0 MB / 822.2 MB (21.3%)
+2026-01-22 22:00:38,386 - embedding_extraction - INFO -   Downloaded: 175.8 MB / 822.2 MB (21.4%)
+2026-01-22 22:00:38,613 - embedding_extraction - INFO -   Downloaded: 176.6 MB / 822.2 MB (21.5%)
+2026-01-22 22:00:38,838 - embedding_extraction - INFO -   Downloaded: 177.3 MB / 822.2 MB (21.6%)
+2026-01-22 22:00:39,062 - embedding_extraction - INFO -   Downloaded: 178.1 MB / 822.2 MB (21.7%)
+2026-01-22 22:00:39,286 - embedding_extraction - INFO -   Downloaded: 178.9 MB / 822.2 MB (21.8%)
+2026-01-22 22:00:39,510 - embedding_extraction - INFO -   Downloaded: 179.7 MB / 822.2 MB (21.9%)
+2026-01-22 22:00:39,735 - embedding_extraction - INFO -   Downloaded: 180.5 MB / 822.2 MB (21.9%)
+2026-01-22 22:00:39,960 - embedding_extraction - INFO -   Downloaded: 181.2 MB / 822.2 MB (22.0%)
+2026-01-22 22:00:40,184 - embedding_extraction - INFO -   Downloaded: 182.0 MB / 822.2 MB (22.1%)
+2026-01-22 22:00:40,418 - embedding_extraction - INFO -   Downloaded: 182.8 MB / 822.2 MB (22.2%)
+2026-01-22 22:00:40,644 - embedding_extraction - INFO -   Downloaded: 183.6 MB / 822.2 MB (22.3%)
+2026-01-22 22:00:40,869 - embedding_extraction - INFO -   Downloaded: 184.4 MB / 822.2 MB (22.4%)
+2026-01-22 22:00:41,093 - embedding_extraction - INFO -   Downloaded: 185.2 MB / 822.2 MB (22.5%)
+2026-01-22 22:00:41,319 - embedding_extraction - INFO -   Downloaded: 185.9 MB / 822.2 MB (22.6%)
+2026-01-22 22:00:41,544 - embedding_extraction - INFO -   Downloaded: 186.7 MB / 822.2 MB (22.7%)
+2026-01-22 22:00:41,770 - embedding_extraction - INFO -   Downloaded: 187.5 MB / 822.2 MB (22.8%)
+2026-01-22 22:00:41,995 - embedding_extraction - INFO -   Downloaded: 188.3 MB / 822.2 MB (22.9%)
+2026-01-22 22:00:42,227 - embedding_extraction - INFO -   Downloaded: 189.1 MB / 822.2 MB (23.0%)
+2026-01-22 22:00:42,456 - embedding_extraction - INFO -   Downloaded: 189.8 MB / 822.2 MB (23.1%)
+2026-01-22 22:00:42,684 - embedding_extraction - INFO -   Downloaded: 190.6 MB / 822.2 MB (23.2%)
+2026-01-22 22:00:42,913 - embedding_extraction - INFO -   Downloaded: 191.4 MB / 822.2 MB (23.3%)
+2026-01-22 22:00:43,143 - embedding_extraction - INFO -   Downloaded: 192.2 MB / 822.2 MB (23.4%)
+2026-01-22 22:00:43,371 - embedding_extraction - INFO -   Downloaded: 193.0 MB / 822.2 MB (23.5%)
+2026-01-22 22:00:43,604 - embedding_extraction - INFO -   Downloaded: 193.8 MB / 822.2 MB (23.6%)
+2026-01-22 22:00:43,832 - embedding_extraction - INFO -   Downloaded: 194.5 MB / 822.2 MB (23.7%)
+2026-01-22 22:00:44,060 - embedding_extraction - INFO -   Downloaded: 195.3 MB / 822.2 MB (23.8%)
+2026-01-22 22:00:44,288 - embedding_extraction - INFO -   Downloaded: 196.1 MB / 822.2 MB (23.8%)
+2026-01-22 22:00:44,515 - embedding_extraction - INFO -   Downloaded: 196.9 MB / 822.2 MB (23.9%)
+2026-01-22 22:00:44,746 - embedding_extraction - INFO -   Downloaded: 197.7 MB / 822.2 MB (24.0%)
+2026-01-22 22:00:44,974 - embedding_extraction - INFO -   Downloaded: 198.4 MB / 822.2 MB (24.1%)
+2026-01-22 22:00:45,200 - embedding_extraction - INFO -   Downloaded: 199.2 MB / 822.2 MB (24.2%)
+2026-01-22 22:00:45,427 - embedding_extraction - INFO -   Downloaded: 200.0 MB / 822.2 MB (24.3%)
+2026-01-22 22:00:45,656 - embedding_extraction - INFO -   Downloaded: 200.8 MB / 822.2 MB (24.4%)
+2026-01-22 22:00:45,884 - embedding_extraction - INFO -   Downloaded: 201.6 MB / 822.2 MB (24.5%)
+2026-01-22 22:00:46,112 - embedding_extraction - INFO -   Downloaded: 202.3 MB / 822.2 MB (24.6%)
+2026-01-22 22:00:46,341 - embedding_extraction - INFO -   Downloaded: 203.1 MB / 822.2 MB (24.7%)
+2026-01-22 22:00:46,570 - embedding_extraction - INFO -   Downloaded: 203.9 MB / 822.2 MB (24.8%)
+2026-01-22 22:00:46,798 - embedding_extraction - INFO -   Downloaded: 204.7 MB / 822.2 MB (24.9%)
+2026-01-22 22:00:47,026 - embedding_extraction - INFO -   Downloaded: 205.5 MB / 822.2 MB (25.0%)
+2026-01-22 22:00:47,255 - embedding_extraction - INFO -   Downloaded: 206.2 MB / 822.2 MB (25.1%)
+2026-01-22 22:00:47,481 - embedding_extraction - INFO -   Downloaded: 207.0 MB / 822.2 MB (25.2%)
+2026-01-22 22:00:47,707 - embedding_extraction - INFO -   Downloaded: 207.8 MB / 822.2 MB (25.3%)
+2026-01-22 22:00:47,956 - embedding_extraction - INFO -   Downloaded: 208.6 MB / 822.2 MB (25.4%)
+2026-01-22 22:00:48,186 - embedding_extraction - INFO -   Downloaded: 209.4 MB / 822.2 MB (25.5%)
+2026-01-22 22:00:48,415 - embedding_extraction - INFO -   Downloaded: 210.2 MB / 822.2 MB (25.6%)
+2026-01-22 22:00:48,643 - embedding_extraction - INFO -   Downloaded: 210.9 MB / 822.2 MB (25.7%)
+2026-01-22 22:00:48,875 - embedding_extraction - INFO -   Downloaded: 211.7 MB / 822.2 MB (25.7%)
+2026-01-22 22:00:49,116 - embedding_extraction - INFO -   Downloaded: 212.5 MB / 822.2 MB (25.8%)
+2026-01-22 22:00:49,345 - embedding_extraction - INFO -   Downloaded: 213.3 MB / 822.2 MB (25.9%)
+2026-01-22 22:00:49,574 - embedding_extraction - INFO -   Downloaded: 214.1 MB / 822.2 MB (26.0%)
+2026-01-22 22:00:49,804 - embedding_extraction - INFO -   Downloaded: 214.8 MB / 822.2 MB (26.1%)
+2026-01-22 22:00:50,033 - embedding_extraction - INFO -   Downloaded: 215.6 MB / 822.2 MB (26.2%)
+2026-01-22 22:00:50,262 - embedding_extraction - INFO -   Downloaded: 216.4 MB / 822.2 MB (26.3%)
+2026-01-22 22:00:50,489 - embedding_extraction - INFO -   Downloaded: 217.2 MB / 822.2 MB (26.4%)
+2026-01-22 22:00:50,717 - embedding_extraction - INFO -   Downloaded: 218.0 MB / 822.2 MB (26.5%)
+2026-01-22 22:00:50,946 - embedding_extraction - INFO -   Downloaded: 218.8 MB / 822.2 MB (26.6%)
+2026-01-22 22:00:51,177 - embedding_extraction - INFO -   Downloaded: 219.5 MB / 822.2 MB (26.7%)
+2026-01-22 22:00:51,415 - embedding_extraction - INFO -   Downloaded: 220.3 MB / 822.2 MB (26.8%)
+2026-01-22 22:00:51,643 - embedding_extraction - INFO -   Downloaded: 221.1 MB / 822.2 MB (26.9%)
+2026-01-22 22:00:51,871 - embedding_extraction - INFO -   Downloaded: 221.9 MB / 822.2 MB (27.0%)
+2026-01-22 22:00:52,099 - embedding_extraction - INFO -   Downloaded: 222.7 MB / 822.2 MB (27.1%)
+2026-01-22 22:00:52,330 - embedding_extraction - INFO -   Downloaded: 223.4 MB / 822.2 MB (27.2%)
+2026-01-22 22:00:52,557 - embedding_extraction - INFO -   Downloaded: 224.2 MB / 822.2 MB (27.3%)
+2026-01-22 22:00:52,783 - embedding_extraction - INFO -   Downloaded: 225.0 MB / 822.2 MB (27.4%)
+2026-01-22 22:00:53,013 - embedding_extraction - INFO -   Downloaded: 225.8 MB / 822.2 MB (27.5%)
+2026-01-22 22:00:53,243 - embedding_extraction - INFO -   Downloaded: 226.6 MB / 822.2 MB (27.6%)
+2026-01-22 22:00:53,478 - embedding_extraction - INFO -   Downloaded: 227.3 MB / 822.2 MB (27.6%)
+2026-01-22 22:00:53,721 - embedding_extraction - INFO -   Downloaded: 228.1 MB / 822.2 MB (27.7%)
+2026-01-22 22:00:53,950 - embedding_extraction - INFO -   Downloaded: 228.9 MB / 822.2 MB (27.8%)
+2026-01-22 22:00:54,182 - embedding_extraction - INFO -   Downloaded: 229.7 MB / 822.2 MB (27.9%)
+2026-01-22 22:00:54,410 - embedding_extraction - INFO -   Downloaded: 230.5 MB / 822.2 MB (28.0%)
+2026-01-22 22:00:54,638 - embedding_extraction - INFO -   Downloaded: 231.2 MB / 822.2 MB (28.1%)
+2026-01-22 22:00:54,869 - embedding_extraction - INFO -   Downloaded: 232.0 MB / 822.2 MB (28.2%)
+2026-01-22 22:00:55,098 - embedding_extraction - INFO -   Downloaded: 232.8 MB / 822.2 MB (28.3%)
+2026-01-22 22:00:55,326 - embedding_extraction - INFO -   Downloaded: 233.6 MB / 822.2 MB (28.4%)
+2026-01-22 22:00:55,552 - embedding_extraction - INFO -   Downloaded: 234.4 MB / 822.2 MB (28.5%)
+2026-01-22 22:00:55,779 - embedding_extraction - INFO -   Downloaded: 235.2 MB / 822.2 MB (28.6%)
+2026-01-22 22:00:56,007 - embedding_extraction - INFO -   Downloaded: 235.9 MB / 822.2 MB (28.7%)
+2026-01-22 22:00:56,236 - embedding_extraction - INFO -   Downloaded: 236.7 MB / 822.2 MB (28.8%)
+2026-01-22 22:00:56,464 - embedding_extraction - INFO -   Downloaded: 237.5 MB / 822.2 MB (28.9%)
+2026-01-22 22:00:56,700 - embedding_extraction - INFO -   Downloaded: 238.3 MB / 822.2 MB (29.0%)
+2026-01-22 22:00:56,931 - embedding_extraction - INFO -   Downloaded: 239.1 MB / 822.2 MB (29.1%)
+2026-01-22 22:00:57,162 - embedding_extraction - INFO -   Downloaded: 239.8 MB / 822.2 MB (29.2%)
+2026-01-22 22:00:57,390 - embedding_extraction - INFO -   Downloaded: 240.6 MB / 822.2 MB (29.3%)
+2026-01-22 22:00:57,618 - embedding_extraction - INFO -   Downloaded: 241.4 MB / 822.2 MB (29.4%)
+2026-01-22 22:00:57,850 - embedding_extraction - INFO -   Downloaded: 242.2 MB / 822.2 MB (29.5%)
+2026-01-22 22:00:58,086 - embedding_extraction - INFO -   Downloaded: 243.0 MB / 822.2 MB (29.5%)
+2026-01-22 22:00:58,314 - embedding_extraction - INFO -   Downloaded: 243.8 MB / 822.2 MB (29.6%)
+2026-01-22 22:00:58,545 - embedding_extraction - INFO -   Downloaded: 244.5 MB / 822.2 MB (29.7%)
+2026-01-22 22:00:58,773 - embedding_extraction - INFO -   Downloaded: 245.3 MB / 822.2 MB (29.8%)
+2026-01-22 22:00:59,002 - embedding_extraction - INFO -   Downloaded: 246.1 MB / 822.2 MB (29.9%)
+2026-01-22 22:00:59,230 - embedding_extraction - INFO -   Downloaded: 246.9 MB / 822.2 MB (30.0%)
+2026-01-22 22:00:59,460 - embedding_extraction - INFO -   Downloaded: 247.7 MB / 822.2 MB (30.1%)
+2026-01-22 22:00:59,687 - embedding_extraction - INFO -   Downloaded: 248.4 MB / 822.2 MB (30.2%)
+2026-01-22 22:00:59,919 - embedding_extraction - INFO -   Downloaded: 249.2 MB / 822.2 MB (30.3%)
+2026-01-22 22:01:00,149 - embedding_extraction - INFO -   Downloaded: 250.0 MB / 822.2 MB (30.4%)
+2026-01-22 22:01:00,379 - embedding_extraction - INFO -   Downloaded: 250.8 MB / 822.2 MB (30.5%)
+2026-01-22 22:01:00,607 - embedding_extraction - INFO -   Downloaded: 251.6 MB / 822.2 MB (30.6%)
+2026-01-22 22:01:00,835 - embedding_extraction - INFO -   Downloaded: 252.3 MB / 822.2 MB (30.7%)
+2026-01-22 22:01:01,060 - embedding_extraction - INFO -   Downloaded: 253.1 MB / 822.2 MB (30.8%)
+2026-01-22 22:01:01,288 - embedding_extraction - INFO -   Downloaded: 253.9 MB / 822.2 MB (30.9%)
+2026-01-22 22:01:01,513 - embedding_extraction - INFO -   Downloaded: 254.7 MB / 822.2 MB (31.0%)
+2026-01-22 22:01:01,742 - embedding_extraction - INFO -   Downloaded: 255.5 MB / 822.2 MB (31.1%)
+2026-01-22 22:01:01,971 - embedding_extraction - INFO -   Downloaded: 256.2 MB / 822.2 MB (31.2%)
+2026-01-22 22:01:02,199 - embedding_extraction - INFO -   Downloaded: 257.0 MB / 822.2 MB (31.3%)
+2026-01-22 22:01:02,434 - embedding_extraction - INFO -   Downloaded: 257.8 MB / 822.2 MB (31.4%)
+2026-01-22 22:01:02,657 - embedding_extraction - INFO -   Downloaded: 258.6 MB / 822.2 MB (31.4%)
+2026-01-22 22:01:02,881 - embedding_extraction - INFO -   Downloaded: 259.4 MB / 822.2 MB (31.5%)
+2026-01-22 22:01:03,104 - embedding_extraction - INFO -   Downloaded: 260.2 MB / 822.2 MB (31.6%)
+2026-01-22 22:01:03,328 - embedding_extraction - INFO -   Downloaded: 260.9 MB / 822.2 MB (31.7%)
+2026-01-22 22:01:03,552 - embedding_extraction - INFO -   Downloaded: 261.7 MB / 822.2 MB (31.8%)
+2026-01-22 22:01:03,775 - embedding_extraction - INFO -   Downloaded: 262.5 MB / 822.2 MB (31.9%)
+2026-01-22 22:01:03,998 - embedding_extraction - INFO -   Downloaded: 263.3 MB / 822.2 MB (32.0%)
+2026-01-22 22:01:04,223 - embedding_extraction - INFO -   Downloaded: 264.1 MB / 822.2 MB (32.1%)
+2026-01-22 22:01:04,449 - embedding_extraction - INFO -   Downloaded: 264.8 MB / 822.2 MB (32.2%)
+2026-01-22 22:01:04,673 - embedding_extraction - INFO -   Downloaded: 265.6 MB / 822.2 MB (32.3%)
+2026-01-22 22:01:04,898 - embedding_extraction - INFO -   Downloaded: 266.4 MB / 822.2 MB (32.4%)
+2026-01-22 22:01:05,123 - embedding_extraction - INFO -   Downloaded: 267.2 MB / 822.2 MB (32.5%)
+2026-01-22 22:01:05,392 - embedding_extraction - INFO -   Downloaded: 268.0 MB / 822.2 MB (32.6%)
+2026-01-22 22:01:05,619 - embedding_extraction - INFO -   Downloaded: 268.8 MB / 822.2 MB (32.7%)
+2026-01-22 22:01:05,865 - embedding_extraction - INFO -   Downloaded: 269.5 MB / 822.2 MB (32.8%)
+2026-01-22 22:01:06,251 - embedding_extraction - INFO -   Downloaded: 270.3 MB / 822.2 MB (32.9%)
+2026-01-22 22:01:06,428 - embedding_extraction - INFO -   Downloaded: 271.1 MB / 822.2 MB (33.0%)
+2026-01-22 22:01:06,770 - embedding_extraction - INFO -   Downloaded: 271.9 MB / 822.2 MB (33.1%)
+2026-01-22 22:01:07,098 - embedding_extraction - INFO -   Downloaded: 272.7 MB / 822.2 MB (33.2%)
+2026-01-22 22:01:07,425 - embedding_extraction - INFO -   Downloaded: 273.4 MB / 822.2 MB (33.3%)
+2026-01-22 22:01:07,743 - embedding_extraction - INFO -   Downloaded: 274.2 MB / 822.2 MB (33.4%)
+2026-01-22 22:01:08,053 - embedding_extraction - INFO -   Downloaded: 275.0 MB / 822.2 MB (33.4%)
+2026-01-22 22:01:08,356 - embedding_extraction - INFO -   Downloaded: 275.8 MB / 822.2 MB (33.5%)
+2026-01-22 22:01:08,662 - embedding_extraction - INFO -   Downloaded: 276.6 MB / 822.2 MB (33.6%)
+2026-01-22 22:01:08,962 - embedding_extraction - INFO -   Downloaded: 277.3 MB / 822.2 MB (33.7%)
+2026-01-22 22:01:09,258 - embedding_extraction - INFO -   Downloaded: 278.1 MB / 822.2 MB (33.8%)
+2026-01-22 22:01:09,558 - embedding_extraction - INFO -   Downloaded: 278.9 MB / 822.2 MB (33.9%)
+2026-01-22 22:01:09,855 - embedding_extraction - INFO -   Downloaded: 279.7 MB / 822.2 MB (34.0%)
+2026-01-22 22:01:10,151 - embedding_extraction - INFO -   Downloaded: 280.5 MB / 822.2 MB (34.1%)
+2026-01-22 22:01:10,443 - embedding_extraction - INFO -   Downloaded: 281.2 MB / 822.2 MB (34.2%)
+2026-01-22 22:01:10,741 - embedding_extraction - INFO -   Downloaded: 282.0 MB / 822.2 MB (34.3%)
+2026-01-22 22:01:11,042 - embedding_extraction - INFO -   Downloaded: 282.8 MB / 822.2 MB (34.4%)
+2026-01-22 22:01:11,331 - embedding_extraction - INFO -   Downloaded: 283.6 MB / 822.2 MB (34.5%)
+2026-01-22 22:01:11,616 - embedding_extraction - INFO -   Downloaded: 284.4 MB / 822.2 MB (34.6%)
+2026-01-22 22:01:11,908 - embedding_extraction - INFO -   Downloaded: 285.2 MB / 822.2 MB (34.7%)
+2026-01-22 22:01:12,198 - embedding_extraction - INFO -   Downloaded: 285.9 MB / 822.2 MB (34.8%)
+2026-01-22 22:01:12,495 - embedding_extraction - INFO -   Downloaded: 286.7 MB / 822.2 MB (34.9%)
+2026-01-22 22:01:12,790 - embedding_extraction - INFO -   Downloaded: 287.5 MB / 822.2 MB (35.0%)
+2026-01-22 22:01:13,082 - embedding_extraction - INFO -   Downloaded: 288.3 MB / 822.2 MB (35.1%)
+2026-01-22 22:01:13,378 - embedding_extraction - INFO -   Downloaded: 289.1 MB / 822.2 MB (35.2%)
+2026-01-22 22:01:13,674 - embedding_extraction - INFO -   Downloaded: 289.8 MB / 822.2 MB (35.3%)
+2026-01-22 22:01:13,961 - embedding_extraction - INFO -   Downloaded: 290.6 MB / 822.2 MB (35.3%)
+2026-01-22 22:01:14,238 - embedding_extraction - INFO -   Downloaded: 291.4 MB / 822.2 MB (35.4%)
+2026-01-22 22:01:14,519 - embedding_extraction - INFO -   Downloaded: 292.2 MB / 822.2 MB (35.5%)
+2026-01-22 22:01:14,803 - embedding_extraction - INFO -   Downloaded: 293.0 MB / 822.2 MB (35.6%)
+2026-01-22 22:01:15,085 - embedding_extraction - INFO -   Downloaded: 293.8 MB / 822.2 MB (35.7%)
+2026-01-22 22:01:15,368 - embedding_extraction - INFO -   Downloaded: 294.5 MB / 822.2 MB (35.8%)
+2026-01-22 22:01:15,629 - embedding_extraction - INFO -   Downloaded: 295.3 MB / 822.2 MB (35.9%)
+2026-01-22 22:01:15,889 - embedding_extraction - INFO -   Downloaded: 296.1 MB / 822.2 MB (36.0%)
+2026-01-22 22:01:16,156 - embedding_extraction - INFO -   Downloaded: 296.9 MB / 822.2 MB (36.1%)
+2026-01-22 22:01:16,409 - embedding_extraction - INFO -   Downloaded: 297.7 MB / 822.2 MB (36.2%)
+2026-01-22 22:01:16,651 - embedding_extraction - INFO -   Downloaded: 298.4 MB / 822.2 MB (36.3%)
+2026-01-22 22:01:16,906 - embedding_extraction - INFO -   Downloaded: 299.2 MB / 822.2 MB (36.4%)
+2026-01-22 22:01:17,137 - embedding_extraction - INFO -   Downloaded: 300.0 MB / 822.2 MB (36.5%)
+2026-01-22 22:01:17,385 - embedding_extraction - INFO -   Downloaded: 300.8 MB / 822.2 MB (36.6%)
+2026-01-22 22:01:17,597 - embedding_extraction - INFO -   Downloaded: 301.6 MB / 822.2 MB (36.7%)
+2026-01-22 22:01:17,825 - embedding_extraction - INFO -   Downloaded: 302.3 MB / 822.2 MB (36.8%)
+2026-01-22 22:01:18,033 - embedding_extraction - INFO -   Downloaded: 303.1 MB / 822.2 MB (36.9%)
+2026-01-22 22:01:18,241 - embedding_extraction - INFO -   Downloaded: 303.9 MB / 822.2 MB (37.0%)
+2026-01-22 22:01:18,457 - embedding_extraction - INFO -   Downloaded: 304.7 MB / 822.2 MB (37.1%)
+2026-01-22 22:01:18,649 - embedding_extraction - INFO -   Downloaded: 305.5 MB / 822.2 MB (37.2%)
+2026-01-22 22:01:18,840 - embedding_extraction - INFO -   Downloaded: 306.2 MB / 822.2 MB (37.2%)
+2026-01-22 22:01:19,034 - embedding_extraction - INFO -   Downloaded: 307.0 MB / 822.2 MB (37.3%)
+2026-01-22 22:01:19,218 - embedding_extraction - INFO -   Downloaded: 307.8 MB / 822.2 MB (37.4%)
+2026-01-22 22:01:19,402 - embedding_extraction - INFO -   Downloaded: 308.6 MB / 822.2 MB (37.5%)
+2026-01-22 22:01:19,567 - embedding_extraction - INFO -   Downloaded: 309.4 MB / 822.2 MB (37.6%)
+2026-01-22 22:01:19,734 - embedding_extraction - INFO -   Downloaded: 310.2 MB / 822.2 MB (37.7%)
+2026-01-22 22:01:19,899 - embedding_extraction - INFO -   Downloaded: 310.9 MB / 822.2 MB (37.8%)
+2026-01-22 22:01:20,057 - embedding_extraction - INFO -   Downloaded: 311.7 MB / 822.2 MB (37.9%)
+2026-01-22 22:01:20,246 - embedding_extraction - INFO -   Downloaded: 312.5 MB / 822.2 MB (38.0%)
+2026-01-22 22:01:20,469 - embedding_extraction - INFO -   Downloaded: 313.3 MB / 822.2 MB (38.1%)
+2026-01-22 22:01:20,695 - embedding_extraction - INFO -   Downloaded: 314.1 MB / 822.2 MB (38.2%)
+2026-01-22 22:01:20,919 - embedding_extraction - INFO -   Downloaded: 314.8 MB / 822.2 MB (38.3%)
+2026-01-22 22:01:21,143 - embedding_extraction - INFO -   Downloaded: 315.6 MB / 822.2 MB (38.4%)
+2026-01-22 22:01:21,366 - embedding_extraction - INFO -   Downloaded: 316.4 MB / 822.2 MB (38.5%)
+2026-01-22 22:01:21,590 - embedding_extraction - INFO -   Downloaded: 317.2 MB / 822.2 MB (38.6%)
+2026-01-22 22:01:21,815 - embedding_extraction - INFO -   Downloaded: 318.0 MB / 822.2 MB (38.7%)
+2026-01-22 22:01:22,039 - embedding_extraction - INFO -   Downloaded: 318.8 MB / 822.2 MB (38.8%)
+2026-01-22 22:01:22,264 - embedding_extraction - INFO -   Downloaded: 319.5 MB / 822.2 MB (38.9%)
+2026-01-22 22:01:22,493 - embedding_extraction - INFO -   Downloaded: 320.3 MB / 822.2 MB (39.0%)
+2026-01-22 22:01:22,728 - embedding_extraction - INFO -   Downloaded: 321.1 MB / 822.2 MB (39.1%)
+2026-01-22 22:01:22,953 - embedding_extraction - INFO -   Downloaded: 321.9 MB / 822.2 MB (39.1%)
+2026-01-22 22:01:23,176 - embedding_extraction - INFO -   Downloaded: 322.7 MB / 822.2 MB (39.2%)
+2026-01-22 22:01:23,401 - embedding_extraction - INFO -   Downloaded: 323.4 MB / 822.2 MB (39.3%)
+2026-01-22 22:01:23,625 - embedding_extraction - INFO -   Downloaded: 324.2 MB / 822.2 MB (39.4%)
+2026-01-22 22:01:23,863 - embedding_extraction - INFO -   Downloaded: 325.0 MB / 822.2 MB (39.5%)
+2026-01-22 22:01:24,088 - embedding_extraction - INFO -   Downloaded: 325.8 MB / 822.2 MB (39.6%)
+2026-01-22 22:01:24,311 - embedding_extraction - INFO -   Downloaded: 326.6 MB / 822.2 MB (39.7%)
+2026-01-22 22:01:24,535 - embedding_extraction - INFO -   Downloaded: 327.3 MB / 822.2 MB (39.8%)
+2026-01-22 22:01:24,760 - embedding_extraction - INFO -   Downloaded: 328.1 MB / 822.2 MB (39.9%)
+2026-01-22 22:01:24,985 - embedding_extraction - INFO -   Downloaded: 328.9 MB / 822.2 MB (40.0%)
+2026-01-22 22:01:25,211 - embedding_extraction - INFO -   Downloaded: 329.7 MB / 822.2 MB (40.1%)
+2026-01-22 22:01:25,439 - embedding_extraction - INFO -   Downloaded: 330.5 MB / 822.2 MB (40.2%)
+2026-01-22 22:01:25,666 - embedding_extraction - INFO -   Downloaded: 331.2 MB / 822.2 MB (40.3%)
+2026-01-22 22:01:25,890 - embedding_extraction - INFO -   Downloaded: 332.0 MB / 822.2 MB (40.4%)
+2026-01-22 22:01:26,116 - embedding_extraction - INFO -   Downloaded: 332.8 MB / 822.2 MB (40.5%)
+2026-01-22 22:01:26,341 - embedding_extraction - INFO -   Downloaded: 333.6 MB / 822.2 MB (40.6%)
+2026-01-22 22:01:26,566 - embedding_extraction - INFO -   Downloaded: 334.4 MB / 822.2 MB (40.7%)
+2026-01-22 22:01:26,792 - embedding_extraction - INFO -   Downloaded: 335.2 MB / 822.2 MB (40.8%)
+2026-01-22 22:01:27,019 - embedding_extraction - INFO -   Downloaded: 335.9 MB / 822.2 MB (40.9%)
+2026-01-22 22:01:27,244 - embedding_extraction - INFO -   Downloaded: 336.7 MB / 822.2 MB (41.0%)
+2026-01-22 22:01:27,470 - embedding_extraction - INFO -   Downloaded: 337.5 MB / 822.2 MB (41.0%)
+2026-01-22 22:01:27,694 - embedding_extraction - INFO -   Downloaded: 338.3 MB / 822.2 MB (41.1%)
+2026-01-22 22:01:27,918 - embedding_extraction - INFO -   Downloaded: 339.1 MB / 822.2 MB (41.2%)
+2026-01-22 22:01:28,156 - embedding_extraction - INFO -   Downloaded: 339.8 MB / 822.2 MB (41.3%)
+2026-01-22 22:01:28,381 - embedding_extraction - INFO -   Downloaded: 340.6 MB / 822.2 MB (41.4%)
+2026-01-22 22:01:28,606 - embedding_extraction - INFO -   Downloaded: 341.4 MB / 822.2 MB (41.5%)
+2026-01-22 22:01:28,831 - embedding_extraction - INFO -   Downloaded: 342.2 MB / 822.2 MB (41.6%)
+2026-01-22 22:01:29,056 - embedding_extraction - INFO -   Downloaded: 343.0 MB / 822.2 MB (41.7%)
+2026-01-22 22:01:29,282 - embedding_extraction - INFO -   Downloaded: 343.8 MB / 822.2 MB (41.8%)
+2026-01-22 22:01:29,507 - embedding_extraction - INFO -   Downloaded: 344.5 MB / 822.2 MB (41.9%)
+2026-01-22 22:01:29,731 - embedding_extraction - INFO -   Downloaded: 345.3 MB / 822.2 MB (42.0%)
+2026-01-22 22:01:29,955 - embedding_extraction - INFO -   Downloaded: 346.1 MB / 822.2 MB (42.1%)
+2026-01-22 22:01:30,179 - embedding_extraction - INFO -   Downloaded: 346.9 MB / 822.2 MB (42.2%)
+2026-01-22 22:01:30,403 - embedding_extraction - INFO -   Downloaded: 347.7 MB / 822.2 MB (42.3%)
+2026-01-22 22:01:30,628 - embedding_extraction - INFO -   Downloaded: 348.4 MB / 822.2 MB (42.4%)
+2026-01-22 22:01:30,851 - embedding_extraction - INFO -   Downloaded: 349.2 MB / 822.2 MB (42.5%)
+2026-01-22 22:01:31,222 - embedding_extraction - INFO -   Downloaded: 350.0 MB / 822.2 MB (42.6%)
+2026-01-22 22:01:31,417 - embedding_extraction - INFO -   Downloaded: 350.8 MB / 822.2 MB (42.7%)
+2026-01-22 22:01:31,562 - embedding_extraction - INFO -   Downloaded: 351.6 MB / 822.2 MB (42.8%)
+2026-01-22 22:01:31,860 - embedding_extraction - INFO -   Downloaded: 352.3 MB / 822.2 MB (42.9%)
+2026-01-22 22:01:32,182 - embedding_extraction - INFO -   Downloaded: 353.1 MB / 822.2 MB (42.9%)
+2026-01-22 22:01:32,637 - embedding_extraction - INFO -   Downloaded: 353.9 MB / 822.2 MB (43.0%)
+2026-01-22 22:01:33,228 - embedding_extraction - INFO -   Downloaded: 354.7 MB / 822.2 MB (43.1%)
+2026-01-22 22:01:34,219 - embedding_extraction - INFO -   Downloaded: 355.5 MB / 822.2 MB (43.2%)
+2026-01-22 22:01:35,162 - embedding_extraction - INFO -   Downloaded: 356.2 MB / 822.2 MB (43.3%)
+2026-01-22 22:01:36,064 - embedding_extraction - INFO -   Downloaded: 357.0 MB / 822.2 MB (43.4%)
+2026-01-22 22:01:36,980 - embedding_extraction - INFO -   Downloaded: 357.8 MB / 822.2 MB (43.5%)
+2026-01-22 22:01:37,897 - embedding_extraction - INFO -   Downloaded: 358.6 MB / 822.2 MB (43.6%)
+2026-01-22 22:01:38,787 - embedding_extraction - INFO -   Downloaded: 359.4 MB / 822.2 MB (43.7%)
+2026-01-22 22:01:39,625 - embedding_extraction - INFO -   Downloaded: 360.2 MB / 822.2 MB (43.8%)
+2026-01-22 22:01:40,413 - embedding_extraction - INFO -   Downloaded: 360.9 MB / 822.2 MB (43.9%)
+2026-01-22 22:01:41,113 - embedding_extraction - INFO -   Downloaded: 361.7 MB / 822.2 MB (44.0%)
+2026-01-22 22:01:41,739 - embedding_extraction - INFO -   Downloaded: 362.5 MB / 822.2 MB (44.1%)
+2026-01-22 22:01:42,304 - embedding_extraction - INFO -   Downloaded: 363.3 MB / 822.2 MB (44.2%)
+2026-01-22 22:01:42,802 - embedding_extraction - INFO -   Downloaded: 364.1 MB / 822.2 MB (44.3%)
+2026-01-22 22:01:43,245 - embedding_extraction - INFO -   Downloaded: 364.8 MB / 822.2 MB (44.4%)
+2026-01-22 22:01:43,640 - embedding_extraction - INFO -   Downloaded: 365.6 MB / 822.2 MB (44.5%)
+2026-01-22 22:01:44,008 - embedding_extraction - INFO -   Downloaded: 366.4 MB / 822.2 MB (44.6%)
+2026-01-22 22:01:44,351 - embedding_extraction - INFO -   Downloaded: 367.2 MB / 822.2 MB (44.7%)
+2026-01-22 22:01:44,648 - embedding_extraction - INFO -   Downloaded: 368.0 MB / 822.2 MB (44.8%)
+2026-01-22 22:01:44,935 - embedding_extraction - INFO -   Downloaded: 368.8 MB / 822.2 MB (44.8%)
+2026-01-22 22:01:45,197 - embedding_extraction - INFO -   Downloaded: 369.5 MB / 822.2 MB (44.9%)
+2026-01-22 22:01:45,445 - embedding_extraction - INFO -   Downloaded: 370.3 MB / 822.2 MB (45.0%)
+2026-01-22 22:01:45,683 - embedding_extraction - INFO -   Downloaded: 371.1 MB / 822.2 MB (45.1%)
+2026-01-22 22:01:45,900 - embedding_extraction - INFO -   Downloaded: 371.9 MB / 822.2 MB (45.2%)
+2026-01-22 22:01:46,110 - embedding_extraction - INFO -   Downloaded: 372.7 MB / 822.2 MB (45.3%)
+2026-01-22 22:01:46,309 - embedding_extraction - INFO -   Downloaded: 373.4 MB / 822.2 MB (45.4%)
+2026-01-22 22:01:46,494 - embedding_extraction - INFO -   Downloaded: 374.2 MB / 822.2 MB (45.5%)
+2026-01-22 22:01:46,683 - embedding_extraction - INFO -   Downloaded: 375.0 MB / 822.2 MB (45.6%)
+2026-01-22 22:01:46,843 - embedding_extraction - INFO -   Downloaded: 375.8 MB / 822.2 MB (45.7%)
+2026-01-22 22:01:47,006 - embedding_extraction - INFO -   Downloaded: 376.6 MB / 822.2 MB (45.8%)
+2026-01-22 22:01:47,173 - embedding_extraction - INFO -   Downloaded: 377.3 MB / 822.2 MB (45.9%)
+2026-01-22 22:01:47,329 - embedding_extraction - INFO -   Downloaded: 378.1 MB / 822.2 MB (46.0%)
+2026-01-22 22:01:47,476 - embedding_extraction - INFO -   Downloaded: 378.9 MB / 822.2 MB (46.1%)
+2026-01-22 22:01:47,667 - embedding_extraction - INFO -   Downloaded: 379.7 MB / 822.2 MB (46.2%)
+2026-01-22 22:01:47,886 - embedding_extraction - INFO -   Downloaded: 380.5 MB / 822.2 MB (46.3%)
+2026-01-22 22:01:48,107 - embedding_extraction - INFO -   Downloaded: 381.2 MB / 822.2 MB (46.4%)
+2026-01-22 22:01:48,330 - embedding_extraction - INFO -   Downloaded: 382.0 MB / 822.2 MB (46.5%)
+2026-01-22 22:01:48,550 - embedding_extraction - INFO -   Downloaded: 382.8 MB / 822.2 MB (46.6%)
+2026-01-22 22:01:48,772 - embedding_extraction - INFO -   Downloaded: 383.6 MB / 822.2 MB (46.7%)
+2026-01-22 22:01:48,991 - embedding_extraction - INFO -   Downloaded: 384.4 MB / 822.2 MB (46.7%)
+2026-01-22 22:01:49,212 - embedding_extraction - INFO -   Downloaded: 385.2 MB / 822.2 MB (46.8%)
+2026-01-22 22:01:49,431 - embedding_extraction - INFO -   Downloaded: 385.9 MB / 822.2 MB (46.9%)
+2026-01-22 22:01:49,650 - embedding_extraction - INFO -   Downloaded: 386.7 MB / 822.2 MB (47.0%)
+2026-01-22 22:01:49,871 - embedding_extraction - INFO -   Downloaded: 387.5 MB / 822.2 MB (47.1%)
+2026-01-22 22:01:50,094 - embedding_extraction - INFO -   Downloaded: 388.3 MB / 822.2 MB (47.2%)
+2026-01-22 22:01:50,316 - embedding_extraction - INFO -   Downloaded: 389.1 MB / 822.2 MB (47.3%)
+2026-01-22 22:01:50,539 - embedding_extraction - INFO -   Downloaded: 389.8 MB / 822.2 MB (47.4%)
+2026-01-22 22:01:50,761 - embedding_extraction - INFO -   Downloaded: 390.6 MB / 822.2 MB (47.5%)
+2026-01-22 22:01:50,984 - embedding_extraction - INFO -   Downloaded: 391.4 MB / 822.2 MB (47.6%)
+2026-01-22 22:01:51,205 - embedding_extraction - INFO -   Downloaded: 392.2 MB / 822.2 MB (47.7%)
+2026-01-22 22:01:51,427 - embedding_extraction - INFO -   Downloaded: 393.0 MB / 822.2 MB (47.8%)
+2026-01-22 22:01:51,649 - embedding_extraction - INFO -   Downloaded: 393.8 MB / 822.2 MB (47.9%)
+2026-01-22 22:01:51,873 - embedding_extraction - INFO -   Downloaded: 394.5 MB / 822.2 MB (48.0%)
+2026-01-22 22:01:52,099 - embedding_extraction - INFO -   Downloaded: 395.3 MB / 822.2 MB (48.1%)
+2026-01-22 22:01:52,324 - embedding_extraction - INFO -   Downloaded: 396.1 MB / 822.2 MB (48.2%)
+2026-01-22 22:01:52,547 - embedding_extraction - INFO -   Downloaded: 396.9 MB / 822.2 MB (48.3%)
+2026-01-22 22:01:52,771 - embedding_extraction - INFO -   Downloaded: 397.7 MB / 822.2 MB (48.4%)
+2026-01-22 22:01:52,995 - embedding_extraction - INFO -   Downloaded: 398.4 MB / 822.2 MB (48.5%)
+2026-01-22 22:01:53,218 - embedding_extraction - INFO -   Downloaded: 399.2 MB / 822.2 MB (48.6%)
+2026-01-22 22:01:53,441 - embedding_extraction - INFO -   Downloaded: 400.0 MB / 822.2 MB (48.6%)
+2026-01-22 22:01:53,663 - embedding_extraction - INFO -   Downloaded: 400.8 MB / 822.2 MB (48.7%)
+2026-01-22 22:01:53,888 - embedding_extraction - INFO -   Downloaded: 401.6 MB / 822.2 MB (48.8%)
+2026-01-22 22:01:54,109 - embedding_extraction - INFO -   Downloaded: 402.3 MB / 822.2 MB (48.9%)
+2026-01-22 22:01:54,333 - embedding_extraction - INFO -   Downloaded: 403.1 MB / 822.2 MB (49.0%)
+2026-01-22 22:01:54,558 - embedding_extraction - INFO -   Downloaded: 403.9 MB / 822.2 MB (49.1%)
+2026-01-22 22:01:54,786 - embedding_extraction - INFO -   Downloaded: 404.7 MB / 822.2 MB (49.2%)
+2026-01-22 22:01:55,012 - embedding_extraction - INFO -   Downloaded: 405.5 MB / 822.2 MB (49.3%)
+2026-01-22 22:01:55,238 - embedding_extraction - INFO -   Downloaded: 406.2 MB / 822.2 MB (49.4%)
+2026-01-22 22:01:55,462 - embedding_extraction - INFO -   Downloaded: 407.0 MB / 822.2 MB (49.5%)
+2026-01-22 22:01:55,687 - embedding_extraction - INFO -   Downloaded: 407.8 MB / 822.2 MB (49.6%)
+2026-01-22 22:01:55,912 - embedding_extraction - INFO -   Downloaded: 408.6 MB / 822.2 MB (49.7%)
+2026-01-22 22:01:56,135 - embedding_extraction - INFO -   Downloaded: 409.4 MB / 822.2 MB (49.8%)
+2026-01-22 22:01:56,359 - embedding_extraction - INFO -   Downloaded: 410.2 MB / 822.2 MB (49.9%)
+2026-01-22 22:01:56,582 - embedding_extraction - INFO -   Downloaded: 410.9 MB / 822.2 MB (50.0%)
+2026-01-22 22:01:56,805 - embedding_extraction - INFO -   Downloaded: 411.7 MB / 822.2 MB (50.1%)
+2026-01-22 22:01:57,033 - embedding_extraction - INFO -   Downloaded: 412.5 MB / 822.2 MB (50.2%)
+2026-01-22 22:01:57,264 - embedding_extraction - INFO -   Downloaded: 413.3 MB / 822.2 MB (50.3%)
+2026-01-22 22:01:57,487 - embedding_extraction - INFO -   Downloaded: 414.1 MB / 822.2 MB (50.4%)
+2026-01-22 22:01:57,712 - embedding_extraction - INFO -   Downloaded: 414.8 MB / 822.2 MB (50.5%)
+2026-01-22 22:01:57,936 - embedding_extraction - INFO -   Downloaded: 415.6 MB / 822.2 MB (50.5%)
+2026-01-22 22:01:58,160 - embedding_extraction - INFO -   Downloaded: 416.4 MB / 822.2 MB (50.6%)
+2026-01-22 22:01:58,386 - embedding_extraction - INFO -   Downloaded: 417.2 MB / 822.2 MB (50.7%)
+2026-01-22 22:01:58,609 - embedding_extraction - INFO -   Downloaded: 418.0 MB / 822.2 MB (50.8%)
+2026-01-22 22:01:58,834 - embedding_extraction - INFO -   Downloaded: 418.8 MB / 822.2 MB (50.9%)
+2026-01-22 22:01:59,059 - embedding_extraction - INFO -   Downloaded: 419.5 MB / 822.2 MB (51.0%)
+2026-01-22 22:01:59,282 - embedding_extraction - INFO -   Downloaded: 420.3 MB / 822.2 MB (51.1%)
+2026-01-22 22:01:59,506 - embedding_extraction - INFO -   Downloaded: 421.1 MB / 822.2 MB (51.2%)
+2026-01-22 22:01:59,730 - embedding_extraction - INFO -   Downloaded: 421.9 MB / 822.2 MB (51.3%)
+2026-01-22 22:01:59,955 - embedding_extraction - INFO -   Downloaded: 422.7 MB / 822.2 MB (51.4%)
+2026-01-22 22:02:00,178 - embedding_extraction - INFO -   Downloaded: 423.4 MB / 822.2 MB (51.5%)
+2026-01-22 22:02:00,403 - embedding_extraction - INFO -   Downloaded: 424.2 MB / 822.2 MB (51.6%)
+2026-01-22 22:02:00,627 - embedding_extraction - INFO -   Downloaded: 425.0 MB / 822.2 MB (51.7%)
+2026-01-22 22:02:00,854 - embedding_extraction - INFO -   Downloaded: 425.8 MB / 822.2 MB (51.8%)
+2026-01-22 22:02:01,078 - embedding_extraction - INFO -   Downloaded: 426.6 MB / 822.2 MB (51.9%)
+2026-01-22 22:02:01,300 - embedding_extraction - INFO -   Downloaded: 427.3 MB / 822.2 MB (52.0%)
+2026-01-22 22:02:01,527 - embedding_extraction - INFO -   Downloaded: 428.1 MB / 822.2 MB (52.1%)
+2026-01-22 22:02:01,750 - embedding_extraction - INFO -   Downloaded: 428.9 MB / 822.2 MB (52.2%)
+2026-01-22 22:02:01,974 - embedding_extraction - INFO -   Downloaded: 429.7 MB / 822.2 MB (52.3%)
+2026-01-22 22:02:02,197 - embedding_extraction - INFO -   Downloaded: 430.5 MB / 822.2 MB (52.4%)
+2026-01-22 22:02:02,420 - embedding_extraction - INFO -   Downloaded: 431.2 MB / 822.2 MB (52.4%)
+2026-01-22 22:02:02,645 - embedding_extraction - INFO -   Downloaded: 432.0 MB / 822.2 MB (52.5%)
+2026-01-22 22:02:02,867 - embedding_extraction - INFO -   Downloaded: 432.8 MB / 822.2 MB (52.6%)
+2026-01-22 22:02:03,092 - embedding_extraction - INFO -   Downloaded: 433.6 MB / 822.2 MB (52.7%)
+2026-01-22 22:02:03,315 - embedding_extraction - INFO -   Downloaded: 434.4 MB / 822.2 MB (52.8%)
+2026-01-22 22:02:03,537 - embedding_extraction - INFO -   Downloaded: 435.2 MB / 822.2 MB (52.9%)
+2026-01-22 22:02:03,760 - embedding_extraction - INFO -   Downloaded: 435.9 MB / 822.2 MB (53.0%)
+2026-01-22 22:02:03,983 - embedding_extraction - INFO -   Downloaded: 436.7 MB / 822.2 MB (53.1%)
+2026-01-22 22:02:04,210 - embedding_extraction - INFO -   Downloaded: 437.5 MB / 822.2 MB (53.2%)
+2026-01-22 22:02:04,434 - embedding_extraction - INFO -   Downloaded: 438.3 MB / 822.2 MB (53.3%)
+2026-01-22 22:02:04,657 - embedding_extraction - INFO -   Downloaded: 439.1 MB / 822.2 MB (53.4%)
+2026-01-22 22:02:04,880 - embedding_extraction - INFO -   Downloaded: 439.8 MB / 822.2 MB (53.5%)
+2026-01-22 22:02:05,113 - embedding_extraction - INFO -   Downloaded: 440.6 MB / 822.2 MB (53.6%)
+2026-01-22 22:02:05,337 - embedding_extraction - INFO -   Downloaded: 441.4 MB / 822.2 MB (53.7%)
+2026-01-22 22:02:05,561 - embedding_extraction - INFO -   Downloaded: 442.2 MB / 822.2 MB (53.8%)
+2026-01-22 22:02:05,791 - embedding_extraction - INFO -   Downloaded: 443.0 MB / 822.2 MB (53.9%)
+2026-01-22 22:02:06,018 - embedding_extraction - INFO -   Downloaded: 443.8 MB / 822.2 MB (54.0%)
+2026-01-22 22:02:06,243 - embedding_extraction - INFO -   Downloaded: 444.5 MB / 822.2 MB (54.1%)
+2026-01-22 22:02:06,468 - embedding_extraction - INFO -   Downloaded: 445.3 MB / 822.2 MB (54.2%)
+2026-01-22 22:02:06,692 - embedding_extraction - INFO -   Downloaded: 446.1 MB / 822.2 MB (54.3%)
+2026-01-22 22:02:06,914 - embedding_extraction - INFO -   Downloaded: 446.9 MB / 822.2 MB (54.3%)
+2026-01-22 22:02:07,137 - embedding_extraction - INFO -   Downloaded: 447.7 MB / 822.2 MB (54.4%)
+2026-01-22 22:02:07,364 - embedding_extraction - INFO -   Downloaded: 448.4 MB / 822.2 MB (54.5%)
+2026-01-22 22:02:07,587 - embedding_extraction - INFO -   Downloaded: 449.2 MB / 822.2 MB (54.6%)
+2026-01-22 22:02:07,811 - embedding_extraction - INFO -   Downloaded: 450.0 MB / 822.2 MB (54.7%)
+2026-01-22 22:02:08,036 - embedding_extraction - INFO -   Downloaded: 450.8 MB / 822.2 MB (54.8%)
+2026-01-22 22:02:08,260 - embedding_extraction - INFO -   Downloaded: 451.6 MB / 822.2 MB (54.9%)
+2026-01-22 22:02:08,483 - embedding_extraction - INFO -   Downloaded: 452.3 MB / 822.2 MB (55.0%)
+2026-01-22 22:02:08,707 - embedding_extraction - INFO -   Downloaded: 453.1 MB / 822.2 MB (55.1%)
+2026-01-22 22:02:08,931 - embedding_extraction - INFO -   Downloaded: 453.9 MB / 822.2 MB (55.2%)
+2026-01-22 22:02:09,155 - embedding_extraction - INFO -   Downloaded: 454.7 MB / 822.2 MB (55.3%)
+2026-01-22 22:02:09,386 - embedding_extraction - INFO -   Downloaded: 455.5 MB / 822.2 MB (55.4%)
+2026-01-22 22:02:09,610 - embedding_extraction - INFO -   Downloaded: 456.2 MB / 822.2 MB (55.5%)
+2026-01-22 22:02:09,834 - embedding_extraction - INFO -   Downloaded: 457.0 MB / 822.2 MB (55.6%)
+2026-01-22 22:02:10,063 - embedding_extraction - INFO -   Downloaded: 457.8 MB / 822.2 MB (55.7%)
+2026-01-22 22:02:10,288 - embedding_extraction - INFO -   Downloaded: 458.6 MB / 822.2 MB (55.8%)
+2026-01-22 22:02:10,511 - embedding_extraction - INFO -   Downloaded: 459.4 MB / 822.2 MB (55.9%)
+2026-01-22 22:02:10,735 - embedding_extraction - INFO -   Downloaded: 460.2 MB / 822.2 MB (56.0%)
+2026-01-22 22:02:10,959 - embedding_extraction - INFO -   Downloaded: 460.9 MB / 822.2 MB (56.1%)
+2026-01-22 22:02:11,184 - embedding_extraction - INFO -   Downloaded: 461.7 MB / 822.2 MB (56.2%)
+2026-01-22 22:02:11,411 - embedding_extraction - INFO -   Downloaded: 462.5 MB / 822.2 MB (56.2%)
+2026-01-22 22:02:11,635 - embedding_extraction - INFO -   Downloaded: 463.3 MB / 822.2 MB (56.3%)
+2026-01-22 22:02:11,858 - embedding_extraction - INFO -   Downloaded: 464.1 MB / 822.2 MB (56.4%)
+2026-01-22 22:02:12,082 - embedding_extraction - INFO -   Downloaded: 464.8 MB / 822.2 MB (56.5%)
+2026-01-22 22:02:12,309 - embedding_extraction - INFO -   Downloaded: 465.6 MB / 822.2 MB (56.6%)
+2026-01-22 22:02:12,533 - embedding_extraction - INFO -   Downloaded: 466.4 MB / 822.2 MB (56.7%)
+2026-01-22 22:02:12,757 - embedding_extraction - INFO -   Downloaded: 467.2 MB / 822.2 MB (56.8%)
+2026-01-22 22:02:12,980 - embedding_extraction - INFO -   Downloaded: 468.0 MB / 822.2 MB (56.9%)
+2026-01-22 22:02:13,204 - embedding_extraction - INFO -   Downloaded: 468.8 MB / 822.2 MB (57.0%)
+2026-01-22 22:02:13,435 - embedding_extraction - INFO -   Downloaded: 469.5 MB / 822.2 MB (57.1%)
+2026-01-22 22:02:13,659 - embedding_extraction - INFO -   Downloaded: 470.3 MB / 822.2 MB (57.2%)
+2026-01-22 22:02:14,007 - embedding_extraction - INFO -   Downloaded: 471.1 MB / 822.2 MB (57.3%)
+2026-01-22 22:02:14,107 - embedding_extraction - INFO -   Downloaded: 471.9 MB / 822.2 MB (57.4%)
+2026-01-22 22:02:14,331 - embedding_extraction - INFO -   Downloaded: 472.7 MB / 822.2 MB (57.5%)
+2026-01-22 22:02:14,555 - embedding_extraction - INFO -   Downloaded: 473.4 MB / 822.2 MB (57.6%)
+2026-01-22 22:02:14,777 - embedding_extraction - INFO -   Downloaded: 474.2 MB / 822.2 MB (57.7%)
+2026-01-22 22:02:15,001 - embedding_extraction - INFO -   Downloaded: 475.0 MB / 822.2 MB (57.8%)
+2026-01-22 22:02:15,225 - embedding_extraction - INFO -   Downloaded: 475.8 MB / 822.2 MB (57.9%)
+2026-01-22 22:02:15,448 - embedding_extraction - INFO -   Downloaded: 476.6 MB / 822.2 MB (58.0%)
+2026-01-22 22:02:15,673 - embedding_extraction - INFO -   Downloaded: 477.3 MB / 822.2 MB (58.1%)
+2026-01-22 22:02:15,897 - embedding_extraction - INFO -   Downloaded: 478.1 MB / 822.2 MB (58.1%)
+2026-01-22 22:02:16,121 - embedding_extraction - INFO -   Downloaded: 478.9 MB / 822.2 MB (58.2%)
+2026-01-22 22:02:16,344 - embedding_extraction - INFO -   Downloaded: 479.7 MB / 822.2 MB (58.3%)
+2026-01-22 22:02:16,566 - embedding_extraction - INFO -   Downloaded: 480.5 MB / 822.2 MB (58.4%)
+2026-01-22 22:02:16,793 - embedding_extraction - INFO -   Downloaded: 481.2 MB / 822.2 MB (58.5%)
+2026-01-22 22:02:17,016 - embedding_extraction - INFO -   Downloaded: 482.0 MB / 822.2 MB (58.6%)
+2026-01-22 22:02:17,241 - embedding_extraction - INFO -   Downloaded: 482.8 MB / 822.2 MB (58.7%)
+2026-01-22 22:02:17,464 - embedding_extraction - INFO -   Downloaded: 483.6 MB / 822.2 MB (58.8%)
+2026-01-22 22:02:17,693 - embedding_extraction - INFO -   Downloaded: 484.4 MB / 822.2 MB (58.9%)
+2026-01-22 22:02:17,917 - embedding_extraction - INFO -   Downloaded: 485.2 MB / 822.2 MB (59.0%)
+2026-01-22 22:02:18,142 - embedding_extraction - INFO -   Downloaded: 485.9 MB / 822.2 MB (59.1%)
+2026-01-22 22:02:18,366 - embedding_extraction - INFO -   Downloaded: 486.7 MB / 822.2 MB (59.2%)
+2026-01-22 22:02:18,594 - embedding_extraction - INFO -   Downloaded: 487.5 MB / 822.2 MB (59.3%)
+2026-01-22 22:02:18,820 - embedding_extraction - INFO -   Downloaded: 488.3 MB / 822.2 MB (59.4%)
+2026-01-22 22:02:19,042 - embedding_extraction - INFO -   Downloaded: 489.1 MB / 822.2 MB (59.5%)
+2026-01-22 22:02:19,267 - embedding_extraction - INFO -   Downloaded: 489.8 MB / 822.2 MB (59.6%)
+2026-01-22 22:02:19,492 - embedding_extraction - INFO -   Downloaded: 490.6 MB / 822.2 MB (59.7%)
+2026-01-22 22:02:19,719 - embedding_extraction - INFO -   Downloaded: 491.4 MB / 822.2 MB (59.8%)
+2026-01-22 22:02:19,946 - embedding_extraction - INFO -   Downloaded: 492.2 MB / 822.2 MB (59.9%)
+2026-01-22 22:02:20,170 - embedding_extraction - INFO -   Downloaded: 493.0 MB / 822.2 MB (60.0%)
+2026-01-22 22:02:20,393 - embedding_extraction - INFO -   Downloaded: 493.8 MB / 822.2 MB (60.0%)
+2026-01-22 22:02:20,616 - embedding_extraction - INFO -   Downloaded: 494.5 MB / 822.2 MB (60.1%)
+2026-01-22 22:02:20,840 - embedding_extraction - INFO -   Downloaded: 495.3 MB / 822.2 MB (60.2%)
+2026-01-22 22:02:21,063 - embedding_extraction - INFO -   Downloaded: 496.1 MB / 822.2 MB (60.3%)
+2026-01-22 22:02:21,286 - embedding_extraction - INFO -   Downloaded: 496.9 MB / 822.2 MB (60.4%)
+2026-01-22 22:02:21,509 - embedding_extraction - INFO -   Downloaded: 497.7 MB / 822.2 MB (60.5%)
+2026-01-22 22:02:21,732 - embedding_extraction - INFO -   Downloaded: 498.4 MB / 822.2 MB (60.6%)
+2026-01-22 22:02:21,955 - embedding_extraction - INFO -   Downloaded: 499.2 MB / 822.2 MB (60.7%)
+2026-01-22 22:02:22,179 - embedding_extraction - INFO -   Downloaded: 500.0 MB / 822.2 MB (60.8%)
+2026-01-22 22:02:22,403 - embedding_extraction - INFO -   Downloaded: 500.8 MB / 822.2 MB (60.9%)
+2026-01-22 22:02:22,633 - embedding_extraction - INFO -   Downloaded: 501.6 MB / 822.2 MB (61.0%)
+2026-01-22 22:02:22,859 - embedding_extraction - INFO -   Downloaded: 502.3 MB / 822.2 MB (61.1%)
+2026-01-22 22:02:23,091 - embedding_extraction - INFO -   Downloaded: 503.1 MB / 822.2 MB (61.2%)
+2026-01-22 22:02:23,316 - embedding_extraction - INFO -   Downloaded: 503.9 MB / 822.2 MB (61.3%)
+2026-01-22 22:02:23,540 - embedding_extraction - INFO -   Downloaded: 504.7 MB / 822.2 MB (61.4%)
+2026-01-22 22:02:23,764 - embedding_extraction - INFO -   Downloaded: 505.5 MB / 822.2 MB (61.5%)
+2026-01-22 22:02:23,986 - embedding_extraction - INFO -   Downloaded: 506.2 MB / 822.2 MB (61.6%)
+2026-01-22 22:02:24,211 - embedding_extraction - INFO -   Downloaded: 507.0 MB / 822.2 MB (61.7%)
+2026-01-22 22:02:24,434 - embedding_extraction - INFO -   Downloaded: 507.8 MB / 822.2 MB (61.8%)
+2026-01-22 22:02:24,661 - embedding_extraction - INFO -   Downloaded: 508.6 MB / 822.2 MB (61.9%)
+2026-01-22 22:02:24,885 - embedding_extraction - INFO -   Downloaded: 509.4 MB / 822.2 MB (61.9%)
+2026-01-22 22:02:25,109 - embedding_extraction - INFO -   Downloaded: 510.2 MB / 822.2 MB (62.0%)
+2026-01-22 22:02:25,337 - embedding_extraction - INFO -   Downloaded: 510.9 MB / 822.2 MB (62.1%)
+2026-01-22 22:02:25,560 - embedding_extraction - INFO -   Downloaded: 511.7 MB / 822.2 MB (62.2%)
+2026-01-22 22:02:25,793 - embedding_extraction - INFO -   Downloaded: 512.5 MB / 822.2 MB (62.3%)
+2026-01-22 22:02:26,019 - embedding_extraction - INFO -   Downloaded: 513.3 MB / 822.2 MB (62.4%)
+2026-01-22 22:02:26,243 - embedding_extraction - INFO -   Downloaded: 514.1 MB / 822.2 MB (62.5%)
+2026-01-22 22:02:26,468 - embedding_extraction - INFO -   Downloaded: 514.8 MB / 822.2 MB (62.6%)
+2026-01-22 22:02:26,691 - embedding_extraction - INFO -   Downloaded: 515.6 MB / 822.2 MB (62.7%)
+2026-01-22 22:02:26,915 - embedding_extraction - INFO -   Downloaded: 516.4 MB / 822.2 MB (62.8%)
+2026-01-22 22:02:27,139 - embedding_extraction - INFO -   Downloaded: 517.2 MB / 822.2 MB (62.9%)
+2026-01-22 22:02:27,371 - embedding_extraction - INFO -   Downloaded: 518.0 MB / 822.2 MB (63.0%)
+2026-01-22 22:02:27,595 - embedding_extraction - INFO -   Downloaded: 518.8 MB / 822.2 MB (63.1%)
+2026-01-22 22:02:27,818 - embedding_extraction - INFO -   Downloaded: 519.5 MB / 822.2 MB (63.2%)
+2026-01-22 22:02:28,041 - embedding_extraction - INFO -   Downloaded: 520.3 MB / 822.2 MB (63.3%)
+2026-01-22 22:02:28,266 - embedding_extraction - INFO -   Downloaded: 521.1 MB / 822.2 MB (63.4%)
+2026-01-22 22:02:28,604 - embedding_extraction - INFO -   Downloaded: 521.9 MB / 822.2 MB (63.5%)
+2026-01-22 22:02:28,827 - embedding_extraction - INFO -   Downloaded: 522.7 MB / 822.2 MB (63.6%)
+2026-01-22 22:02:29,051 - embedding_extraction - INFO -   Downloaded: 523.4 MB / 822.2 MB (63.7%)
+2026-01-22 22:02:29,274 - embedding_extraction - INFO -   Downloaded: 524.2 MB / 822.2 MB (63.8%)
+2026-01-22 22:02:29,592 - embedding_extraction - INFO -   Downloaded: 525.0 MB / 822.2 MB (63.8%)
+2026-01-22 22:02:29,815 - embedding_extraction - INFO -   Downloaded: 525.8 MB / 822.2 MB (63.9%)
+2026-01-22 22:02:30,038 - embedding_extraction - INFO -   Downloaded: 526.6 MB / 822.2 MB (64.0%)
+2026-01-22 22:02:30,264 - embedding_extraction - INFO -   Downloaded: 527.3 MB / 822.2 MB (64.1%)
+2026-01-22 22:02:30,488 - embedding_extraction - INFO -   Downloaded: 528.1 MB / 822.2 MB (64.2%)
+2026-01-22 22:02:30,711 - embedding_extraction - INFO -   Downloaded: 528.9 MB / 822.2 MB (64.3%)
+2026-01-22 22:02:30,936 - embedding_extraction - INFO -   Downloaded: 529.7 MB / 822.2 MB (64.4%)
+2026-01-22 22:02:31,160 - embedding_extraction - INFO -   Downloaded: 530.5 MB / 822.2 MB (64.5%)
+2026-01-22 22:02:31,474 - embedding_extraction - INFO -   Downloaded: 531.2 MB / 822.2 MB (64.6%)
+2026-01-22 22:02:31,782 - embedding_extraction - INFO -   Downloaded: 532.0 MB / 822.2 MB (64.7%)
+2026-01-22 22:02:32,008 - embedding_extraction - INFO -   Downloaded: 532.8 MB / 822.2 MB (64.8%)
+2026-01-22 22:02:32,321 - embedding_extraction - INFO -   Downloaded: 533.6 MB / 822.2 MB (64.9%)
+2026-01-22 22:02:32,546 - embedding_extraction - INFO -   Downloaded: 534.4 MB / 822.2 MB (65.0%)
+2026-01-22 22:02:32,770 - embedding_extraction - INFO -   Downloaded: 535.2 MB / 822.2 MB (65.1%)
+2026-01-22 22:02:32,993 - embedding_extraction - INFO -   Downloaded: 535.9 MB / 822.2 MB (65.2%)
+2026-01-22 22:02:33,217 - embedding_extraction - INFO -   Downloaded: 536.7 MB / 822.2 MB (65.3%)
+2026-01-22 22:02:33,441 - embedding_extraction - INFO -   Downloaded: 537.5 MB / 822.2 MB (65.4%)
+2026-01-22 22:02:33,667 - embedding_extraction - INFO -   Downloaded: 538.3 MB / 822.2 MB (65.5%)
+2026-01-22 22:02:33,891 - embedding_extraction - INFO -   Downloaded: 539.1 MB / 822.2 MB (65.6%)
+2026-01-22 22:02:34,215 - embedding_extraction - INFO -   Downloaded: 539.8 MB / 822.2 MB (65.7%)
+2026-01-22 22:02:34,438 - embedding_extraction - INFO -   Downloaded: 540.6 MB / 822.2 MB (65.8%)
+2026-01-22 22:02:34,673 - embedding_extraction - INFO -   Downloaded: 541.4 MB / 822.2 MB (65.8%)
+2026-01-22 22:02:34,991 - embedding_extraction - INFO -   Downloaded: 542.2 MB / 822.2 MB (65.9%)
+2026-01-22 22:02:35,303 - embedding_extraction - INFO -   Downloaded: 543.0 MB / 822.2 MB (66.0%)
+2026-01-22 22:02:35,624 - embedding_extraction - INFO -   Downloaded: 543.8 MB / 822.2 MB (66.1%)
+2026-01-22 22:02:35,993 - embedding_extraction - INFO -   Downloaded: 544.5 MB / 822.2 MB (66.2%)
+2026-01-22 22:02:36,218 - embedding_extraction - INFO -   Downloaded: 545.3 MB / 822.2 MB (66.3%)
+2026-01-22 22:02:36,445 - embedding_extraction - INFO -   Downloaded: 546.1 MB / 822.2 MB (66.4%)
+2026-01-22 22:02:36,671 - embedding_extraction - INFO -   Downloaded: 546.9 MB / 822.2 MB (66.5%)
+2026-01-22 22:02:36,913 - embedding_extraction - INFO -   Downloaded: 547.7 MB / 822.2 MB (66.6%)
+2026-01-22 22:02:37,140 - embedding_extraction - INFO -   Downloaded: 548.4 MB / 822.2 MB (66.7%)
+2026-01-22 22:02:37,363 - embedding_extraction - INFO -   Downloaded: 549.2 MB / 822.2 MB (66.8%)
+2026-01-22 22:02:37,586 - embedding_extraction - INFO -   Downloaded: 550.0 MB / 822.2 MB (66.9%)
+2026-01-22 22:02:37,815 - embedding_extraction - INFO -   Downloaded: 550.8 MB / 822.2 MB (67.0%)
+2026-01-22 22:02:38,043 - embedding_extraction - INFO -   Downloaded: 551.6 MB / 822.2 MB (67.1%)
+2026-01-22 22:02:38,359 - embedding_extraction - INFO -   Downloaded: 552.3 MB / 822.2 MB (67.2%)
+2026-01-22 22:02:38,671 - embedding_extraction - INFO -   Downloaded: 553.1 MB / 822.2 MB (67.3%)
+2026-01-22 22:02:38,896 - embedding_extraction - INFO -   Downloaded: 553.9 MB / 822.2 MB (67.4%)
+2026-01-22 22:02:39,122 - embedding_extraction - INFO -   Downloaded: 554.7 MB / 822.2 MB (67.5%)
+2026-01-22 22:02:39,351 - embedding_extraction - INFO -   Downloaded: 555.5 MB / 822.2 MB (67.6%)
+2026-01-22 22:02:39,577 - embedding_extraction - INFO -   Downloaded: 556.2 MB / 822.2 MB (67.7%)
+2026-01-22 22:02:39,802 - embedding_extraction - INFO -   Downloaded: 557.0 MB / 822.2 MB (67.7%)
+2026-01-22 22:02:40,026 - embedding_extraction - INFO -   Downloaded: 557.8 MB / 822.2 MB (67.8%)
+2026-01-22 22:02:40,251 - embedding_extraction - INFO -   Downloaded: 558.6 MB / 822.2 MB (67.9%)
+2026-01-22 22:02:40,475 - embedding_extraction - INFO -   Downloaded: 559.4 MB / 822.2 MB (68.0%)
+2026-01-22 22:02:40,699 - embedding_extraction - INFO -   Downloaded: 560.2 MB / 822.2 MB (68.1%)
+2026-01-22 22:02:40,924 - embedding_extraction - INFO -   Downloaded: 560.9 MB / 822.2 MB (68.2%)
+2026-01-22 22:02:41,149 - embedding_extraction - INFO -   Downloaded: 561.7 MB / 822.2 MB (68.3%)
+2026-01-22 22:02:41,385 - embedding_extraction - INFO -   Downloaded: 562.5 MB / 822.2 MB (68.4%)
+2026-01-22 22:02:41,622 - embedding_extraction - INFO -   Downloaded: 563.3 MB / 822.2 MB (68.5%)
+2026-01-22 22:02:41,849 - embedding_extraction - INFO -   Downloaded: 564.1 MB / 822.2 MB (68.6%)
+2026-01-22 22:02:42,073 - embedding_extraction - INFO -   Downloaded: 564.8 MB / 822.2 MB (68.7%)
+2026-01-22 22:02:42,297 - embedding_extraction - INFO -   Downloaded: 565.6 MB / 822.2 MB (68.8%)
+2026-01-22 22:02:42,520 - embedding_extraction - INFO -   Downloaded: 566.4 MB / 822.2 MB (68.9%)
+2026-01-22 22:02:42,745 - embedding_extraction - INFO -   Downloaded: 567.2 MB / 822.2 MB (69.0%)
+2026-01-22 22:02:42,969 - embedding_extraction - INFO -   Downloaded: 568.0 MB / 822.2 MB (69.1%)
+2026-01-22 22:02:43,195 - embedding_extraction - INFO -   Downloaded: 568.8 MB / 822.2 MB (69.2%)
+2026-01-22 22:02:43,420 - embedding_extraction - INFO -   Downloaded: 569.5 MB / 822.2 MB (69.3%)
+2026-01-22 22:02:43,648 - embedding_extraction - INFO -   Downloaded: 570.3 MB / 822.2 MB (69.4%)
+2026-01-22 22:02:43,874 - embedding_extraction - INFO -   Downloaded: 571.1 MB / 822.2 MB (69.5%)
+2026-01-22 22:02:44,100 - embedding_extraction - INFO -   Downloaded: 571.9 MB / 822.2 MB (69.6%)
+2026-01-22 22:02:44,324 - embedding_extraction - INFO -   Downloaded: 572.7 MB / 822.2 MB (69.6%)
+2026-01-22 22:02:44,550 - embedding_extraction - INFO -   Downloaded: 573.4 MB / 822.2 MB (69.7%)
+2026-01-22 22:02:44,776 - embedding_extraction - INFO -   Downloaded: 574.2 MB / 822.2 MB (69.8%)
+2026-01-22 22:02:45,000 - embedding_extraction - INFO -   Downloaded: 575.0 MB / 822.2 MB (69.9%)
+2026-01-22 22:02:45,226 - embedding_extraction - INFO -   Downloaded: 575.8 MB / 822.2 MB (70.0%)
+2026-01-22 22:02:45,451 - embedding_extraction - INFO -   Downloaded: 576.6 MB / 822.2 MB (70.1%)
+2026-01-22 22:02:45,677 - embedding_extraction - INFO -   Downloaded: 577.3 MB / 822.2 MB (70.2%)
+2026-01-22 22:02:45,906 - embedding_extraction - INFO -   Downloaded: 578.1 MB / 822.2 MB (70.3%)
+2026-01-22 22:02:46,141 - embedding_extraction - INFO -   Downloaded: 578.9 MB / 822.2 MB (70.4%)
+2026-01-22 22:02:46,366 - embedding_extraction - INFO -   Downloaded: 579.7 MB / 822.2 MB (70.5%)
+2026-01-22 22:02:46,590 - embedding_extraction - INFO -   Downloaded: 580.5 MB / 822.2 MB (70.6%)
+2026-01-22 22:02:46,815 - embedding_extraction - INFO -   Downloaded: 581.2 MB / 822.2 MB (70.7%)
+2026-01-22 22:02:47,039 - embedding_extraction - INFO -   Downloaded: 582.0 MB / 822.2 MB (70.8%)
+2026-01-22 22:02:47,264 - embedding_extraction - INFO -   Downloaded: 582.8 MB / 822.2 MB (70.9%)
+2026-01-22 22:02:47,488 - embedding_extraction - INFO -   Downloaded: 583.6 MB / 822.2 MB (71.0%)
+2026-01-22 22:02:47,714 - embedding_extraction - INFO -   Downloaded: 584.4 MB / 822.2 MB (71.1%)
+2026-01-22 22:02:47,939 - embedding_extraction - INFO -   Downloaded: 585.2 MB / 822.2 MB (71.2%)
+2026-01-22 22:02:48,165 - embedding_extraction - INFO -   Downloaded: 585.9 MB / 822.2 MB (71.3%)
+2026-01-22 22:02:48,390 - embedding_extraction - INFO -   Downloaded: 586.7 MB / 822.2 MB (71.4%)
+2026-01-22 22:02:48,615 - embedding_extraction - INFO -   Downloaded: 587.5 MB / 822.2 MB (71.5%)
+2026-01-22 22:02:48,839 - embedding_extraction - INFO -   Downloaded: 588.3 MB / 822.2 MB (71.5%)
+2026-01-22 22:02:49,064 - embedding_extraction - INFO -   Downloaded: 589.1 MB / 822.2 MB (71.6%)
+2026-01-22 22:02:49,292 - embedding_extraction - INFO -   Downloaded: 589.8 MB / 822.2 MB (71.7%)
+2026-01-22 22:02:49,518 - embedding_extraction - INFO -   Downloaded: 590.6 MB / 822.2 MB (71.8%)
+2026-01-22 22:02:49,743 - embedding_extraction - INFO -   Downloaded: 591.4 MB / 822.2 MB (71.9%)
+2026-01-22 22:02:49,968 - embedding_extraction - INFO -   Downloaded: 592.2 MB / 822.2 MB (72.0%)
+2026-01-22 22:02:50,213 - embedding_extraction - INFO -   Downloaded: 593.0 MB / 822.2 MB (72.1%)
+2026-01-22 22:02:50,438 - embedding_extraction - INFO -   Downloaded: 593.8 MB / 822.2 MB (72.2%)
+2026-01-22 22:02:50,661 - embedding_extraction - INFO -   Downloaded: 594.5 MB / 822.2 MB (72.3%)
+2026-01-22 22:02:50,884 - embedding_extraction - INFO -   Downloaded: 595.3 MB / 822.2 MB (72.4%)
+2026-01-22 22:02:51,107 - embedding_extraction - INFO -   Downloaded: 596.1 MB / 822.2 MB (72.5%)
+2026-01-22 22:02:51,331 - embedding_extraction - INFO -   Downloaded: 596.9 MB / 822.2 MB (72.6%)
+2026-01-22 22:02:51,556 - embedding_extraction - INFO -   Downloaded: 597.7 MB / 822.2 MB (72.7%)
+2026-01-22 22:02:51,783 - embedding_extraction - INFO -   Downloaded: 598.4 MB / 822.2 MB (72.8%)
+2026-01-22 22:02:52,007 - embedding_extraction - INFO -   Downloaded: 599.2 MB / 822.2 MB (72.9%)
+2026-01-22 22:02:52,233 - embedding_extraction - INFO -   Downloaded: 600.0 MB / 822.2 MB (73.0%)
+2026-01-22 22:02:52,457 - embedding_extraction - INFO -   Downloaded: 600.8 MB / 822.2 MB (73.1%)
+2026-01-22 22:02:52,682 - embedding_extraction - INFO -   Downloaded: 601.6 MB / 822.2 MB (73.2%)
+2026-01-22 22:02:52,906 - embedding_extraction - INFO -   Downloaded: 602.3 MB / 822.2 MB (73.3%)
+2026-01-22 22:02:53,131 - embedding_extraction - INFO -   Downloaded: 603.1 MB / 822.2 MB (73.4%)
+2026-01-22 22:02:53,382 - embedding_extraction - INFO -   Downloaded: 603.9 MB / 822.2 MB (73.4%)
+2026-01-22 22:02:53,641 - embedding_extraction - INFO -   Downloaded: 604.7 MB / 822.2 MB (73.5%)
+2026-01-22 22:02:53,908 - embedding_extraction - INFO -   Downloaded: 605.5 MB / 822.2 MB (73.6%)
+2026-01-22 22:02:54,166 - embedding_extraction - INFO -   Downloaded: 606.2 MB / 822.2 MB (73.7%)
+2026-01-22 22:02:54,433 - embedding_extraction - INFO -   Downloaded: 607.0 MB / 822.2 MB (73.8%)
+2026-01-22 22:02:54,688 - embedding_extraction - INFO -   Downloaded: 607.8 MB / 822.2 MB (73.9%)
+2026-01-22 22:02:54,929 - embedding_extraction - INFO -   Downloaded: 608.6 MB / 822.2 MB (74.0%)
+2026-01-22 22:02:55,190 - embedding_extraction - INFO -   Downloaded: 609.4 MB / 822.2 MB (74.1%)
+2026-01-22 22:02:55,424 - embedding_extraction - INFO -   Downloaded: 610.2 MB / 822.2 MB (74.2%)
+2026-01-22 22:02:55,675 - embedding_extraction - INFO -   Downloaded: 610.9 MB / 822.2 MB (74.3%)
+2026-01-22 22:02:55,910 - embedding_extraction - INFO -   Downloaded: 611.7 MB / 822.2 MB (74.4%)
+2026-01-22 22:02:56,148 - embedding_extraction - INFO -   Downloaded: 612.5 MB / 822.2 MB (74.5%)
+2026-01-22 22:02:56,385 - embedding_extraction - INFO -   Downloaded: 613.3 MB / 822.2 MB (74.6%)
+2026-01-22 22:02:56,616 - embedding_extraction - INFO -   Downloaded: 614.1 MB / 822.2 MB (74.7%)
+2026-01-22 22:02:56,854 - embedding_extraction - INFO -   Downloaded: 614.8 MB / 822.2 MB (74.8%)
+2026-01-22 22:02:57,083 - embedding_extraction - INFO -   Downloaded: 615.6 MB / 822.2 MB (74.9%)
+2026-01-22 22:02:57,321 - embedding_extraction - INFO -   Downloaded: 616.4 MB / 822.2 MB (75.0%)
+2026-01-22 22:02:57,547 - embedding_extraction - INFO -   Downloaded: 617.2 MB / 822.2 MB (75.1%)
+2026-01-22 22:02:57,782 - embedding_extraction - INFO -   Downloaded: 618.0 MB / 822.2 MB (75.2%)
+2026-01-22 22:02:58,011 - embedding_extraction - INFO -   Downloaded: 618.8 MB / 822.2 MB (75.3%)
+2026-01-22 22:02:58,245 - embedding_extraction - INFO -   Downloaded: 619.5 MB / 822.2 MB (75.3%)
+2026-01-22 22:02:58,475 - embedding_extraction - INFO -   Downloaded: 620.3 MB / 822.2 MB (75.4%)
+2026-01-22 22:02:58,709 - embedding_extraction - INFO -   Downloaded: 621.1 MB / 822.2 MB (75.5%)
+2026-01-22 22:02:58,938 - embedding_extraction - INFO -   Downloaded: 621.9 MB / 822.2 MB (75.6%)
+2026-01-22 22:02:59,171 - embedding_extraction - INFO -   Downloaded: 622.7 MB / 822.2 MB (75.7%)
+2026-01-22 22:02:59,401 - embedding_extraction - INFO -   Downloaded: 623.4 MB / 822.2 MB (75.8%)
+2026-01-22 22:02:59,635 - embedding_extraction - INFO -   Downloaded: 624.2 MB / 822.2 MB (75.9%)
+2026-01-22 22:02:59,865 - embedding_extraction - INFO -   Downloaded: 625.0 MB / 822.2 MB (76.0%)
+2026-01-22 22:03:00,098 - embedding_extraction - INFO -   Downloaded: 625.8 MB / 822.2 MB (76.1%)
+2026-01-22 22:03:00,326 - embedding_extraction - INFO -   Downloaded: 626.6 MB / 822.2 MB (76.2%)
+2026-01-22 22:03:00,557 - embedding_extraction - INFO -   Downloaded: 627.3 MB / 822.2 MB (76.3%)
+2026-01-22 22:03:00,788 - embedding_extraction - INFO -   Downloaded: 628.1 MB / 822.2 MB (76.4%)
+2026-01-22 22:03:01,015 - embedding_extraction - INFO -   Downloaded: 628.9 MB / 822.2 MB (76.5%)
+2026-01-22 22:03:01,248 - embedding_extraction - INFO -   Downloaded: 629.7 MB / 822.2 MB (76.6%)
+2026-01-22 22:03:01,471 - embedding_extraction - INFO -   Downloaded: 630.5 MB / 822.2 MB (76.7%)
+2026-01-22 22:03:01,706 - embedding_extraction - INFO -   Downloaded: 631.2 MB / 822.2 MB (76.8%)
+2026-01-22 22:03:01,922 - embedding_extraction - INFO -   Downloaded: 632.0 MB / 822.2 MB (76.9%)
+2026-01-22 22:03:02,162 - embedding_extraction - INFO -   Downloaded: 632.8 MB / 822.2 MB (77.0%)
+2026-01-22 22:03:02,372 - embedding_extraction - INFO -   Downloaded: 633.6 MB / 822.2 MB (77.1%)
+2026-01-22 22:03:02,604 - embedding_extraction - INFO -   Downloaded: 634.4 MB / 822.2 MB (77.2%)
+2026-01-22 22:03:02,815 - embedding_extraction - INFO -   Downloaded: 635.2 MB / 822.2 MB (77.2%)
+2026-01-22 22:03:03,038 - embedding_extraction - INFO -   Downloaded: 635.9 MB / 822.2 MB (77.3%)
+2026-01-22 22:03:03,256 - embedding_extraction - INFO -   Downloaded: 636.7 MB / 822.2 MB (77.4%)
+2026-01-22 22:03:03,463 - embedding_extraction - INFO -   Downloaded: 637.5 MB / 822.2 MB (77.5%)
+2026-01-22 22:03:03,681 - embedding_extraction - INFO -   Downloaded: 638.3 MB / 822.2 MB (77.6%)
+2026-01-22 22:03:03,885 - embedding_extraction - INFO -   Downloaded: 639.1 MB / 822.2 MB (77.7%)
+2026-01-22 22:03:04,085 - embedding_extraction - INFO -   Downloaded: 639.8 MB / 822.2 MB (77.8%)
+2026-01-22 22:03:04,298 - embedding_extraction - INFO -   Downloaded: 640.6 MB / 822.2 MB (77.9%)
+2026-01-22 22:03:04,494 - embedding_extraction - INFO -   Downloaded: 641.4 MB / 822.2 MB (78.0%)
+2026-01-22 22:03:04,680 - embedding_extraction - INFO -   Downloaded: 642.2 MB / 822.2 MB (78.1%)
+2026-01-22 22:03:04,877 - embedding_extraction - INFO -   Downloaded: 643.0 MB / 822.2 MB (78.2%)
+2026-01-22 22:03:05,075 - embedding_extraction - INFO -   Downloaded: 643.8 MB / 822.2 MB (78.3%)
+2026-01-22 22:03:05,261 - embedding_extraction - INFO -   Downloaded: 644.5 MB / 822.2 MB (78.4%)
+2026-01-22 22:03:05,439 - embedding_extraction - INFO -   Downloaded: 645.3 MB / 822.2 MB (78.5%)
+2026-01-22 22:03:05,613 - embedding_extraction - INFO -   Downloaded: 646.1 MB / 822.2 MB (78.6%)
+2026-01-22 22:03:05,790 - embedding_extraction - INFO -   Downloaded: 646.9 MB / 822.2 MB (78.7%)
+2026-01-22 22:03:05,969 - embedding_extraction - INFO -   Downloaded: 647.7 MB / 822.2 MB (78.8%)
+2026-01-22 22:03:06,140 - embedding_extraction - INFO -   Downloaded: 648.4 MB / 822.2 MB (78.9%)
+2026-01-22 22:03:06,355 - embedding_extraction - INFO -   Downloaded: 649.2 MB / 822.2 MB (79.0%)
+2026-01-22 22:03:06,577 - embedding_extraction - INFO -   Downloaded: 650.0 MB / 822.2 MB (79.1%)
+2026-01-22 22:03:06,800 - embedding_extraction - INFO -   Downloaded: 650.8 MB / 822.2 MB (79.1%)
+2026-01-22 22:03:07,022 - embedding_extraction - INFO -   Downloaded: 651.6 MB / 822.2 MB (79.2%)
+2026-01-22 22:03:07,244 - embedding_extraction - INFO -   Downloaded: 652.3 MB / 822.2 MB (79.3%)
+2026-01-22 22:03:07,468 - embedding_extraction - INFO -   Downloaded: 653.1 MB / 822.2 MB (79.4%)
+2026-01-22 22:03:07,777 - embedding_extraction - INFO -   Downloaded: 653.9 MB / 822.2 MB (79.5%)
+2026-01-22 22:03:08,072 - embedding_extraction - INFO -   Downloaded: 654.7 MB / 822.2 MB (79.6%)
+2026-01-22 22:03:08,234 - embedding_extraction - INFO -   Downloaded: 655.5 MB / 822.2 MB (79.7%)
+2026-01-22 22:03:08,570 - embedding_extraction - INFO -   Downloaded: 656.2 MB / 822.2 MB (79.8%)
+2026-01-22 22:03:08,892 - embedding_extraction - INFO -   Downloaded: 657.0 MB / 822.2 MB (79.9%)
+2026-01-22 22:03:09,263 - embedding_extraction - INFO -   Downloaded: 657.8 MB / 822.2 MB (80.0%)
+2026-01-22 22:03:09,721 - embedding_extraction - INFO -   Downloaded: 658.6 MB / 822.2 MB (80.1%)
+2026-01-22 22:03:10,446 - embedding_extraction - INFO -   Downloaded: 659.4 MB / 822.2 MB (80.2%)
+2026-01-22 22:03:11,207 - embedding_extraction - INFO -   Downloaded: 660.2 MB / 822.2 MB (80.3%)
+2026-01-22 22:03:11,918 - embedding_extraction - INFO -   Downloaded: 660.9 MB / 822.2 MB (80.4%)
+2026-01-22 22:03:12,613 - embedding_extraction - INFO -   Downloaded: 661.7 MB / 822.2 MB (80.5%)
+2026-01-22 22:03:13,291 - embedding_extraction - INFO -   Downloaded: 662.5 MB / 822.2 MB (80.6%)
+2026-01-22 22:03:13,995 - embedding_extraction - INFO -   Downloaded: 663.3 MB / 822.2 MB (80.7%)
+2026-01-22 22:03:14,669 - embedding_extraction - INFO -   Downloaded: 664.1 MB / 822.2 MB (80.8%)
+2026-01-22 22:03:15,360 - embedding_extraction - INFO -   Downloaded: 664.8 MB / 822.2 MB (80.9%)
+2026-01-22 22:03:16,039 - embedding_extraction - INFO -   Downloaded: 665.6 MB / 822.2 MB (81.0%)
+2026-01-22 22:03:16,694 - embedding_extraction - INFO -   Downloaded: 666.4 MB / 822.2 MB (81.0%)
+2026-01-22 22:03:17,325 - embedding_extraction - INFO -   Downloaded: 667.2 MB / 822.2 MB (81.1%)
+2026-01-22 22:03:17,919 - embedding_extraction - INFO -   Downloaded: 668.0 MB / 822.2 MB (81.2%)
+2026-01-22 22:03:18,486 - embedding_extraction - INFO -   Downloaded: 668.8 MB / 822.2 MB (81.3%)
+2026-01-22 22:03:18,989 - embedding_extraction - INFO -   Downloaded: 669.5 MB / 822.2 MB (81.4%)
+2026-01-22 22:03:19,457 - embedding_extraction - INFO -   Downloaded: 670.3 MB / 822.2 MB (81.5%)
+2026-01-22 22:03:19,908 - embedding_extraction - INFO -   Downloaded: 671.1 MB / 822.2 MB (81.6%)
+2026-01-22 22:03:20,301 - embedding_extraction - INFO -   Downloaded: 671.9 MB / 822.2 MB (81.7%)
+2026-01-22 22:03:20,668 - embedding_extraction - INFO -   Downloaded: 672.7 MB / 822.2 MB (81.8%)
+2026-01-22 22:03:21,002 - embedding_extraction - INFO -   Downloaded: 673.4 MB / 822.2 MB (81.9%)
+2026-01-22 22:03:21,317 - embedding_extraction - INFO -   Downloaded: 674.2 MB / 822.2 MB (82.0%)
+2026-01-22 22:03:21,617 - embedding_extraction - INFO -   Downloaded: 675.0 MB / 822.2 MB (82.1%)
+2026-01-22 22:03:21,897 - embedding_extraction - INFO -   Downloaded: 675.8 MB / 822.2 MB (82.2%)
+2026-01-22 22:03:22,160 - embedding_extraction - INFO -   Downloaded: 676.6 MB / 822.2 MB (82.3%)
+2026-01-22 22:03:22,397 - embedding_extraction - INFO -   Downloaded: 677.3 MB / 822.2 MB (82.4%)
+2026-01-22 22:03:22,655 - embedding_extraction - INFO -   Downloaded: 678.1 MB / 822.2 MB (82.5%)
+2026-01-22 22:03:22,854 - embedding_extraction - INFO -   Downloaded: 678.9 MB / 822.2 MB (82.6%)
+2026-01-22 22:03:23,070 - embedding_extraction - INFO -   Downloaded: 679.7 MB / 822.2 MB (82.7%)
+2026-01-22 22:03:23,282 - embedding_extraction - INFO -   Downloaded: 680.5 MB / 822.2 MB (82.8%)
+2026-01-22 22:03:23,457 - embedding_extraction - INFO -   Downloaded: 681.2 MB / 822.2 MB (82.9%)
+2026-01-22 22:03:23,632 - embedding_extraction - INFO -   Downloaded: 682.0 MB / 822.2 MB (82.9%)
+2026-01-22 22:03:23,815 - embedding_extraction - INFO -   Downloaded: 682.8 MB / 822.2 MB (83.0%)
+2026-01-22 22:03:23,978 - embedding_extraction - INFO -   Downloaded: 683.6 MB / 822.2 MB (83.1%)
+2026-01-22 22:03:24,153 - embedding_extraction - INFO -   Downloaded: 684.4 MB / 822.2 MB (83.2%)
+2026-01-22 22:03:24,310 - embedding_extraction - INFO -   Downloaded: 685.2 MB / 822.2 MB (83.3%)
+2026-01-22 22:03:24,477 - embedding_extraction - INFO -   Downloaded: 685.9 MB / 822.2 MB (83.4%)
+2026-01-22 22:03:24,708 - embedding_extraction - INFO -   Downloaded: 686.7 MB / 822.2 MB (83.5%)
+2026-01-22 22:03:24,936 - embedding_extraction - INFO -   Downloaded: 687.5 MB / 822.2 MB (83.6%)
+2026-01-22 22:03:25,167 - embedding_extraction - INFO -   Downloaded: 688.3 MB / 822.2 MB (83.7%)
+2026-01-22 22:03:25,394 - embedding_extraction - INFO -   Downloaded: 689.1 MB / 822.2 MB (83.8%)
+2026-01-22 22:03:25,627 - embedding_extraction - INFO -   Downloaded: 689.8 MB / 822.2 MB (83.9%)
+2026-01-22 22:03:25,856 - embedding_extraction - INFO -   Downloaded: 690.6 MB / 822.2 MB (84.0%)
+2026-01-22 22:03:26,085 - embedding_extraction - INFO -   Downloaded: 691.4 MB / 822.2 MB (84.1%)
+2026-01-22 22:03:26,312 - embedding_extraction - INFO -   Downloaded: 692.2 MB / 822.2 MB (84.2%)
+2026-01-22 22:03:26,543 - embedding_extraction - INFO -   Downloaded: 693.0 MB / 822.2 MB (84.3%)
+2026-01-22 22:03:26,770 - embedding_extraction - INFO -   Downloaded: 693.8 MB / 822.2 MB (84.4%)
+2026-01-22 22:03:26,998 - embedding_extraction - INFO -   Downloaded: 694.5 MB / 822.2 MB (84.5%)
+2026-01-22 22:03:27,227 - embedding_extraction - INFO -   Downloaded: 695.3 MB / 822.2 MB (84.6%)
+2026-01-22 22:03:27,454 - embedding_extraction - INFO -   Downloaded: 696.1 MB / 822.2 MB (84.7%)
+2026-01-22 22:03:27,682 - embedding_extraction - INFO -   Downloaded: 696.9 MB / 822.2 MB (84.8%)
+2026-01-22 22:03:27,909 - embedding_extraction - INFO -   Downloaded: 697.7 MB / 822.2 MB (84.8%)
+2026-01-22 22:03:28,146 - embedding_extraction - INFO -   Downloaded: 698.4 MB / 822.2 MB (84.9%)
+2026-01-22 22:03:28,373 - embedding_extraction - INFO -   Downloaded: 699.2 MB / 822.2 MB (85.0%)
+2026-01-22 22:03:28,599 - embedding_extraction - INFO -   Downloaded: 700.0 MB / 822.2 MB (85.1%)
+2026-01-22 22:03:28,827 - embedding_extraction - INFO -   Downloaded: 700.8 MB / 822.2 MB (85.2%)
+2026-01-22 22:03:29,057 - embedding_extraction - INFO -   Downloaded: 701.6 MB / 822.2 MB (85.3%)
+2026-01-22 22:03:29,285 - embedding_extraction - INFO -   Downloaded: 702.3 MB / 822.2 MB (85.4%)
+2026-01-22 22:03:29,513 - embedding_extraction - INFO -   Downloaded: 703.1 MB / 822.2 MB (85.5%)
+2026-01-22 22:03:29,741 - embedding_extraction - INFO -   Downloaded: 703.9 MB / 822.2 MB (85.6%)
+2026-01-22 22:03:29,973 - embedding_extraction - INFO -   Downloaded: 704.7 MB / 822.2 MB (85.7%)
+2026-01-22 22:03:30,201 - embedding_extraction - INFO -   Downloaded: 705.5 MB / 822.2 MB (85.8%)
+2026-01-22 22:03:30,429 - embedding_extraction - INFO -   Downloaded: 706.2 MB / 822.2 MB (85.9%)
+2026-01-22 22:03:30,656 - embedding_extraction - INFO -   Downloaded: 707.0 MB / 822.2 MB (86.0%)
+2026-01-22 22:03:30,891 - embedding_extraction - INFO -   Downloaded: 707.8 MB / 822.2 MB (86.1%)
+2026-01-22 22:03:31,120 - embedding_extraction - INFO -   Downloaded: 708.6 MB / 822.2 MB (86.2%)
+2026-01-22 22:03:31,348 - embedding_extraction - INFO -   Downloaded: 709.4 MB / 822.2 MB (86.3%)
+2026-01-22 22:03:31,575 - embedding_extraction - INFO -   Downloaded: 710.2 MB / 822.2 MB (86.4%)
+2026-01-22 22:03:31,803 - embedding_extraction - INFO -   Downloaded: 710.9 MB / 822.2 MB (86.5%)
+2026-01-22 22:03:32,031 - embedding_extraction - INFO -   Downloaded: 711.7 MB / 822.2 MB (86.6%)
+2026-01-22 22:03:32,260 - embedding_extraction - INFO -   Downloaded: 712.5 MB / 822.2 MB (86.7%)
+2026-01-22 22:03:32,489 - embedding_extraction - INFO -   Downloaded: 713.3 MB / 822.2 MB (86.7%)
+2026-01-22 22:03:32,716 - embedding_extraction - INFO -   Downloaded: 714.1 MB / 822.2 MB (86.8%)
+2026-01-22 22:03:32,946 - embedding_extraction - INFO -   Downloaded: 714.8 MB / 822.2 MB (86.9%)
+2026-01-22 22:03:33,173 - embedding_extraction - INFO -   Downloaded: 715.6 MB / 822.2 MB (87.0%)
+2026-01-22 22:03:33,401 - embedding_extraction - INFO -   Downloaded: 716.4 MB / 822.2 MB (87.1%)
+2026-01-22 22:03:33,629 - embedding_extraction - INFO -   Downloaded: 717.2 MB / 822.2 MB (87.2%)
+2026-01-22 22:03:33,861 - embedding_extraction - INFO -   Downloaded: 718.0 MB / 822.2 MB (87.3%)
+2026-01-22 22:03:34,088 - embedding_extraction - INFO -   Downloaded: 718.8 MB / 822.2 MB (87.4%)
+2026-01-22 22:03:34,319 - embedding_extraction - INFO -   Downloaded: 719.5 MB / 822.2 MB (87.5%)
+2026-01-22 22:03:34,546 - embedding_extraction - INFO -   Downloaded: 720.3 MB / 822.2 MB (87.6%)
+2026-01-22 22:03:34,773 - embedding_extraction - INFO -   Downloaded: 721.1 MB / 822.2 MB (87.7%)
+2026-01-22 22:03:35,000 - embedding_extraction - INFO -   Downloaded: 721.9 MB / 822.2 MB (87.8%)
+2026-01-22 22:03:35,308 - embedding_extraction - INFO -   Downloaded: 722.7 MB / 822.2 MB (87.9%)
+2026-01-22 22:03:35,465 - embedding_extraction - INFO -   Downloaded: 723.4 MB / 822.2 MB (88.0%)
+2026-01-22 22:03:35,692 - embedding_extraction - INFO -   Downloaded: 724.2 MB / 822.2 MB (88.1%)
+2026-01-22 22:03:35,920 - embedding_extraction - INFO -   Downloaded: 725.0 MB / 822.2 MB (88.2%)
+2026-01-22 22:03:36,147 - embedding_extraction - INFO -   Downloaded: 725.8 MB / 822.2 MB (88.3%)
+2026-01-22 22:03:36,375 - embedding_extraction - INFO -   Downloaded: 726.6 MB / 822.2 MB (88.4%)
+2026-01-22 22:03:36,602 - embedding_extraction - INFO -   Downloaded: 727.3 MB / 822.2 MB (88.5%)
+2026-01-22 22:03:36,836 - embedding_extraction - INFO -   Downloaded: 728.1 MB / 822.2 MB (88.6%)
+2026-01-22 22:03:37,062 - embedding_extraction - INFO -   Downloaded: 728.9 MB / 822.2 MB (88.6%)
+2026-01-22 22:03:37,290 - embedding_extraction - INFO -   Downloaded: 729.7 MB / 822.2 MB (88.7%)
+2026-01-22 22:03:37,517 - embedding_extraction - INFO -   Downloaded: 730.5 MB / 822.2 MB (88.8%)
+2026-01-22 22:03:37,747 - embedding_extraction - INFO -   Downloaded: 731.2 MB / 822.2 MB (88.9%)
+2026-01-22 22:03:37,977 - embedding_extraction - INFO -   Downloaded: 732.0 MB / 822.2 MB (89.0%)
+2026-01-22 22:03:38,207 - embedding_extraction - INFO -   Downloaded: 732.8 MB / 822.2 MB (89.1%)
+2026-01-22 22:03:38,439 - embedding_extraction - INFO -   Downloaded: 733.6 MB / 822.2 MB (89.2%)
+2026-01-22 22:03:38,668 - embedding_extraction - INFO -   Downloaded: 734.4 MB / 822.2 MB (89.3%)
+2026-01-22 22:03:38,906 - embedding_extraction - INFO -   Downloaded: 735.2 MB / 822.2 MB (89.4%)
+2026-01-22 22:03:39,133 - embedding_extraction - INFO -   Downloaded: 735.9 MB / 822.2 MB (89.5%)
+2026-01-22 22:03:39,360 - embedding_extraction - INFO -   Downloaded: 736.7 MB / 822.2 MB (89.6%)
+2026-01-22 22:03:39,589 - embedding_extraction - INFO -   Downloaded: 737.5 MB / 822.2 MB (89.7%)
+2026-01-22 22:03:39,825 - embedding_extraction - INFO -   Downloaded: 738.3 MB / 822.2 MB (89.8%)
+2026-01-22 22:03:40,055 - embedding_extraction - INFO -   Downloaded: 739.1 MB / 822.2 MB (89.9%)
+2026-01-22 22:03:40,283 - embedding_extraction - INFO -   Downloaded: 739.8 MB / 822.2 MB (90.0%)
+2026-01-22 22:03:40,511 - embedding_extraction - INFO -   Downloaded: 740.6 MB / 822.2 MB (90.1%)
+2026-01-22 22:03:40,739 - embedding_extraction - INFO -   Downloaded: 741.4 MB / 822.2 MB (90.2%)
+2026-01-22 22:03:40,968 - embedding_extraction - INFO -   Downloaded: 742.2 MB / 822.2 MB (90.3%)
+2026-01-22 22:03:41,205 - embedding_extraction - INFO -   Downloaded: 743.0 MB / 822.2 MB (90.4%)
+2026-01-22 22:03:41,433 - embedding_extraction - INFO -   Downloaded: 743.8 MB / 822.2 MB (90.5%)
+2026-01-22 22:03:41,683 - embedding_extraction - INFO -   Downloaded: 744.5 MB / 822.2 MB (90.5%)
+2026-01-22 22:03:41,957 - embedding_extraction - INFO -   Downloaded: 745.3 MB / 822.2 MB (90.6%)
+2026-01-22 22:03:42,245 - embedding_extraction - INFO -   Downloaded: 746.1 MB / 822.2 MB (90.7%)
+2026-01-22 22:03:42,513 - embedding_extraction - INFO -   Downloaded: 746.9 MB / 822.2 MB (90.8%)
+2026-01-22 22:03:42,775 - embedding_extraction - INFO -   Downloaded: 747.7 MB / 822.2 MB (90.9%)
+2026-01-22 22:03:43,045 - embedding_extraction - INFO -   Downloaded: 748.4 MB / 822.2 MB (91.0%)
+2026-01-22 22:03:43,308 - embedding_extraction - INFO -   Downloaded: 749.2 MB / 822.2 MB (91.1%)
+2026-01-22 22:03:43,554 - embedding_extraction - INFO -   Downloaded: 750.0 MB / 822.2 MB (91.2%)
+2026-01-22 22:03:43,814 - embedding_extraction - INFO -   Downloaded: 750.8 MB / 822.2 MB (91.3%)
+2026-01-22 22:03:44,067 - embedding_extraction - INFO -   Downloaded: 751.6 MB / 822.2 MB (91.4%)
+2026-01-22 22:03:44,309 - embedding_extraction - INFO -   Downloaded: 752.3 MB / 822.2 MB (91.5%)
+2026-01-22 22:03:44,567 - embedding_extraction - INFO -   Downloaded: 753.1 MB / 822.2 MB (91.6%)
+2026-01-22 22:03:44,801 - embedding_extraction - INFO -   Downloaded: 753.9 MB / 822.2 MB (91.7%)
+2026-01-22 22:03:45,049 - embedding_extraction - INFO -   Downloaded: 754.7 MB / 822.2 MB (91.8%)
+2026-01-22 22:03:45,291 - embedding_extraction - INFO -   Downloaded: 755.5 MB / 822.2 MB (91.9%)
+2026-01-22 22:03:45,531 - embedding_extraction - INFO -   Downloaded: 756.2 MB / 822.2 MB (92.0%)
+2026-01-22 22:03:45,779 - embedding_extraction - INFO -   Downloaded: 757.0 MB / 822.2 MB (92.1%)
+2026-01-22 22:03:46,012 - embedding_extraction - INFO -   Downloaded: 757.8 MB / 822.2 MB (92.2%)
+2026-01-22 22:03:46,263 - embedding_extraction - INFO -   Downloaded: 758.6 MB / 822.2 MB (92.3%)
+2026-01-22 22:03:46,500 - embedding_extraction - INFO -   Downloaded: 759.4 MB / 822.2 MB (92.4%)
+2026-01-22 22:03:46,742 - embedding_extraction - INFO -   Downloaded: 760.2 MB / 822.2 MB (92.4%)
+2026-01-22 22:03:46,981 - embedding_extraction - INFO -   Downloaded: 760.9 MB / 822.2 MB (92.5%)
+2026-01-22 22:03:47,238 - embedding_extraction - INFO -   Downloaded: 761.7 MB / 822.2 MB (92.6%)
+2026-01-22 22:03:47,566 - embedding_extraction - INFO -   Downloaded: 762.5 MB / 822.2 MB (92.7%)
+2026-01-22 22:03:47,886 - embedding_extraction - INFO -   Downloaded: 763.3 MB / 822.2 MB (92.8%)
+2026-01-22 22:03:48,189 - embedding_extraction - INFO -   Downloaded: 764.1 MB / 822.2 MB (92.9%)
+2026-01-22 22:03:48,482 - embedding_extraction - INFO -   Downloaded: 764.8 MB / 822.2 MB (93.0%)
+2026-01-22 22:03:48,766 - embedding_extraction - INFO -   Downloaded: 765.6 MB / 822.2 MB (93.1%)
+2026-01-22 22:03:49,054 - embedding_extraction - INFO -   Downloaded: 766.4 MB / 822.2 MB (93.2%)
+2026-01-22 22:03:49,315 - embedding_extraction - INFO -   Downloaded: 767.2 MB / 822.2 MB (93.3%)
+2026-01-22 22:03:49,573 - embedding_extraction - INFO -   Downloaded: 768.0 MB / 822.2 MB (93.4%)
+2026-01-22 22:03:49,838 - embedding_extraction - INFO -   Downloaded: 768.8 MB / 822.2 MB (93.5%)
+2026-01-22 22:03:50,100 - embedding_extraction - INFO -   Downloaded: 769.5 MB / 822.2 MB (93.6%)
+2026-01-22 22:03:50,345 - embedding_extraction - INFO -   Downloaded: 770.3 MB / 822.2 MB (93.7%)
+2026-01-22 22:03:50,606 - embedding_extraction - INFO -   Downloaded: 771.1 MB / 822.2 MB (93.8%)
+2026-01-22 22:03:50,848 - embedding_extraction - INFO -   Downloaded: 771.9 MB / 822.2 MB (93.9%)
+2026-01-22 22:03:51,093 - embedding_extraction - INFO -   Downloaded: 772.7 MB / 822.2 MB (94.0%)
+2026-01-22 22:03:51,342 - embedding_extraction - INFO -   Downloaded: 773.4 MB / 822.2 MB (94.1%)
+2026-01-22 22:03:51,583 - embedding_extraction - INFO -   Downloaded: 774.2 MB / 822.2 MB (94.2%)
+2026-01-22 22:03:51,837 - embedding_extraction - INFO -   Downloaded: 775.0 MB / 822.2 MB (94.3%)
+2026-01-22 22:03:52,071 - embedding_extraction - INFO -   Downloaded: 775.8 MB / 822.2 MB (94.3%)
+2026-01-22 22:03:52,312 - embedding_extraction - INFO -   Downloaded: 776.6 MB / 822.2 MB (94.4%)
+2026-01-22 22:03:52,553 - embedding_extraction - INFO -   Downloaded: 777.3 MB / 822.2 MB (94.5%)
+2026-01-22 22:03:52,796 - embedding_extraction - INFO -   Downloaded: 778.1 MB / 822.2 MB (94.6%)
+2026-01-22 22:03:53,042 - embedding_extraction - INFO -   Downloaded: 778.9 MB / 822.2 MB (94.7%)
+2026-01-22 22:03:53,276 - embedding_extraction - INFO -   Downloaded: 779.7 MB / 822.2 MB (94.8%)
+2026-01-22 22:03:53,524 - embedding_extraction - INFO -   Downloaded: 780.5 MB / 822.2 MB (94.9%)
+2026-01-22 22:03:53,756 - embedding_extraction - INFO -   Downloaded: 781.2 MB / 822.2 MB (95.0%)
+2026-01-22 22:03:54,008 - embedding_extraction - INFO -   Downloaded: 782.0 MB / 822.2 MB (95.1%)
+2026-01-22 22:03:54,238 - embedding_extraction - INFO -   Downloaded: 782.8 MB / 822.2 MB (95.2%)
+2026-01-22 22:03:54,606 - embedding_extraction - INFO -   Downloaded: 783.6 MB / 822.2 MB (95.3%)
+2026-01-22 22:03:54,783 - embedding_extraction - INFO -   Downloaded: 784.4 MB / 822.2 MB (95.4%)
+2026-01-22 22:03:55,101 - embedding_extraction - INFO -   Downloaded: 785.2 MB / 822.2 MB (95.5%)
+2026-01-22 22:03:55,414 - embedding_extraction - INFO -   Downloaded: 785.9 MB / 822.2 MB (95.6%)
+2026-01-22 22:03:55,716 - embedding_extraction - INFO -   Downloaded: 786.7 MB / 822.2 MB (95.7%)
+2026-01-22 22:03:56,013 - embedding_extraction - INFO -   Downloaded: 787.5 MB / 822.2 MB (95.8%)
+2026-01-22 22:03:56,294 - embedding_extraction - INFO -   Downloaded: 788.3 MB / 822.2 MB (95.9%)
+2026-01-22 22:03:56,559 - embedding_extraction - INFO -   Downloaded: 789.1 MB / 822.2 MB (96.0%)
+2026-01-22 22:03:56,822 - embedding_extraction - INFO -   Downloaded: 789.8 MB / 822.2 MB (96.1%)
+2026-01-22 22:03:57,097 - embedding_extraction - INFO -   Downloaded: 790.6 MB / 822.2 MB (96.2%)
+2026-01-22 22:03:57,351 - embedding_extraction - INFO -   Downloaded: 791.4 MB / 822.2 MB (96.2%)
+2026-01-22 22:03:57,604 - embedding_extraction - INFO -   Downloaded: 792.2 MB / 822.2 MB (96.3%)
+2026-01-22 22:03:57,861 - embedding_extraction - INFO -   Downloaded: 793.0 MB / 822.2 MB (96.4%)
+2026-01-22 22:03:58,107 - embedding_extraction - INFO -   Downloaded: 793.8 MB / 822.2 MB (96.5%)
+2026-01-22 22:03:58,354 - embedding_extraction - INFO -   Downloaded: 794.5 MB / 822.2 MB (96.6%)
+2026-01-22 22:03:58,610 - embedding_extraction - INFO -   Downloaded: 795.3 MB / 822.2 MB (96.7%)
+2026-01-22 22:03:58,846 - embedding_extraction - INFO -   Downloaded: 796.1 MB / 822.2 MB (96.8%)
+2026-01-22 22:03:59,099 - embedding_extraction - INFO -   Downloaded: 796.9 MB / 822.2 MB (96.9%)
+2026-01-22 22:03:59,331 - embedding_extraction - INFO -   Downloaded: 797.7 MB / 822.2 MB (97.0%)
+2026-01-22 22:03:59,583 - embedding_extraction - INFO -   Downloaded: 798.4 MB / 822.2 MB (97.1%)
+2026-01-22 22:03:59,817 - embedding_extraction - INFO -   Downloaded: 799.2 MB / 822.2 MB (97.2%)
+2026-01-22 22:04:00,058 - embedding_extraction - INFO -   Downloaded: 800.0 MB / 822.2 MB (97.3%)
+2026-01-22 22:04:00,304 - embedding_extraction - INFO -   Downloaded: 800.8 MB / 822.2 MB (97.4%)
+2026-01-22 22:04:00,538 - embedding_extraction - INFO -   Downloaded: 801.6 MB / 822.2 MB (97.5%)
+2026-01-22 22:04:00,796 - embedding_extraction - INFO -   Downloaded: 802.3 MB / 822.2 MB (97.6%)
+2026-01-22 22:04:01,024 - embedding_extraction - INFO -   Downloaded: 803.1 MB / 822.2 MB (97.7%)
+2026-01-22 22:04:01,273 - embedding_extraction - INFO -   Downloaded: 803.9 MB / 822.2 MB (97.8%)
+2026-01-22 22:04:01,508 - embedding_extraction - INFO -   Downloaded: 804.7 MB / 822.2 MB (97.9%)
+2026-01-22 22:04:01,752 - embedding_extraction - INFO -   Downloaded: 805.5 MB / 822.2 MB (98.0%)
+2026-01-22 22:04:01,989 - embedding_extraction - INFO -   Downloaded: 806.2 MB / 822.2 MB (98.1%)
+2026-01-22 22:04:02,229 - embedding_extraction - INFO -   Downloaded: 807.0 MB / 822.2 MB (98.2%)
+2026-01-22 22:04:02,478 - embedding_extraction - INFO -   Downloaded: 807.8 MB / 822.2 MB (98.2%)
+2026-01-22 22:04:02,711 - embedding_extraction - INFO -   Downloaded: 808.6 MB / 822.2 MB (98.3%)
+2026-01-22 22:04:02,963 - embedding_extraction - INFO -   Downloaded: 809.4 MB / 822.2 MB (98.4%)
+2026-01-22 22:04:03,191 - embedding_extraction - INFO -   Downloaded: 810.2 MB / 822.2 MB (98.5%)
+2026-01-22 22:04:03,440 - embedding_extraction - INFO -   Downloaded: 810.9 MB / 822.2 MB (98.6%)
+2026-01-22 22:04:03,670 - embedding_extraction - INFO -   Downloaded: 811.7 MB / 822.2 MB (98.7%)
+2026-01-22 22:04:03,912 - embedding_extraction - INFO -   Downloaded: 812.5 MB / 822.2 MB (98.8%)
+2026-01-22 22:04:04,142 - embedding_extraction - INFO -   Downloaded: 813.3 MB / 822.2 MB (98.9%)
+2026-01-22 22:04:04,381 - embedding_extraction - INFO -   Downloaded: 814.1 MB / 822.2 MB (99.0%)
+2026-01-22 22:04:04,606 - embedding_extraction - INFO -   Downloaded: 814.8 MB / 822.2 MB (99.1%)
+2026-01-22 22:04:04,844 - embedding_extraction - INFO -   Downloaded: 815.6 MB / 822.2 MB (99.2%)
+2026-01-22 22:04:05,067 - embedding_extraction - INFO -   Downloaded: 816.4 MB / 822.2 MB (99.3%)
+2026-01-22 22:04:05,299 - embedding_extraction - INFO -   Downloaded: 817.2 MB / 822.2 MB (99.4%)
+2026-01-22 22:04:05,514 - embedding_extraction - INFO -   Downloaded: 818.0 MB / 822.2 MB (99.5%)
+2026-01-22 22:04:05,748 - embedding_extraction - INFO -   Downloaded: 818.8 MB / 822.2 MB (99.6%)
+2026-01-22 22:04:05,951 - embedding_extraction - INFO -   Downloaded: 819.5 MB / 822.2 MB (99.7%)
+2026-01-22 22:04:06,174 - embedding_extraction - INFO -   Downloaded: 820.3 MB / 822.2 MB (99.8%)
+2026-01-22 22:04:06,388 - embedding_extraction - INFO -   Downloaded: 821.1 MB / 822.2 MB (99.9%)
+2026-01-22 22:04:06,588 - embedding_extraction - INFO -   Downloaded: 821.9 MB / 822.2 MB (100.0%)
+2026-01-22 22:04:06,693 - embedding_extraction - INFO - Download complete!
+2026-01-22 22:04:06,694 - embedding_extraction - INFO - Extracting glove.6B.300d.txt...
+2026-01-22 22:04:14,530 - embedding_extraction - INFO - Loading GloVe from file: /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/embeddings/glove.6B.300d.txt
+Loading GloVe embeddings: 0it [00:00, ?it/s]Loading GloVe embeddings: 434it [00:00, 4338.42it/s]Loading GloVe embeddings: 1759it [00:00, 9577.09it/s]Loading GloVe embeddings: 3271it [00:00, 11944.45it/s]Loading GloVe embeddings: 4735it [00:00, 12894.11it/s]Loading GloVe embeddings: 6047it [00:00, 12909.75it/s]Loading GloVe embeddings: 7773it [00:00, 14372.45it/s]Loading GloVe embeddings: 9483it [00:00, 15167.60it/s]Loading GloVe embeddings: 11100it [00:00, 15361.37it/s]Loading GloVe embeddings: 12636it [00:00, 15219.37it/s]Loading GloVe embeddings: 14635it [00:01, 16669.52it/s]Loading GloVe embeddings: 16400it [00:01, 16965.51it/s]Loading GloVe embeddings: 18099it [00:01, 16930.25it/s]Loading GloVe embeddings: 20270it [00:01, 18366.94it/s]Loading GloVe embeddings: 22411it [00:01, 19279.99it/s]Loading GloVe embeddings: 24574it [00:01, 19984.82it/s]Loading GloVe embeddings: 26768it [00:01, 20571.38it/s]Loading GloVe embeddings: 28921it [00:01, 20858.38it/s]Loading GloVe embeddings: 31064it [00:01, 21029.71it/s]Loading GloVe embeddings: 33213it [00:01, 21167.48it/s]Loading GloVe embeddings: 35380it [00:02, 21315.42it/s]Loading GloVe embeddings: 37551it [00:02, 21433.36it/s]Loading GloVe embeddings: 39756it [00:02, 21616.47it/s]Loading GloVe embeddings: 41958it [00:02, 21736.33it/s]Loading GloVe embeddings: 44153it [00:02, 21799.36it/s]Loading GloVe embeddings: 46360it [00:02, 21878.05it/s]Loading GloVe embeddings: 48560it [00:02, 21912.71it/s]Loading GloVe embeddings: 50762it [00:02, 21943.77it/s]Loading GloVe embeddings: 52986it [00:02, 22032.38it/s]Loading GloVe embeddings: 55207it [00:02, 22084.04it/s]Loading GloVe embeddings: 57416it [00:03, 22043.99it/s]Loading GloVe embeddings: 59621it [00:03, 22032.04it/s]Loading GloVe embeddings: 61834it [00:03, 22058.89it/s]Loading GloVe embeddings: 64040it [00:03, 21997.95it/s]Loading GloVe embeddings: 66244it [00:03, 22007.93it/s]Loading GloVe embeddings: 68467it [00:03, 22072.49it/s]Loading GloVe embeddings: 70686it [00:03, 22106.61it/s]Loading GloVe embeddings: 72897it [00:03, 22103.68it/s]Loading GloVe embeddings: 75119it [00:03, 22137.00it/s]Loading GloVe embeddings: 77333it [00:03, 22105.11it/s]Loading GloVe embeddings: 79555it [00:04, 22137.68it/s]Loading GloVe embeddings: 81790it [00:04, 22199.04it/s]Loading GloVe embeddings: 84010it [00:04, 21978.11it/s]Loading GloVe embeddings: 86209it [00:04, 21838.97it/s]Loading GloVe embeddings: 88394it [00:04, 21822.09it/s]Loading GloVe embeddings: 90589it [00:04, 21857.04it/s]Loading GloVe embeddings: 92822it [00:04, 21997.10it/s]Loading GloVe embeddings: 95086it [00:04, 22187.71it/s]Loading GloVe embeddings: 97306it [00:04, 22013.47it/s]Loading GloVe embeddings: 99536it [00:04, 22094.27it/s]Loading GloVe embeddings: 101764it [00:05, 22149.30it/s]Loading GloVe embeddings: 103980it [00:05, 22151.98it/s]Loading GloVe embeddings: 106244it [00:05, 22296.22it/s]Loading GloVe embeddings: 108474it [00:05, 22201.49it/s]Loading GloVe embeddings: 110695it [00:05, 22091.29it/s]Loading GloVe embeddings: 112915it [00:05, 22122.40it/s]Loading GloVe embeddings: 115128it [00:05, 22115.89it/s]Loading GloVe embeddings: 117340it [00:05, 22094.70it/s]Loading GloVe embeddings: 119587it [00:05, 22205.37it/s]Loading GloVe embeddings: 121808it [00:05, 22107.73it/s]Loading GloVe embeddings: 124019it [00:06, 22002.05it/s]Loading GloVe embeddings: 126228it [00:06, 22025.04it/s]Loading GloVe embeddings: 128452it [00:06, 22086.76it/s]Loading GloVe embeddings: 130686it [00:06, 22162.02it/s]Loading GloVe embeddings: 132903it [00:06, 22032.78it/s]Loading GloVe embeddings: 135131it [00:06, 22103.85it/s]Loading GloVe embeddings: 137342it [00:06, 22073.35it/s]Loading GloVe embeddings: 139550it [00:06, 22070.45it/s]Loading GloVe embeddings: 141767it [00:06, 22098.46it/s]Loading GloVe embeddings: 143977it [00:06, 22008.24it/s]Loading GloVe embeddings: 146178it [00:07, 21831.27it/s]Loading GloVe embeddings: 148399it [00:07, 21941.26it/s]Loading GloVe embeddings: 150623it [00:07, 22027.49it/s]Loading GloVe embeddings: 152847it [00:07, 22088.07it/s]Loading GloVe embeddings: 155057it [00:07, 22084.78it/s]Loading GloVe embeddings: 157266it [00:07, 22019.50it/s]Loading GloVe embeddings: 159469it [00:07, 21973.56it/s]Loading GloVe embeddings: 161667it [00:07, 21926.77it/s]Loading GloVe embeddings: 163860it [00:07, 21919.87it/s]Loading GloVe embeddings: 166053it [00:07, 21867.52it/s]Loading GloVe embeddings: 168282it [00:08, 21992.93it/s]Loading GloVe embeddings: 170482it [00:08, 21690.26it/s]Loading GloVe embeddings: 172652it [00:08, 19990.67it/s]Loading GloVe embeddings: 174763it [00:08, 20205.68it/s]Loading GloVe embeddings: 176803it [00:08, 18725.54it/s]Loading GloVe embeddings: 178707it [00:08, 17903.89it/s]Loading GloVe embeddings: 180522it [00:08, 17578.23it/s]Loading GloVe embeddings: 182295it [00:08, 17136.60it/s]Loading GloVe embeddings: 184019it [00:08, 16980.39it/s]Loading GloVe embeddings: 185724it [00:09, 16706.95it/s]Loading GloVe embeddings: 187399it [00:09, 16551.20it/s]Loading GloVe embeddings: 189057it [00:09, 16529.81it/s]Loading GloVe embeddings: 190712it [00:09, 16462.91it/s]Loading GloVe embeddings: 192539it [00:09, 16987.66it/s]Loading GloVe embeddings: 194271it [00:09, 17085.04it/s]Loading GloVe embeddings: 196278it [00:09, 17964.90it/s]Loading GloVe embeddings: 198077it [00:09, 17621.79it/s]Loading GloVe embeddings: 200011it [00:09, 18125.06it/s]Loading GloVe embeddings: 201827it [00:09, 17932.91it/s]Loading GloVe embeddings: 203623it [00:10, 17502.93it/s]Loading GloVe embeddings: 205377it [00:10, 17453.24it/s]Loading GloVe embeddings: 207210it [00:10, 17709.87it/s]Loading GloVe embeddings: 208984it [00:10, 17679.38it/s]Loading GloVe embeddings: 210754it [00:10, 17684.68it/s]Loading GloVe embeddings: 212524it [00:10, 17638.59it/s]Loading GloVe embeddings: 214502it [00:10, 18274.56it/s]Loading GloVe embeddings: 216345it [00:10, 18310.71it/s]Loading GloVe embeddings: 218218it [00:10, 18434.87it/s]Loading GloVe embeddings: 220063it [00:10, 18158.99it/s]Loading GloVe embeddings: 221929it [00:11, 18304.94it/s]Loading GloVe embeddings: 223818it [00:11, 18476.67it/s]Loading GloVe embeddings: 225741it [00:11, 18692.26it/s]Loading GloVe embeddings: 227736it [00:11, 19065.50it/s]Loading GloVe embeddings: 229662it [00:11, 19121.92it/s]Loading GloVe embeddings: 231575it [00:11, 18876.35it/s]Loading GloVe embeddings: 233768it [00:11, 19782.18it/s]Loading GloVe embeddings: 235933it [00:11, 20336.46it/s]Loading GloVe embeddings: 238139it [00:11, 20848.09it/s]Loading GloVe embeddings: 240316it [00:11, 21122.71it/s]Loading GloVe embeddings: 242430it [00:12, 19080.44it/s]Loading GloVe embeddings: 244445it [00:12, 19377.84it/s]Loading GloVe embeddings: 246496it [00:12, 19698.79it/s]Loading GloVe embeddings: 248556it [00:12, 19959.05it/s]Loading GloVe embeddings: 250713it [00:12, 20427.90it/s]Loading GloVe embeddings: 252858it [00:12, 20728.34it/s]Loading GloVe embeddings: 254941it [00:12, 20729.77it/s]Loading GloVe embeddings: 257021it [00:12, 20331.24it/s]Loading GloVe embeddings: 259067it [00:12, 20367.07it/s]Loading GloVe embeddings: 261263it [00:13, 20833.69it/s]Loading GloVe embeddings: 263450it [00:13, 21140.80it/s]Loading GloVe embeddings: 265651it [00:13, 21397.08it/s]Loading GloVe embeddings: 267850it [00:13, 21572.49it/s]Loading GloVe embeddings: 270009it [00:13, 19752.26it/s]Loading GloVe embeddings: 272015it [00:13, 19090.52it/s]Loading GloVe embeddings: 273948it [00:13, 18656.87it/s]Loading GloVe embeddings: 275830it [00:13, 18392.83it/s]Loading GloVe embeddings: 277680it [00:13, 17288.60it/s]Loading GloVe embeddings: 279425it [00:14, 17065.89it/s]Loading GloVe embeddings: 281142it [00:14, 17055.48it/s]Loading GloVe embeddings: 282855it [00:14, 16597.91it/s]Loading GloVe embeddings: 284524it [00:14, 16621.66it/s]Loading GloVe embeddings: 286191it [00:14, 16277.43it/s]Loading GloVe embeddings: 287822it [00:14, 14801.18it/s]Loading GloVe embeddings: 289327it [00:14, 14480.41it/s]Loading GloVe embeddings: 290910it [00:14, 14847.85it/s]Loading GloVe embeddings: 292487it [00:14, 15107.01it/s]Loading GloVe embeddings: 294156it [00:14, 15559.11it/s]Loading GloVe embeddings: 295937it [00:15, 16211.17it/s]Loading GloVe embeddings: 297659it [00:15, 16505.09it/s]Loading GloVe embeddings: 299317it [00:15, 16349.79it/s]Loading GloVe embeddings: 301001it [00:15, 16492.38it/s]Loading GloVe embeddings: 302817it [00:15, 16985.28it/s]Loading GloVe embeddings: 304649it [00:15, 17381.53it/s]Loading GloVe embeddings: 306418it [00:15, 17471.48it/s]Loading GloVe embeddings: 308280it [00:15, 17812.44it/s]Loading GloVe embeddings: 310216it [00:15, 18273.76it/s]Loading GloVe embeddings: 312167it [00:15, 18559.73it/s]Loading GloVe embeddings: 314101it [00:16, 18790.22it/s]Loading GloVe embeddings: 316222it [00:16, 19511.76it/s]Loading GloVe embeddings: 318347it [00:16, 20029.78it/s]Loading GloVe embeddings: 320351it [00:16, 17944.73it/s]Loading GloVe embeddings: 322187it [00:16, 17682.19it/s]Loading GloVe embeddings: 323984it [00:16, 17539.36it/s]Loading GloVe embeddings: 325757it [00:16, 17484.79it/s]Loading GloVe embeddings: 327524it [00:16, 17535.44it/s]Loading GloVe embeddings: 329341it [00:16, 17717.81it/s]Loading GloVe embeddings: 331120it [00:17, 16412.69it/s]Loading GloVe embeddings: 332784it [00:17, 15306.07it/s]Loading GloVe embeddings: 334341it [00:17, 14682.93it/s]Loading GloVe embeddings: 336078it [00:17, 15405.27it/s]Loading GloVe embeddings: 337858it [00:17, 16069.68it/s]Loading GloVe embeddings: 339541it [00:17, 16232.26it/s]Loading GloVe embeddings: 341207it [00:17, 16355.13it/s]Loading GloVe embeddings: 342854it [00:17, 16291.73it/s]Loading GloVe embeddings: 344706it [00:17, 16943.51it/s]Loading GloVe embeddings: 346454it [00:18, 17100.62it/s]Loading GloVe embeddings: 348170it [00:18, 16296.37it/s]Loading GloVe embeddings: 349811it [00:18, 15902.50it/s]Loading GloVe embeddings: 351410it [00:18, 15602.98it/s]Loading GloVe embeddings: 353037it [00:18, 15791.21it/s]Loading GloVe embeddings: 355088it [00:18, 17156.70it/s]Loading GloVe embeddings: 357106it [00:18, 18041.20it/s]Loading GloVe embeddings: 359183it [00:18, 18843.71it/s]Loading GloVe embeddings: 361075it [00:18, 17500.09it/s]Loading GloVe embeddings: 362849it [00:19, 15883.28it/s]Loading GloVe embeddings: 364478it [00:19, 15777.18it/s]Loading GloVe embeddings: 366313it [00:19, 16480.32it/s]Loading GloVe embeddings: 367998it [00:19, 16550.28it/s]Loading GloVe embeddings: 369725it [00:19, 16755.77it/s]Loading GloVe embeddings: 371415it [00:19, 16614.20it/s]Loading GloVe embeddings: 373169it [00:19, 16881.86it/s]Loading GloVe embeddings: 374865it [00:19, 16437.80it/s]Loading GloVe embeddings: 376563it [00:19, 16594.21it/s]Loading GloVe embeddings: 378347it [00:19, 16921.52it/s]Loading GloVe embeddings: 380256it [00:20, 17543.17it/s]Loading GloVe embeddings: 382015it [00:20, 17527.79it/s]Loading GloVe embeddings: 383771it [00:20, 17383.18it/s]Loading GloVe embeddings: 385512it [00:20, 17370.42it/s]Loading GloVe embeddings: 387251it [00:20, 17201.04it/s]Loading GloVe embeddings: 389046it [00:20, 17406.23it/s]Loading GloVe embeddings: 390886it [00:20, 17698.57it/s]Loading GloVe embeddings: 392695it [00:20, 17813.05it/s]Loading GloVe embeddings: 394694it [00:20, 18461.18it/s]Loading GloVe embeddings: 396677it [00:20, 18867.87it/s]Loading GloVe embeddings: 398735it [00:21, 19377.59it/s]Loading GloVe embeddings: 400000it [00:21, 18942.05it/s]
+2026-01-22 22:04:36,994 - embedding_extraction - INFO - Loaded 400,000 word embeddings (300-dim)
+2026-01-22 22:04:37,044 - embedding_extraction - INFO - Caching GloVe embeddings to /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/embeddings/glove_6B_300d.pkl
+2026-01-22 22:04:41,090 - embedding_extraction - INFO - Extracting embeddings for train (134,151 samples)...
+Processing train:   0%|          | 0/134151 [00:00<?, ?it/s]Processing train:   2%|▏         | 2110/134151 [00:00<00:06, 21094.59it/s]Processing train:   3%|▎         | 4567/134151 [00:00<00:05, 23135.47it/s]Processing train:   5%|▌         | 7033/134151 [00:00<00:05, 23831.10it/s]Processing train:   7%|▋         | 9539/134151 [00:00<00:05, 24313.59it/s]Processing train:   9%|▉         | 12079/134151 [00:00<00:04, 24703.32it/s]Processing train:  11%|█         | 14550/134151 [00:00<00:04, 24344.03it/s]Processing train:  13%|█▎        | 16986/134151 [00:00<00:04, 24220.49it/s]Processing train:  14%|█▍        | 19409/134151 [00:00<00:04, 24070.31it/s]Processing train:  16%|█▋        | 21817/134151 [00:00<00:04, 23640.91it/s]Processing train:  18%|█▊        | 24183/134151 [00:01<00:04, 23409.38it/s]Processing train:  20%|█▉        | 26526/134151 [00:01<00:04, 23095.08it/s]Processing train:  22%|██▏       | 28856/134151 [00:01<00:04, 23155.11it/s]Processing train:  23%|██▎       | 31307/134151 [00:01<00:04, 23555.34it/s]Processing train:  25%|██▌       | 33764/134151 [00:01<00:04, 23856.47it/s]Processing train:  27%|██▋       | 36189/134151 [00:01<00:04, 23972.52it/s]Processing train:  29%|██▉       | 38588/134151 [00:01<00:04, 23821.53it/s]Processing train:  31%|███       | 40971/134151 [00:01<00:03, 23607.86it/s]Processing train:  32%|███▏      | 43354/134151 [00:01<00:03, 23672.58it/s]Processing train:  34%|███▍      | 45722/134151 [00:01<00:03, 23566.94it/s]Processing train:  36%|███▌      | 48117/134151 [00:02<00:03, 23678.83it/s]Processing train:  38%|███▊      | 50486/134151 [00:02<00:03, 23600.29it/s]Processing train:  40%|███▉      | 53048/134151 [00:02<00:03, 24200.48it/s]Processing train:  42%|████▏     | 55886/134151 [00:02<00:03, 25447.51it/s]Processing train:  44%|████▍     | 59224/134151 [00:02<00:02, 27818.54it/s]Processing train:  47%|████▋     | 62579/134151 [00:02<00:02, 29532.70it/s]Processing train:  49%|████▉     | 65941/134151 [00:02<00:02, 30755.67it/s]Processing train:  52%|█████▏    | 69291/134151 [00:02<00:02, 31574.92it/s]Processing train:  54%|█████▍    | 72450/134151 [00:02<00:02, 30636.69it/s]Processing train:  56%|█████▋    | 75521/134151 [00:02<00:01, 29929.24it/s]Processing train:  59%|█████▊    | 78521/134151 [00:03<00:01, 29776.58it/s]Processing train:  61%|██████    | 81504/134151 [00:03<00:01, 28948.30it/s]Processing train:  63%|██████▎   | 84406/134151 [00:03<00:01, 28655.30it/s]Processing train:  65%|██████▌   | 87303/134151 [00:03<00:01, 28745.05it/s]Processing train:  67%|██████▋   | 90181/134151 [00:03<00:01, 28286.93it/s]Processing train:  69%|██████▉   | 93013/134151 [00:03<00:01, 27836.37it/s]Processing train:  72%|███████▏  | 96008/134151 [00:03<00:01, 28449.44it/s]Processing train:  74%|███████▍  | 99041/134151 [00:03<00:01, 28994.02it/s]Processing train:  76%|███████▌  | 101945/134151 [00:03<00:01, 25774.16it/s]Processing train:  78%|███████▊  | 104589/134151 [00:04<00:01, 25255.91it/s]Processing train:  80%|███████▉  | 107160/134151 [00:04<00:01, 25074.37it/s]Processing train:  82%|████████▏ | 109698/134151 [00:04<00:00, 25092.49it/s]Processing train:  84%|████████▍ | 112382/134151 [00:04<00:00, 25588.53it/s]Processing train:  86%|████████▌ | 115125/134151 [00:04<00:00, 26114.66it/s]Processing train:  88%|████████▊ | 117751/134151 [00:04<00:00, 25868.19it/s]Processing train:  90%|████████▉ | 120348/134151 [00:04<00:00, 25736.25it/s]Processing train:  92%|█████████▏| 123242/134151 [00:04<00:00, 26674.02it/s]Processing train:  94%|█████████▍| 126178/134151 [00:04<00:00, 27464.58it/s]Processing train:  96%|█████████▌| 128957/134151 [00:04<00:00, 27559.54it/s]Processing train:  98%|█████████▊| 131854/134151 [00:05<00:00, 27975.39it/s]Processing train: 100%|██████████| 134151/134151 [00:05<00:00, 26208.25it/s]
+2026-01-22 22:04:46,382 - embedding_extraction - INFO - train embedding statistics:
+2026-01-22 22:04:46,385 - embedding_extraction - INFO -   Total tokens: 2,700,584
+2026-01-22 22:04:46,385 - embedding_extraction - INFO -   Valid tokens (in GloVe): 2,658,683 (98.45%)
+2026-01-22 22:04:46,385 - embedding_extraction - INFO -   OOV tokens: 41,901 (1.55%)
+2026-01-22 22:04:46,385 - embedding_extraction - INFO -   Sentences with all OOV: 16 (0.01%)
+2026-01-22 22:04:46,385 - embedding_extraction - INFO -   Embedding shape: (134151, 300)
+2026-01-22 22:04:46,385 - embedding_extraction - INFO - Extracting embeddings for val (16,768 samples)...
+Processing val:   0%|          | 0/16768 [00:00<?, ?it/s]Processing val:  15%|█▍        | 2495/16768 [00:00<00:00, 24940.69it/s]Processing val:  30%|██▉       | 5011/16768 [00:00<00:00, 25063.86it/s]Processing val:  46%|████▌     | 7707/16768 [00:00<00:00, 25928.40it/s]Processing val:  62%|██████▏   | 10362/16768 [00:00<00:00, 26172.13it/s]Processing val:  78%|███████▊  | 13009/16768 [00:00<00:00, 26278.25it/s]Processing val:  94%|█████████▎| 15692/16768 [00:00<00:00, 26461.93it/s]Processing val: 100%|██████████| 16768/16768 [00:00<00:00, 26245.16it/s]
+2026-01-22 22:04:47,040 - embedding_extraction - INFO - val embedding statistics:
+2026-01-22 22:04:47,040 - embedding_extraction - INFO -   Total tokens: 338,494
+2026-01-22 22:04:47,041 - embedding_extraction - INFO -   Valid tokens (in GloVe): 333,385 (98.49%)
+2026-01-22 22:04:47,041 - embedding_extraction - INFO -   OOV tokens: 5,109 (1.51%)
+2026-01-22 22:04:47,041 - embedding_extraction - INFO -   Sentences with all OOV: 0 (0.00%)
+2026-01-22 22:04:47,041 - embedding_extraction - INFO -   Embedding shape: (16768, 300)
+2026-01-22 22:04:47,054 - embedding_extraction - INFO - Extracting embeddings for test (184,459 samples)...
+Processing test:   0%|          | 0/184459 [00:00<?, ?it/s]Processing test:   1%|▏         | 2740/184459 [00:00<00:06, 27398.98it/s]Processing test:   3%|▎         | 5480/184459 [00:00<00:06, 26584.11it/s]Processing test:   4%|▍         | 8267/184459 [00:00<00:06, 27160.75it/s]Processing test:   6%|▌         | 10985/184459 [00:00<00:06, 26973.64it/s]Processing test:   7%|▋         | 13786/184459 [00:00<00:06, 27342.33it/s]Processing test:   9%|▉         | 16522/184459 [00:00<00:06, 27259.20it/s]Processing test:  10%|█         | 19249/184459 [00:00<00:06, 27088.21it/s]Processing test:  12%|█▏        | 21960/184459 [00:00<00:05, 27093.83it/s]Processing test:  13%|█▎        | 24670/184459 [00:00<00:05, 26836.69it/s]Processing test:  15%|█▍        | 27355/184459 [00:01<00:05, 26821.26it/s]Processing test:  16%|█▋        | 30038/184459 [00:01<00:05, 26234.53it/s]Processing test:  18%|█▊        | 32665/184459 [00:01<00:05, 25716.87it/s]Processing test:  19%|█▉        | 35240/184459 [00:01<00:05, 25053.52it/s]Processing test:  21%|██        | 37950/184459 [00:01<00:05, 25646.55it/s]Processing test:  22%|██▏       | 40719/184459 [00:01<00:05, 26243.10it/s]Processing test:  24%|██▎       | 43469/184459 [00:01<00:05, 26613.26it/s]Processing test:  25%|██▌       | 46210/184459 [00:01<00:05, 26848.72it/s]Processing test:  27%|██▋       | 48983/184459 [00:01<00:04, 27109.90it/s]Processing test:  28%|██▊       | 51697/184459 [00:01<00:04, 27026.04it/s]Processing test:  29%|██▉       | 54402/184459 [00:02<00:04, 26529.65it/s]Processing test:  31%|███       | 57215/184459 [00:02<00:04, 26998.89it/s]Processing test:  33%|███▎      | 60041/184459 [00:02<00:04, 27368.20it/s]Processing test:  34%|███▍      | 62913/184459 [00:02<00:04, 27768.11it/s]Processing test:  36%|███▌      | 65784/184459 [00:02<00:04, 28048.20it/s]Processing test:  37%|███▋      | 68721/184459 [00:02<00:04, 28440.11it/s]Processing test:  39%|███▉      | 71638/184459 [00:02<00:03, 28654.78it/s]Processing test:  40%|████      | 74505/184459 [00:02<00:03, 28564.27it/s]Processing test:  42%|████▏     | 77562/184459 [00:02<00:03, 29161.39it/s]Processing test:  44%|████▎     | 80509/184459 [00:02<00:03, 29251.57it/s]Processing test:  45%|████▌     | 83461/184459 [00:03<00:03, 29329.96it/s]Processing test:  47%|████▋     | 86457/184459 [00:03<00:03, 29517.50it/s]Processing test:  49%|████▊     | 89598/184459 [00:03<00:03, 30081.89it/s]Processing test:  50%|█████     | 92734/184459 [00:03<00:03, 30462.59it/s]Processing test:  52%|█████▏    | 95827/184459 [00:03<00:02, 30601.18it/s]Processing test:  54%|█████▎    | 98948/184459 [00:03<00:02, 30781.61it/s]Processing test:  55%|█████▌    | 102027/184459 [00:03<00:02, 29715.29it/s]Processing test:  57%|█████▋    | 105007/184459 [00:03<00:02, 29391.97it/s]Processing test:  59%|█████▊    | 107952/184459 [00:03<00:02, 28790.08it/s]Processing test:  60%|██████    | 110849/184459 [00:03<00:02, 28840.18it/s]Processing test:  62%|██████▏   | 113737/184459 [00:04<00:02, 28592.01it/s]Processing test:  63%|██████▎   | 116660/184459 [00:04<00:02, 28777.22it/s]Processing test:  65%|██████▍   | 119541/184459 [00:04<00:02, 28753.33it/s]Processing test:  66%|██████▋   | 122418/184459 [00:04<00:02, 28707.24it/s]Processing test:  68%|██████▊   | 125327/184459 [00:04<00:02, 28818.02it/s]Processing test:  70%|██████▉   | 128210/184459 [00:04<00:02, 27646.25it/s]Processing test:  71%|███████   | 130985/184459 [00:04<00:01, 27637.13it/s]Processing test:  73%|███████▎  | 133881/184459 [00:04<00:01, 28022.22it/s]Processing test:  74%|███████▍  | 136785/184459 [00:04<00:01, 28318.63it/s]Processing test:  76%|███████▌  | 139703/184459 [00:04<00:01, 28573.38it/s]Processing test:  77%|███████▋  | 142624/184459 [00:05<00:01, 28759.62it/s]Processing test:  79%|███████▉  | 145556/184459 [00:05<00:01, 28925.08it/s]Processing test:  81%|████████  | 148522/184459 [00:05<00:01, 29142.23it/s]Processing test:  82%|████████▏ | 151524/184459 [00:05<00:01, 29403.59it/s]Processing test:  84%|████████▍ | 154553/184459 [00:05<00:01, 29666.62it/s]Processing test:  85%|████████▌ | 157584/184459 [00:05<00:00, 29859.01it/s]Processing test:  87%|████████▋ | 160571/184459 [00:05<00:00, 29063.80it/s]Processing test:  89%|████████▊ | 163483/184459 [00:05<00:00, 29019.27it/s]Processing test:  90%|█████████ | 166389/184459 [00:05<00:00, 28877.97it/s]Processing test:  92%|█████████▏| 169407/184459 [00:06<00:00, 29260.68it/s]Processing test:  93%|█████████▎| 172372/184459 [00:06<00:00, 29375.50it/s]Processing test:  95%|█████████▌| 175405/184459 [00:06<00:00, 29656.81it/s]Processing test:  97%|█████████▋| 178373/184459 [00:06<00:00, 28946.49it/s]Processing test:  98%|█████████▊| 181274/184459 [00:06<00:00, 28964.18it/s]Processing test: 100%|█████████▉| 184208/184459 [00:06<00:00, 29072.20it/s]Processing test: 100%|██████████| 184459/184459 [00:06<00:00, 28303.13it/s]
+2026-01-22 22:04:53,802 - embedding_extraction - INFO - test embedding statistics:
+2026-01-22 22:04:53,805 - embedding_extraction - INFO -   Total tokens: 4,117,576
+2026-01-22 22:04:53,805 - embedding_extraction - INFO -   Valid tokens (in GloVe): 4,054,042 (98.46%)
+2026-01-22 22:04:53,805 - embedding_extraction - INFO -   OOV tokens: 63,534 (1.54%)
+2026-01-22 22:04:53,805 - embedding_extraction - INFO -   Sentences with all OOV: 24 (0.01%)
+2026-01-22 22:04:53,805 - embedding_extraction - INFO -   Embedding shape: (184459, 300)
+2026-01-22 22:04:53,808 - embedding_extraction - INFO - Caching embeddings to /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection/outputs/sentence_embeddings.pkl
+2026-01-22 22:04:55,161 - embedding_extraction - INFO - ============================================================
+2026-01-22 22:04:55,162 - embedding_extraction - INFO - EMBEDDINGS PREPARED
+2026-01-22 22:04:55,162 - embedding_extraction - INFO - ============================================================
+2026-01-22 22:04:55,162 - embedding_extraction - INFO - train: (134151, 300)
+2026-01-22 22:04:55,162 - embedding_extraction - INFO - val: (16768, 300)
+2026-01-22 22:04:55,162 - embedding_extraction - INFO - test: (184459, 300)
+2026-01-22 22:04:55,162 - embedding_extraction - INFO - ============================================================
+2026-01-22 22:04:55,462 - __main__ - INFO - 
+2026-01-22 22:04:55,462 - __main__ - INFO - STEP 3/5: Model Training
+2026-01-22 22:04:55,462 - __main__ - INFO - ----------------------------------------------------------------------
+2026-01-22 22:04:55,483 - model_training - INFO - Using 33,537 normal texts for validation
+2026-01-22 22:04:55,483 - model_training - INFO - ============================================================
+2026-01-22 22:04:55,483 - model_training - INFO - HYPERPARAMETER TUNING
+2026-01-22 22:04:55,483 - model_training - INFO - ============================================================
+2026-01-22 22:04:55,483 - model_training - INFO - Parameter grid: {'n_estimators': [64, 100, 128, 256], 'contamination': [0.001, 0.01, 0.05], 'max_samples': ['auto'], 'random_state': [42]}
+2026-01-22 22:04:55,483 - model_training - INFO - Total combinations to try: 12
+Hyperparameter search:   0%|          | 0/12 [00:00<?, ?it/s]2026-01-22 22:04:55,483 - model_training - INFO - Training Isolation Forest with n_estimators=64, contamination=0.001
+2026-01-22 22:04:57,677 - model_training - INFO - Training complete
+2026-01-22 22:04:57,985 - model_training - INFO - Params: {'n_estimators': 64, 'contamination': 0.001, 'max_samples': 'auto', 'random_state': 42} -> AUROC: 0.4792
+Hyperparameter search:   8%|▊         | 1/12 [00:02<00:27,  2.50s/it]2026-01-22 22:04:57,985 - model_training - INFO - Training Isolation Forest with n_estimators=64, contamination=0.01
+2026-01-22 22:04:59,260 - model_training - INFO - Training complete
+2026-01-22 22:04:59,603 - model_training - INFO - Params: {'n_estimators': 64, 'contamination': 0.01, 'max_samples': 'auto', 'random_state': 42} -> AUROC: 0.4792
+Hyperparameter search:  17%|█▋        | 2/12 [00:04<00:19,  1.98s/it]2026-01-22 22:04:59,603 - model_training - INFO - Training Isolation Forest with n_estimators=64, contamination=0.05
+2026-01-22 22:05:00,861 - model_training - INFO - Training complete
+2026-01-22 22:05:01,177 - model_training - INFO - Params: {'n_estimators': 64, 'contamination': 0.05, 'max_samples': 'auto', 'random_state': 42} -> AUROC: 0.4792
+Hyperparameter search:  25%|██▌       | 3/12 [00:05<00:16,  1.80s/it]2026-01-22 22:05:01,178 - model_training - INFO - Training Isolation Forest with n_estimators=100, contamination=0.001
+2026-01-22 22:05:03,098 - model_training - INFO - Training complete
+2026-01-22 22:05:03,585 - model_training - INFO - Params: {'n_estimators': 100, 'contamination': 0.001, 'max_samples': 'auto', 'random_state': 42} -> AUROC: 0.4808
+Hyperparameter search:  33%|███▎      | 4/12 [00:08<00:16,  2.04s/it]2026-01-22 22:05:03,585 - model_training - INFO - Training Isolation Forest with n_estimators=100, contamination=0.01
+2026-01-22 22:05:05,443 - model_training - INFO - Training complete
+2026-01-22 22:05:05,930 - model_training - INFO - Params: {'n_estimators': 100, 'contamination': 0.01, 'max_samples': 'auto', 'random_state': 42} -> AUROC: 0.4808
+Hyperparameter search:  42%|████▏     | 5/12 [00:10<00:15,  2.15s/it]2026-01-22 22:05:05,930 - model_training - INFO - Training Isolation Forest with n_estimators=100, contamination=0.05
+2026-01-22 22:05:07,902 - model_training - INFO - Training complete
+2026-01-22 22:05:08,446 - model_training - INFO - Params: {'n_estimators': 100, 'contamination': 0.05, 'max_samples': 'auto', 'random_state': 42} -> AUROC: 0.4808
+Hyperparameter search:  50%|█████     | 6/12 [00:12<00:13,  2.27s/it]2026-01-22 22:05:08,447 - model_training - INFO - Training Isolation Forest with n_estimators=128, contamination=0.001
+2026-01-22 22:05:10,948 - model_training - INFO - Training complete
+2026-01-22 22:05:11,585 - model_training - INFO - Params: {'n_estimators': 128, 'contamination': 0.001, 'max_samples': 'auto', 'random_state': 42} -> AUROC: 0.4805
+Hyperparameter search:  58%|█████▊    | 7/12 [00:16<00:12,  2.56s/it]2026-01-22 22:05:11,585 - model_training - INFO - Training Isolation Forest with n_estimators=128, contamination=0.01
+2026-01-22 22:05:14,101 - model_training - INFO - Training complete
+2026-01-22 22:05:14,706 - model_training - INFO - Params: {'n_estimators': 128, 'contamination': 0.01, 'max_samples': 'auto', 'random_state': 42} -> AUROC: 0.4805
+Hyperparameter search:  67%|██████▋   | 8/12 [00:19<00:10,  2.74s/it]2026-01-22 22:05:14,707 - model_training - INFO - Training Isolation Forest with n_estimators=128, contamination=0.05
+2026-01-22 22:05:17,129 - model_training - INFO - Training complete
+2026-01-22 22:05:17,740 - model_training - INFO - Params: {'n_estimators': 128, 'contamination': 0.05, 'max_samples': 'auto', 'random_state': 42} -> AUROC: 0.4805
+Hyperparameter search:  75%|███████▌  | 9/12 [00:22<00:08,  2.83s/it]2026-01-22 22:05:17,740 - model_training - INFO - Training Isolation Forest with n_estimators=256, contamination=0.001
+2026-01-22 22:05:22,580 - model_training - INFO - Training complete
+2026-01-22 22:05:23,703 - model_training - INFO - Params: {'n_estimators': 256, 'contamination': 0.001, 'max_samples': 'auto', 'random_state': 42} -> AUROC: 0.4801
+Hyperparameter search:  83%|████████▎ | 10/12 [00:28<00:07,  3.80s/it]2026-01-22 22:05:23,704 - model_training - INFO - Training Isolation Forest with n_estimators=256, contamination=0.01
+2026-01-22 22:05:28,358 - model_training - INFO - Training complete
+2026-01-22 22:05:29,555 - model_training - INFO - Params: {'n_estimators': 256, 'contamination': 0.01, 'max_samples': 'auto', 'random_state': 42} -> AUROC: 0.4801
+Hyperparameter search:  92%|█████████▏| 11/12 [00:34<00:04,  4.43s/it]2026-01-22 22:05:29,556 - model_training - INFO - Training Isolation Forest with n_estimators=256, contamination=0.05
+2026-01-22 22:05:34,620 - model_training - INFO - Training complete
+2026-01-22 22:05:35,784 - model_training - INFO - Params: {'n_estimators': 256, 'contamination': 0.05, 'max_samples': 'auto', 'random_state': 42} -> AUROC: 0.4801
+Hyperparameter search: 100%|██████████| 12/12 [00:40<00:00,  4.97s/it]Hyperparameter search: 100%|██████████| 12/12 [00:40<00:00,  3.36s/it]
+2026-01-22 22:05:35,785 - model_training - INFO - ============================================================
+2026-01-22 22:05:35,785 - model_training - INFO - Best AUROC: 0.4808
+2026-01-22 22:05:35,785 - model_training - INFO - Best params: {'n_estimators': 100, 'contamination': 0.001, 'max_samples': 'auto', 'random_state': 42}
+2026-01-22 22:05:35,785 - model_training - INFO - ============================================================
+2026-01-22 22:05:35,785 - model_training - INFO - Saving hyperparameter results to /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection/outputs/hyperparameter_tuning_results.json
+2026-01-22 22:05:36,250 - model_training - INFO - Training final model with best parameters...
+2026-01-22 22:05:36,250 - model_training - INFO - Training Isolation Forest with n_estimators=100, contamination=0.001
+2026-01-22 22:05:38,183 - model_training - INFO - Training complete
+2026-01-22 22:05:38,183 - model_training - INFO - Saving model to /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection/outputs/best_isolation_forest.pkl
+2026-01-22 22:05:38,207 - __main__ - INFO - 
+2026-01-22 22:05:38,207 - __main__ - INFO - STEP 4/5: Evaluation
+2026-01-22 22:05:38,207 - __main__ - INFO - ----------------------------------------------------------------------
+2026-01-22 22:05:38,216 - evaluation - INFO - ============================================================
+2026-01-22 22:05:38,216 - evaluation - INFO - MODEL EVALUATION
+2026-01-22 22:05:38,216 - evaluation - INFO - ============================================================
+2026-01-22 22:05:39,868 - evaluation - INFO - AUROC: 0.4815
+2026-01-22 22:05:39,931 - evaluation - INFO - AUPR (Outlier): 0.9041
+2026-01-22 22:05:39,932 - evaluation - INFO - AUPR (Inlier): 0.0854
+2026-01-22 22:05:40,150 - evaluation - INFO - Optimal threshold: -0.2326
+2026-01-22 22:05:40,150 - evaluation - INFO - Best F1: 0.9031
+2026-01-22 22:05:40,150 - evaluation - INFO - Precision at optimal: 0.9076
+2026-01-22 22:05:40,150 - evaluation - INFO - Recall at optimal: 0.8986
+2026-01-22 22:05:40,166 - evaluation - INFO - Confusion Matrix:
+2026-01-22 22:05:40,166 - evaluation - INFO -   TN=1436, FP=15334
+2026-01-22 22:05:40,166 - evaluation - INFO -   FN=17010, TP=150679
+2026-01-22 22:05:40,166 - evaluation - INFO - TPR (Recall): 0.8986
+2026-01-22 22:05:40,166 - evaluation - INFO - FPR: 0.9144
+2026-01-22 22:05:40,171 - evaluation - INFO - Score Distribution:
+2026-01-22 22:05:40,171 - evaluation - INFO -   Inlier (simple):  mean=-0.1931, std=0.0362
+2026-01-22 22:05:40,171 - evaluation - INFO -   Outlier (normal): mean=-0.1954, std=0.0350
+2026-01-22 22:05:40,171 - evaluation - INFO -   Separation: 0.0023
+2026-01-22 22:05:40,171 - evaluation - INFO - ============================================================
+2026-01-22 22:05:40,171 - evaluation - INFO - Saving evaluation results to /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection/outputs/evaluation_results.json
+2026-01-22 22:05:40,580 - __main__ - INFO - 
+2026-01-22 22:05:40,581 - __main__ - INFO - STEP 5/5: Visualization
+2026-01-22 22:05:40,581 - __main__ - INFO - ----------------------------------------------------------------------
+2026-01-22 22:05:40,581 - evaluation - INFO - Creating evaluation plots...
+2026-01-22 22:06:07,076 - evaluation - INFO - Saved score distribution plot to /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection/outputs/score_distribution.png
+2026-01-22 22:06:08,074 - evaluation - INFO - Saved ROC curve to /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection/outputs/roc_curve.png
+2026-01-22 22:06:09,116 - evaluation - INFO - Saved Precision-Recall curve to /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection/outputs/precision_recall_curve.png
+2026-01-22 22:06:09,961 - evaluation - INFO - Saved confusion matrix to /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection/outputs/confusion_matrix.png
+2026-01-22 22:06:09,961 - evaluation - INFO - All plots saved
+2026-01-22 22:06:09,961 - __main__ - INFO - 
+2026-01-22 22:06:09,961 - __main__ - INFO - ======================================================================
+2026-01-22 22:06:09,961 - __main__ - INFO - PIPELINE COMPLETE
+2026-01-22 22:06:09,961 - __main__ - INFO - ======================================================================
+2026-01-22 22:06:09,961 - __main__ - INFO - Key Results:
+2026-01-22 22:06:09,961 - __main__ - INFO -   AUROC: 0.4815
+2026-01-22 22:06:09,961 - __main__ - INFO -   Best F1: 0.9031
+2026-01-22 22:06:09,961 - __main__ - INFO -   Precision: 0.9076
+2026-01-22 22:06:09,961 - __main__ - INFO -   Recall: 0.8986
+2026-01-22 22:06:09,961 - __main__ - INFO - 
+2026-01-22 22:06:09,961 - __main__ - INFO - Output files:
+2026-01-22 22:06:09,961 - __main__ - INFO -   - Model: /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection/outputs/best_isolation_forest.pkl
+2026-01-22 22:06:09,961 - __main__ - INFO -   - Results: /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection/outputs/evaluation_results.json
+2026-01-22 22:06:09,962 - __main__ - INFO -   - Hyperparameters: /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection/outputs/hyperparameter_tuning_results.json
+2026-01-22 22:06:09,962 - __main__ - INFO -   - Plots: /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection/outputs
+2026-01-22 22:06:09,962 - __main__ - INFO - ======================================================================
+/var/spool/slurmd/job175035/slurm_script: line 267: exit: 0#!/bin/bash: numeric argument required
