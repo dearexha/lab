@@ -54,7 +54,8 @@ def compute_histograms(dataset, dataset_name, excluded_columns=["text", "label",
         logger.info("Saving results to disk ...")
         eval_dict = dict()
         eval_dict["metric_hists"] = metric_hists
-        with open(os.path.join(get_project_dir(), f"results/{dataset_name}{"_Filtered" if len(bounds)!=0 else ""}_eval_dict.json"), "w") as f:
+        filtered_suffix = "_Filtered" if len(bounds)!=0 else ""
+        with open(os.path.join(get_project_dir(), f"results/{dataset_name}{filtered_suffix}_eval_dict.json"), "w") as f:
             json.dump(eval_dict, f, indent=4)
         logger.info("Saving results to disk done")
     
@@ -90,7 +91,8 @@ def plot_metrics_hist(dataset, dataset_name, selected_metrics, cols=3, base_size
     label_feature = dataset.features["label"]
     label_names = label_feature.names
 
-    with open(os.path.join(get_project_dir(), f"results/{dataset_name}{"_Filtered" if filtered else ""}_eval_dict.json"), "r") as f:
+    filtered_suffix = "_Filtered" if filtered else ""
+    with open(os.path.join(get_project_dir(), f"results/{dataset_name}{filtered_suffix}_eval_dict.json"), "r") as f:
         eval_dict = json.load(f)
 
     num_plots = len(selected_metrics)
