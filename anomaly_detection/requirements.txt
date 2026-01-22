@@ -4,6 +4,10 @@ scikit-learn>=1.0.0
 datasets>=2.0.0  # HuggingFace datasets for GloVe
 tqdm>=4.62.0
 
+# Embeddings
+sentence-transformers>=2.2.0  # BERT embeddings
+torch>=2.0.0  # Required by sentence-transformers
+
 # Visualization
 matplotlib>=3.4.0
 seaborn>=0.11.0

@@ -1,12 +1,13 @@
 #!/bin/bash
-#SBATCH --job-name=ad_iforest_glove      # Job name
+#SBATCH --job-name=ad_iforest_bert       # Job name
 #SBATCH --output=slurm_%j.out            # Standard output log (%j = job ID)
 #SBATCH --error=slurm_%j.err             # Standard error log (%j = job ID)
-#SBATCH --partition=A40short             # Partition (adjust if different for CPU jobs)
+#SBATCH --partition=A40short             # Partition with GPU access
+#SBATCH --gres=gpu:1                     # Request 1 GPU (BERT benefits from GPU)
 #SBATCH --time=4:00:00                   # Time limit (4 hours)
 #SBATCH --nodes=1                        # Number of nodes
 #SBATCH --ntasks=1                       # Number of tasks
-#SBATCH --cpus-per-task=16               # CPUs per task (Isolation Forest benefits from parallelization)
+#SBATCH --cpus-per-task=8                # CPUs per task
 #SBATCH --mem=32GB                       # Memory allocation
 
 # --- Print job info ---
@@ -49,7 +50,9 @@ pip install --no-cache-dir \
     tqdm \
     matplotlib \
     seaborn \
-    pandas
+    pandas \
+    torch \
+    sentence-transformers
 
 # Install additional dependencies
 echo "Installing additional dependencies..."
@@ -85,6 +88,8 @@ python -c "import tqdm; print(f'✓ tqdm {tqdm.__version__}')" || echo "✗ tqdm
 python -c "import matplotlib; print(f'✓ Matplotlib {matplotlib.__version__}')" || echo "✗ Matplotlib not installed"
 python -c "import seaborn; print(f'✓ Seaborn {seaborn.__version__}')" || echo "✗ Seaborn not installed"
 python -c "import pandas; print(f'✓ Pandas {pandas.__version__}')" || echo "✗ Pandas not installed"
+python -c "import torch; print(f'✓ PyTorch {torch.__version__}')" || echo "✗ PyTorch not installed"
+python -c "import sentence_transformers; print(f'✓ sentence-transformers {sentence_transformers.__version__}')" || echo "✗ sentence-transformers not installed"
 
 # --- Environment variables ---
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
@@ -190,9 +195,15 @@ python -c "
 import config
 print(f'  Random seed: {config.RANDOM_SEED}')
 print(f'  Data split: {config.TRAIN_RATIO}/{config.VAL_RATIO}/{config.TEST_RATIO} (train/val/test)')
-print(f'  GloVe model: {config.GLOVE_MODEL}')
-print(f'  GloVe dimensions: {config.GLOVE_DIM}')
-print(f'  OOV strategy: {config.OOV_STRATEGY}')
+print(f'  Embedding type: {config.EMBEDDING_TYPE}')
+if config.EMBEDDING_TYPE == 'bert':
+    print(f'  BERT model: {config.BERT_MODEL}')
+    print(f'  BERT dimensions: {config.BERT_DIM}')
+    print(f'  BERT batch size: {config.BERT_BATCH_SIZE}')
+else:
+    print(f'  GloVe model: {config.GLOVE_MODEL}')
+    print(f'  GloVe dimensions: {config.GLOVE_DIM}')
+    print(f'  OOV strategy: {config.OOV_STRATEGY}')
 print(f'  Hyperparameter grid:')
 print(f'    n_estimators: {config.IFOREST_PARAM_GRID[\"n_estimators\"]}')
 print(f'    contamination: {config.IFOREST_PARAM_GRID[\"contamination\"]}')

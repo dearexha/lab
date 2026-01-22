@@ -35,6 +35,12 @@ TEST_RATIO = 0.1
 RANDOM_SEED = 42
 
 # ============================================================================
+# EMBEDDING CONFIGURATION
+# ============================================================================
+# Embedding type: "glove" or "bert"
+EMBEDDING_TYPE = "bert"  # Switch between GloVe and BERT
+
+# ============================================================================
 # GLOVE CONFIGURATION
 # ============================================================================
 GLOVE_MODEL = "glove.6B.300d"  # 300-dimensional GloVe embeddings
@@ -44,6 +50,20 @@ GLOVE_CACHE_FILE = EMBEDDINGS_DIR / "glove_6B_300d.pkl"
 # HuggingFace dataset for GloVe
 GLOVE_HF_DATASET = "stanfordnlp/glove"
 GLOVE_HF_CONFIG = "6B"  # Wikipedia 2014 + Gigaword 5
+
+# ============================================================================
+# BERT CONFIGURATION
+# ============================================================================
+# BERT model from sentence-transformers
+# Options:
+#   - "all-MiniLM-L6-v2" (fast, 384-dim, good quality)
+#   - "all-mpnet-base-v2" (slower, 768-dim, best quality)
+#   - "paraphrase-MiniLM-L6-v2" (fast, 384-dim)
+BERT_MODEL = "all-MiniLM-L6-v2"
+BERT_DIM = 384  # Dimension depends on model
+BERT_BATCH_SIZE = 32  # Batch size for encoding (adjust based on GPU memory)
+BERT_MAX_SEQ_LENGTH = 128  # Maximum sequence length (tokens)
+BERT_CACHE_FILE = EMBEDDINGS_DIR / f"bert_{BERT_MODEL.replace('/', '_')}.pkl"
 
 # ============================================================================
 # PREPROCESSING CONFIGURATION

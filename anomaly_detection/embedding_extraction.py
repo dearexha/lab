@@ -280,6 +280,58 @@ def extract_embeddings_for_split(
     return embeddings, stats_list
 
 
+def load_bert_model():
+    """
+    Load BERT model from sentence-transformers.
+
+    Returns:
+        SentenceTransformer model
+    """
+    try:
+        from sentence_transformers import SentenceTransformer
+    except ImportError:
+        logger.error("sentence-transformers not installed. Install with: pip install sentence-transformers")
+        raise
+
+    logger.info(f"Loading BERT model: {config.BERT_MODEL}")
+    model = SentenceTransformer(config.BERT_MODEL)
+    logger.info(f"Model loaded. Embedding dimension: {model.get_sentence_embedding_dimension()}")
+
+    return model
+
+
+def extract_bert_embeddings_for_split(
+    texts: List[str],
+    model,
+    split_name: str = "data"
+) -> np.ndarray:
+    """
+    Extract BERT embeddings for a list of texts.
+
+    Args:
+        texts: List of text strings
+        model: SentenceTransformer model
+        split_name: Name of split (for logging)
+
+    Returns:
+        embeddings: numpy array of shape (n_texts, embedding_dim)
+    """
+    logger.info(f"Extracting BERT embeddings for {split_name} ({len(texts):,} samples)...")
+
+    # Encode texts in batches
+    embeddings = model.encode(
+        texts,
+        batch_size=config.BERT_BATCH_SIZE,
+        show_progress_bar=True,
+        convert_to_numpy=True,
+        normalize_embeddings=False  # Keep raw embeddings
+    )
+
+    logger.info(f"{split_name} embedding shape: {embeddings.shape}")
+
+    return embeddings
+
+
 def prepare_embeddings(
     splits: Dict[str, Dict],
     force_reload: bool = False
@@ -294,9 +346,9 @@ def prepare_embeddings(
     Returns:
         Dictionary with embeddings for each split:
         {
-            'train': np.array (n_train, 300),
-            'val': np.array (n_val, 300),
-            'test': np.array (n_test, 300)
+            'train': np.array (n_train, embedding_dim),
+            'val': np.array (n_val, embedding_dim),
+            'test': np.array (n_test, embedding_dim)
         }
     """
     # Check cache
@@ -307,16 +359,32 @@ def prepare_embeddings(
         logger.info("Cached embeddings loaded successfully")
         return embeddings
 
-    # Load GloVe
-    glove_dict = load_glove_from_huggingface()
-
-    # Extract embeddings for each split
+    # Extract embeddings based on config
     embeddings = {}
 
-    for split_name in ['train', 'val', 'test']:
-        texts = splits[split_name]['texts']
-        emb, stats = extract_embeddings_for_split(texts, glove_dict, split_name)
-        embeddings[split_name] = emb
+    if config.EMBEDDING_TYPE == "glove":
+        logger.info("Using GloVe embeddings")
+        # Load GloVe
+        glove_dict = load_glove_from_huggingface()
+
+        # Extract embeddings for each split
+        for split_name in ['train', 'val', 'test']:
+            texts = splits[split_name]['texts']
+            emb, stats = extract_embeddings_for_split(texts, glove_dict, split_name)
+            embeddings[split_name] = emb
+
+    elif config.EMBEDDING_TYPE == "bert":
+        logger.info("Using BERT embeddings")
+        # Load BERT model
+        model = load_bert_model()
+
+        # Extract embeddings for each split
+        for split_name in ['train', 'val', 'test']:
+            texts = splits[split_name]['texts']
+            emb = extract_bert_embeddings_for_split(texts, model, split_name)
+            embeddings[split_name] = emb
+    else:
+        raise ValueError(f"Unknown embedding type: {config.EMBEDDING_TYPE}. Use 'glove' or 'bert'")
 
     # Cache embeddings
     logger.info(f"Caching embeddings to {config.EMBEDDINGS_CACHE}")

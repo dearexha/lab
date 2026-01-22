@@ -51,6 +51,22 @@ def test_imports():
         print("    Install with: pip install datasets")
         return False
 
+    try:
+        import torch
+        print(f"  ✓ torch {torch.__version__}")
+    except ImportError as e:
+        print(f"  ✗ torch: {e}")
+        print("    Install with: pip install torch")
+        return False
+
+    try:
+        import sentence_transformers
+        print(f"  ✓ sentence-transformers {sentence_transformers.__version__}")
+    except ImportError as e:
+        print(f"  ✗ sentence-transformers: {e}")
+        print("    Install with: pip install sentence-transformers")
+        return False
+
     print("All imports successful!\n")
     return True
 
