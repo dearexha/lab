@@ -1,0 +1,133 @@
+
+Currently Loaded Modules:
+  1) GCCcore/13.3.0                   7) Tcl/8.6.14-GCCcore-13.3.0
+  2) zlib/1.3.1-GCCcore-13.3.0        8) SQLite/3.45.3-GCCcore-13.3.0
+  3) binutils/2.42-GCCcore-13.3.0     9) XZ/5.4.5-GCCcore-13.3.0
+  4) bzip2/1.0.8-GCCcore-13.3.0      10) libffi/3.4.5-GCCcore-13.3.0
+  5) ncurses/6.5-GCCcore-13.3.0      11) OpenSSL/3
+  6) libreadline/8.2-GCCcore-13.3.0  12) Python/3.12.3-GCCcore-13.3.0
+
+ 
+
+2026-01-23 11:45:28,625 - data_preparation - INFO - Loading texts from /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/datasets/SimpleWikipedia_v2/simple.aligned
+2026-01-23 11:45:28,765 - data_preparation - INFO - Loaded 167689 texts
+2026-01-23 11:45:28,766 - data_preparation - INFO - Loading texts from /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/datasets/SimpleWikipedia_v2/normal.aligned
+2026-01-23 11:45:28,903 - data_preparation - INFO - Loaded 167689 texts
+2026-01-23 11:45:32,724 - __main__ - INFO - ======================================================================
+2026-01-23 11:45:32,724 - __main__ - INFO - ANOMALY DETECTION PIPELINE - ISOLATION FOREST + GLOVE
+2026-01-23 11:45:32,724 - __main__ - INFO - ======================================================================
+2026-01-23 11:45:32,724 - __main__ - INFO - Output directory: /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection/outputs
+2026-01-23 11:45:32,724 - __main__ - INFO - 
+2026-01-23 11:45:32,724 - __main__ - INFO - STEP 1/5: Data Preparation
+2026-01-23 11:45:32,724 - __main__ - INFO - ----------------------------------------------------------------------
+2026-01-23 11:45:32,724 - data_preparation - INFO - Loading cached data splits from /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection/outputs/data_splits.pkl
+2026-01-23 11:45:32,968 - data_preparation - INFO - Cached splits loaded successfully
+2026-01-23 11:45:32,968 - __main__ - INFO - 
+2026-01-23 11:45:32,968 - __main__ - INFO - STEP 2/5: Embedding Extraction
+2026-01-23 11:45:32,968 - __main__ - INFO - ----------------------------------------------------------------------
+2026-01-23 11:45:32,968 - embedding_extraction - INFO - Loading cached embeddings from /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection/outputs/sentence_embeddings.pkl
+2026-01-23 11:45:33,415 - embedding_extraction - INFO - Cached embeddings loaded successfully
+2026-01-23 11:45:33,416 - __main__ - INFO - 
+2026-01-23 11:45:33,416 - __main__ - INFO - STEP 3/5: Model Training
+2026-01-23 11:45:33,416 - __main__ - INFO - ----------------------------------------------------------------------
+2026-01-23 11:45:33,463 - model_training - INFO - Using 33,537 normal texts for validation
+2026-01-23 11:45:33,463 - model_training - INFO - ============================================================
+2026-01-23 11:45:33,463 - model_training - INFO - HYPERPARAMETER TUNING
+2026-01-23 11:45:33,463 - model_training - INFO - ============================================================
+2026-01-23 11:45:33,463 - model_training - INFO - Parameter grid: {'n_estimators': [64, 100, 128, 256], 'contamination': [0.001, 0.01, 0.05], 'max_samples': ['auto'], 'random_state': [42]}
+2026-01-23 11:45:33,463 - model_training - INFO - Total combinations to try: 12
+Hyperparameter search:   0%|          | 0/12 [00:00<?, ?it/s]2026-01-23 11:45:33,465 - model_training - INFO - Training Isolation Forest with n_estimators=64, contamination=0.001
+2026-01-23 11:45:34,911 - model_training - INFO - Training complete
+2026-01-23 11:45:35,339 - model_training - INFO - Params: {'n_estimators': 64, 'contamination': 0.001, 'max_samples': 'auto', 'random_state': 42} -> AUROC: 0.4792
+Hyperparameter search:   8%|▊         | 1/12 [00:01<00:20,  1.87s/it]2026-01-23 11:45:35,340 - model_training - INFO - Training Isolation Forest with n_estimators=64, contamination=0.01
+2026-01-23 11:45:36,604 - model_training - INFO - Training complete
+2026-01-23 11:45:36,939 - model_training - INFO - Params: {'n_estimators': 64, 'contamination': 0.01, 'max_samples': 'auto', 'random_state': 42} -> AUROC: 0.4792
+Hyperparameter search:  17%|█▋        | 2/12 [00:03<00:17,  1.71s/it]2026-01-23 11:45:36,940 - model_training - INFO - Training Isolation Forest with n_estimators=64, contamination=0.05
+2026-01-23 11:45:38,231 - model_training - INFO - Training complete
+2026-01-23 11:45:38,575 - model_training - INFO - Params: {'n_estimators': 64, 'contamination': 0.05, 'max_samples': 'auto', 'random_state': 42} -> AUROC: 0.4792
+Hyperparameter search:  25%|██▌       | 3/12 [00:05<00:15,  1.68s/it]2026-01-23 11:45:38,575 - model_training - INFO - Training Isolation Forest with n_estimators=100, contamination=0.001
+2026-01-23 11:45:40,637 - model_training - INFO - Training complete
+2026-01-23 11:45:41,145 - model_training - INFO - Params: {'n_estimators': 100, 'contamination': 0.001, 'max_samples': 'auto', 'random_state': 42} -> AUROC: 0.4808
+Hyperparameter search:  33%|███▎      | 4/12 [00:07<00:16,  2.03s/it]2026-01-23 11:45:41,145 - model_training - INFO - Training Isolation Forest with n_estimators=100, contamination=0.01
+2026-01-23 11:45:43,106 - model_training - INFO - Training complete
+2026-01-23 11:45:43,609 - model_training - INFO - Params: {'n_estimators': 100, 'contamination': 0.01, 'max_samples': 'auto', 'random_state': 42} -> AUROC: 0.4808
+Hyperparameter search:  42%|████▏     | 5/12 [00:10<00:15,  2.19s/it]2026-01-23 11:45:43,610 - model_training - INFO - Training Isolation Forest with n_estimators=100, contamination=0.05
+2026-01-23 11:45:45,579 - model_training - INFO - Training complete
+2026-01-23 11:45:46,086 - model_training - INFO - Params: {'n_estimators': 100, 'contamination': 0.05, 'max_samples': 'auto', 'random_state': 42} -> AUROC: 0.4808
+Hyperparameter search:  50%|█████     | 6/12 [00:12<00:13,  2.29s/it]2026-01-23 11:45:46,086 - model_training - INFO - Training Isolation Forest with n_estimators=128, contamination=0.001
+2026-01-23 11:45:48,656 - model_training - INFO - Training complete
+2026-01-23 11:45:49,317 - model_training - INFO - Params: {'n_estimators': 128, 'contamination': 0.001, 'max_samples': 'auto', 'random_state': 42} -> AUROC: 0.4805
+Hyperparameter search:  58%|█████▊    | 7/12 [00:15<00:12,  2.59s/it]2026-01-23 11:45:49,317 - model_training - INFO - Training Isolation Forest with n_estimators=128, contamination=0.01
+2026-01-23 11:45:51,857 - model_training - INFO - Training complete
+2026-01-23 11:45:52,501 - model_training - INFO - Params: {'n_estimators': 128, 'contamination': 0.01, 'max_samples': 'auto', 'random_state': 42} -> AUROC: 0.4805
+Hyperparameter search:  67%|██████▋   | 8/12 [00:19<00:11,  2.78s/it]2026-01-23 11:45:52,502 - model_training - INFO - Training Isolation Forest with n_estimators=128, contamination=0.05
+2026-01-23 11:45:55,065 - model_training - INFO - Training complete
+2026-01-23 11:45:55,705 - model_training - INFO - Params: {'n_estimators': 128, 'contamination': 0.05, 'max_samples': 'auto', 'random_state': 42} -> AUROC: 0.4805
+Hyperparameter search:  75%|███████▌  | 9/12 [00:22<00:08,  2.91s/it]2026-01-23 11:45:55,706 - model_training - INFO - Training Isolation Forest with n_estimators=256, contamination=0.001
+2026-01-23 11:46:00,858 - model_training - INFO - Training complete
+2026-01-23 11:46:02,085 - model_training - INFO - Params: {'n_estimators': 256, 'contamination': 0.001, 'max_samples': 'auto', 'random_state': 42} -> AUROC: 0.4801
+Hyperparameter search:  83%|████████▎ | 10/12 [00:28<00:07,  3.98s/it]2026-01-23 11:46:02,085 - model_training - INFO - Training Isolation Forest with n_estimators=256, contamination=0.01
+2026-01-23 11:46:07,145 - model_training - INFO - Training complete
+2026-01-23 11:46:08,303 - model_training - INFO - Params: {'n_estimators': 256, 'contamination': 0.01, 'max_samples': 'auto', 'random_state': 42} -> AUROC: 0.4801
+Hyperparameter search:  92%|█████████▏| 11/12 [00:34<00:04,  4.67s/it]2026-01-23 11:46:08,303 - model_training - INFO - Training Isolation Forest with n_estimators=256, contamination=0.05
+2026-01-23 11:46:13,437 - model_training - INFO - Training complete
+2026-01-23 11:46:14,628 - model_training - INFO - Params: {'n_estimators': 256, 'contamination': 0.05, 'max_samples': 'auto', 'random_state': 42} -> AUROC: 0.4801
+Hyperparameter search: 100%|██████████| 12/12 [00:41<00:00,  5.17s/it]Hyperparameter search: 100%|██████████| 12/12 [00:41<00:00,  3.43s/it]
+2026-01-23 11:46:14,628 - model_training - INFO - ============================================================
+2026-01-23 11:46:14,628 - model_training - INFO - Best AUROC: 0.4808
+2026-01-23 11:46:14,628 - model_training - INFO - Best params: {'n_estimators': 100, 'contamination': 0.001, 'max_samples': 'auto', 'random_state': 42}
+2026-01-23 11:46:14,628 - model_training - INFO - ============================================================
+2026-01-23 11:46:14,628 - model_training - INFO - Saving hyperparameter results to /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection/outputs/hyperparameter_tuning_results.json
+2026-01-23 11:46:14,633 - model_training - INFO - Training final model with best parameters...
+2026-01-23 11:46:14,633 - model_training - INFO - Training Isolation Forest with n_estimators=100, contamination=0.001
+2026-01-23 11:46:16,598 - model_training - INFO - Training complete
+2026-01-23 11:46:16,598 - model_training - INFO - Saving model to /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection/outputs/best_isolation_forest.pkl
+2026-01-23 11:46:16,612 - __main__ - INFO - 
+2026-01-23 11:46:16,612 - __main__ - INFO - STEP 4/5: Evaluation
+2026-01-23 11:46:16,612 - __main__ - INFO - ----------------------------------------------------------------------
+2026-01-23 11:46:16,619 - evaluation - INFO - ============================================================
+2026-01-23 11:46:16,620 - evaluation - INFO - MODEL EVALUATION
+2026-01-23 11:46:16,620 - evaluation - INFO - ============================================================
+2026-01-23 11:46:18,354 - evaluation - INFO - AUROC: 0.4815
+2026-01-23 11:46:18,419 - evaluation - INFO - AUPR (Outlier): 0.9041
+2026-01-23 11:46:18,419 - evaluation - INFO - AUPR (Inlier): 0.0854
+2026-01-23 11:46:18,597 - evaluation - INFO - Optimal threshold: -0.2326
+2026-01-23 11:46:18,597 - evaluation - INFO - Best F1: 0.9031
+2026-01-23 11:46:18,597 - evaluation - INFO - Precision at optimal: 0.9076
+2026-01-23 11:46:18,597 - evaluation - INFO - Recall at optimal: 0.8986
+2026-01-23 11:46:18,654 - evaluation - INFO - Confusion Matrix:
+2026-01-23 11:46:18,655 - evaluation - INFO -   TN=1436, FP=15334
+2026-01-23 11:46:18,655 - evaluation - INFO -   FN=17010, TP=150679
+2026-01-23 11:46:18,655 - evaluation - INFO - TPR (Recall): 0.8986
+2026-01-23 11:46:18,655 - evaluation - INFO - FPR: 0.9144
+2026-01-23 11:46:18,664 - evaluation - INFO - Score Distribution:
+2026-01-23 11:46:18,664 - evaluation - INFO -   Inlier (simple):  mean=-0.1931, std=0.0362
+2026-01-23 11:46:18,664 - evaluation - INFO -   Outlier (normal): mean=-0.1954, std=0.0350
+2026-01-23 11:46:18,664 - evaluation - INFO -   Separation: 0.0023
+2026-01-23 11:46:18,664 - evaluation - INFO - ============================================================
+2026-01-23 11:46:18,664 - evaluation - INFO - Saving evaluation results to /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection/outputs/evaluation_results.json
+2026-01-23 11:46:18,667 - __main__ - INFO - 
+2026-01-23 11:46:18,667 - __main__ - INFO - STEP 5/5: Visualization
+2026-01-23 11:46:18,667 - __main__ - INFO - ----------------------------------------------------------------------
+2026-01-23 11:46:18,667 - evaluation - INFO - Creating evaluation plots...
+2026-01-23 11:46:19,703 - evaluation - INFO - Saved score distribution plot to /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection/outputs/score_distribution.png
+2026-01-23 11:46:20,123 - evaluation - INFO - Saved ROC curve to /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection/outputs/roc_curve.png
+2026-01-23 11:46:20,527 - evaluation - INFO - Saved Precision-Recall curve to /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection/outputs/precision_recall_curve.png
+2026-01-23 11:46:20,833 - evaluation - INFO - Saved confusion matrix to /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection/outputs/confusion_matrix.png
+2026-01-23 11:46:20,833 - evaluation - INFO - All plots saved
+2026-01-23 11:46:20,834 - __main__ - INFO - 
+2026-01-23 11:46:20,834 - __main__ - INFO - ======================================================================
+2026-01-23 11:46:20,834 - __main__ - INFO - PIPELINE COMPLETE
+2026-01-23 11:46:20,834 - __main__ - INFO - ======================================================================
+2026-01-23 11:46:20,834 - __main__ - INFO - Key Results:
+2026-01-23 11:46:20,834 - __main__ - INFO -   AUROC: 0.4815
+2026-01-23 11:46:20,834 - __main__ - INFO -   Best F1: 0.9031
+2026-01-23 11:46:20,834 - __main__ - INFO -   Precision: 0.9076
+2026-01-23 11:46:20,834 - __main__ - INFO -   Recall: 0.8986
+2026-01-23 11:46:20,834 - __main__ - INFO - 
+2026-01-23 11:46:20,834 - __main__ - INFO - Output files:
+2026-01-23 11:46:20,834 - __main__ - INFO -   - Model: /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection/outputs/best_isolation_forest.pkl
+2026-01-23 11:46:20,834 - __main__ - INFO -   - Results: /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection/outputs/evaluation_results.json
+2026-01-23 11:46:20,834 - __main__ - INFO -   - Hyperparameters: /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection/outputs/hyperparameter_tuning_results.json
+2026-01-23 11:46:20,834 - __main__ - INFO -   - Plots: /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection/outputs
+2026-01-23 11:46:20,834 - __main__ - INFO - ======================================================================
