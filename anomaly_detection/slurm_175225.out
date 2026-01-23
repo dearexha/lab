@@ -1,0 +1,240 @@
+==================================================
+Starting SLURM Job: ad_iforest_bert (ID: 175225)
+Run on host: node-03.bender
+Node: node-03
+Partition: A40short
+Job started at: Fri Jan 23 11:54:05 CET 2026
+Working Directory: /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection
+==================================================
+Upgrading pip...
+Requirement already satisfied: pip in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (25.3)
+Requirement already satisfied: setuptools in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (80.10.1)
+Requirement already satisfied: wheel in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (0.46.3)
+Requirement already satisfied: packaging>=24.0 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from wheel) (26.0)
+Installing packages from requirements.txt...
+Requirement already satisfied: numpy in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (2.4.1)
+Requirement already satisfied: scikit-learn in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (1.8.0)
+Requirement already satisfied: datasets in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (4.5.0)
+Requirement already satisfied: tqdm in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (4.67.1)
+Requirement already satisfied: matplotlib in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (3.10.8)
+Requirement already satisfied: seaborn in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (0.13.2)
+Requirement already satisfied: pandas in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (3.0.0)
+Requirement already satisfied: torch in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (2.10.0)
+Requirement already satisfied: sentence-transformers in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (5.2.0)
+Requirement already satisfied: scipy>=1.10.0 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from scikit-learn) (1.17.0)
+Requirement already satisfied: joblib>=1.3.0 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from scikit-learn) (1.5.3)
+Requirement already satisfied: threadpoolctl>=3.2.0 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from scikit-learn) (3.6.0)
+Requirement already satisfied: filelock in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from datasets) (3.20.3)
+Requirement already satisfied: pyarrow>=21.0.0 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from datasets) (23.0.0)
+Requirement already satisfied: dill<0.4.1,>=0.3.0 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from datasets) (0.4.0)
+Requirement already satisfied: requests>=2.32.2 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from datasets) (2.32.5)
+Requirement already satisfied: httpx<1.0.0 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from datasets) (0.28.1)
+Requirement already satisfied: xxhash in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from datasets) (3.6.0)
+Requirement already satisfied: multiprocess<0.70.19 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from datasets) (0.70.18)
+Requirement already satisfied: fsspec<=2025.10.0,>=2023.1.0 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from fsspec[http]<=2025.10.0,>=2023.1.0->datasets) (2025.10.0)
+Requirement already satisfied: huggingface-hub<2.0,>=0.25.0 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from datasets) (0.36.0)
+Requirement already satisfied: packaging in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from datasets) (26.0)
+Requirement already satisfied: pyyaml>=5.1 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from datasets) (6.0.3)
+Requirement already satisfied: aiohttp!=4.0.0a0,!=4.0.0a1 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from fsspec[http]<=2025.10.0,>=2023.1.0->datasets) (3.13.3)
+Requirement already satisfied: anyio in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from httpx<1.0.0->datasets) (4.12.1)
+Requirement already satisfied: certifi in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from httpx<1.0.0->datasets) (2026.1.4)
+Requirement already satisfied: httpcore==1.* in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from httpx<1.0.0->datasets) (1.0.9)
+Requirement already satisfied: idna in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from httpx<1.0.0->datasets) (3.11)
+Requirement already satisfied: h11>=0.16 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from httpcore==1.*->httpx<1.0.0->datasets) (0.16.0)
+Requirement already satisfied: typing-extensions>=3.7.4.3 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from huggingface-hub<2.0,>=0.25.0->datasets) (4.15.0)
+Requirement already satisfied: hf-xet<2.0.0,>=1.1.3 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from huggingface-hub<2.0,>=0.25.0->datasets) (1.2.0)
+Requirement already satisfied: contourpy>=1.0.1 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from matplotlib) (1.3.3)
+Requirement already satisfied: cycler>=0.10 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from matplotlib) (0.12.1)
+Requirement already satisfied: fonttools>=4.22.0 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from matplotlib) (4.61.1)
+Requirement already satisfied: kiwisolver>=1.3.1 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from matplotlib) (1.4.9)
+Requirement already satisfied: pillow>=8 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from matplotlib) (12.1.0)
+Requirement already satisfied: pyparsing>=3 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from matplotlib) (3.3.2)
+Requirement already satisfied: python-dateutil>=2.7 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from matplotlib) (2.9.0.post0)
+Requirement already satisfied: setuptools in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from torch) (80.10.1)
+Requirement already satisfied: sympy>=1.13.3 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from torch) (1.14.0)
+Requirement already satisfied: networkx>=2.5.1 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from torch) (3.6.1)
+Requirement already satisfied: jinja2 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from torch) (3.1.6)
+Requirement already satisfied: cuda-bindings==12.9.4 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from torch) (12.9.4)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.8.93 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from torch) (12.8.93)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.8.90 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from torch) (12.8.90)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.8.90 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from torch) (12.8.90)
+Requirement already satisfied: nvidia-cudnn-cu12==9.10.2.21 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from torch) (9.10.2.21)
+Requirement already satisfied: nvidia-cublas-cu12==12.8.4.1 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from torch) (12.8.4.1)
+Requirement already satisfied: nvidia-cufft-cu12==11.3.3.83 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from torch) (11.3.3.83)
+Requirement already satisfied: nvidia-curand-cu12==10.3.9.90 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from torch) (10.3.9.90)
+Requirement already satisfied: nvidia-cusolver-cu12==11.7.3.90 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from torch) (11.7.3.90)
+Requirement already satisfied: nvidia-cusparse-cu12==12.5.8.93 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from torch) (12.5.8.93)
+Requirement already satisfied: nvidia-cusparselt-cu12==0.7.1 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from torch) (0.7.1)
+Requirement already satisfied: nvidia-nccl-cu12==2.27.5 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from torch) (2.27.5)
+Requirement already satisfied: nvidia-nvshmem-cu12==3.4.5 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from torch) (3.4.5)
+Requirement already satisfied: nvidia-nvtx-cu12==12.8.90 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from torch) (12.8.90)
+Requirement already satisfied: nvidia-nvjitlink-cu12==12.8.93 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from torch) (12.8.93)
+Requirement already satisfied: nvidia-cufile-cu12==1.13.1.3 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from torch) (1.13.1.3)
+Requirement already satisfied: triton==3.6.0 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from torch) (3.6.0)
+Requirement already satisfied: cuda-pathfinder~=1.1 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from cuda-bindings==12.9.4->torch) (1.3.3)
+Requirement already satisfied: transformers<6.0.0,>=4.41.0 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from sentence-transformers) (4.57.6)
+Requirement already satisfied: regex!=2019.12.17 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from transformers<6.0.0,>=4.41.0->sentence-transformers) (2026.1.15)
+Requirement already satisfied: tokenizers<=0.23.0,>=0.22.0 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from transformers<6.0.0,>=4.41.0->sentence-transformers) (0.22.2)
+Requirement already satisfied: safetensors>=0.4.3 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from transformers<6.0.0,>=4.41.0->sentence-transformers) (0.7.0)
+Requirement already satisfied: aiohappyeyeballs>=2.5.0 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2025.10.0,>=2023.1.0->datasets) (2.6.1)
+Requirement already satisfied: aiosignal>=1.4.0 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2025.10.0,>=2023.1.0->datasets) (1.4.0)
+Requirement already satisfied: attrs>=17.3.0 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2025.10.0,>=2023.1.0->datasets) (25.4.0)
+Requirement already satisfied: frozenlist>=1.1.1 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2025.10.0,>=2023.1.0->datasets) (1.8.0)
+Requirement already satisfied: multidict<7.0,>=4.5 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2025.10.0,>=2023.1.0->datasets) (6.7.0)
+Requirement already satisfied: propcache>=0.2.0 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2025.10.0,>=2023.1.0->datasets) (0.4.1)
+Requirement already satisfied: yarl<2.0,>=1.17.0 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2025.10.0,>=2023.1.0->datasets) (1.22.0)
+Requirement already satisfied: six>=1.5 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from python-dateutil>=2.7->matplotlib) (1.17.0)
+Requirement already satisfied: charset_normalizer<4,>=2 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from requests>=2.32.2->datasets) (3.4.4)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from requests>=2.32.2->datasets) (2.6.3)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from sympy>=1.13.3->torch) (1.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from jinja2->torch) (3.0.3)
+Installing additional dependencies...
+Requirement already satisfied: pyarrow in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (23.0.0)
+Requirement already satisfied: dill in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (0.4.0)
+Requirement already satisfied: filelock in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (3.20.3)
+Requirement already satisfied: requests in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (2.32.5)
+Requirement already satisfied: regex in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (2026.1.15)
+Requirement already satisfied: packaging in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (26.0)
+Requirement already satisfied: pillow in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (12.1.0)
+Requirement already satisfied: python-dateutil in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (2.9.0.post0)
+Requirement already satisfied: pytz in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (2025.2)
+Requirement already satisfied: urllib3 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (2.6.3)
+Requirement already satisfied: idna in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (3.11)
+Requirement already satisfied: certifi in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (2026.1.4)
+Requirement already satisfied: charset-normalizer in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (3.4.4)
+Requirement already satisfied: MarkupSafe in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (3.0.3)
+Requirement already satisfied: Jinja2 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (3.1.6)
+Requirement already satisfied: joblib in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (1.5.3)
+Requirement already satisfied: xxhash in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (3.6.0)
+Requirement already satisfied: multiprocess in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (0.70.18)
+Requirement already satisfied: fsspec in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (2025.10.0)
+Requirement already satisfied: six>=1.5 in /home/s07drexh/ad_pipeline_env/lib/python3.12/site-packages (from python-dateutil) (1.17.0)
+==================================================
+Verifying package installations...
+==================================================
+✓ NumPy 2.4.1
+✓ scikit-learn 1.8.0
+✓ HuggingFace Datasets 4.5.0
+✓ tqdm 4.67.1
+✓ Matplotlib 3.10.8
+✓ Seaborn 0.13.2
+✓ Pandas 3.0.0
+✓ PyTorch 2.10.0+cu128
+✓ sentence-transformers 5.2.0
+==================================================
+Environment Information:
+==================================================
+Python: /home/s07drexh/ad_pipeline_env/bin/python
+Python version: Python 3.12.3
+CPUs available: 8
+Memory: 32768 MB
+
+Working directory: /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection
+==================================================
+Setting up output directory structure...
+==================================================
+Output directory ready
+
+==================================================
+Checking for required datasets...
+==================================================
+SimpleWikipedia simple.aligned exists: yes
+SimpleWikipedia normal.aligned exists: yes
+
+Dataset information:
+  Simple texts: 167689 lines
+  Normal texts: 167689 lines
+
+==================================================
+Running setup verification...
+==================================================
+======================================================================
+SETUP TEST - Isolation Forest + GloVe Pipeline
+======================================================================
+
+Testing imports...
+  ✓ numpy 2.4.1
+  ✓ scikit-learn 1.8.0
+  ✓ matplotlib 3.10.8
+  ✓ seaborn 0.13.2
+  ✓ tqdm 4.67.1
+  ✓ datasets 4.5.0
+  ✓ torch 2.10.0+cu128
+  ✓ sentence-transformers 5.2.0
+All imports successful!
+
+Testing configuration...
+Configuration loaded. Output directory: /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection/outputs
+  ✓ Project root: /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main
+  ✓ Data directory: /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/datasets/SimpleWikipedia_v2
+  ✓ Output directory: /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection/outputs
+  ✓ Embeddings directory: /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/embeddings
+  ✓ Simple texts file found: /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/datasets/SimpleWikipedia_v2/simple.aligned
+  ✓ Normal texts file found: /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/datasets/SimpleWikipedia_v2/normal.aligned
+Configuration OK!
+
+Testing data loading (first 10 samples)...
+  ✓ Loaded 167,689 simple texts
+    Sample: It is the county seat of Alfalfa County ....
+  ✓ Loaded 167,689 normal texts
+    Sample: It is the county seat of Alfalfa County ....
+Data loading OK!
+
+======================================================================
+✓ ALL TESTS PASSED - Setup is ready!
+
+Next steps:
+  1. Run quick test: python main.py --quick
+  2. Run full pipeline: python main.py
+  3. Submit to SLURM: sbatch run_pipeline.sh
+======================================================================
+==================================================
+Starting Anomaly Detection Pipeline
+Started at: Fri Jan 23 11:54:38 CET 2026
+==================================================
+
+Pipeline configuration (from config.py):
+Configuration loaded. Output directory: /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection/outputs
+  Random seed: 42
+  Data split: 0.8/0.1/0.1 (train/val/test)
+  Embedding type: bert
+  BERT model: all-MiniLM-L6-v2
+  BERT dimensions: 384
+  BERT batch size: 32
+  Hyperparameter grid:
+    n_estimators: [64, 100, 128, 256]
+    contamination: [0.001, 0.01, 0.05]
+
+Configuration loaded. Output directory: /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection/outputs
+
+==================================================
+Pipeline completed at: Fri Jan 23 11:57:38 CET 2026
+Exit code: 0
+==================================================
+
+✓ Pipeline completed successfully!
+
+Output files saved to: /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection/outputs/
+
+Files created:
+  best_isolation_forest.pkl (1.4M)
+  confusion_matrix.png (108K)
+  data_splits.pkl (44M)
+  evaluation_results.json (876)
+  hyperparameter_tuning_results.json (2.5K)
+  pipeline.log (149K)
+  precision_recall_curve.png (139K)
+  roc_curve.png (177K)
+  score_distribution.png (127K)
+  sentence_embeddings_bert_all-MiniLM-L6-v2.pkl (492M)
+  sentence_embeddings.pkl (384M)
+
+Key Results:
+  AUROC: 0.5053
+  Best F1: 0.9052
+  Precision: 0.9097
+  Recall: 0.9006
+
+==================================================
+Job finished at: Fri Jan 23 11:57:38 CET 2026
+==================================================
