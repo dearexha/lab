@@ -101,6 +101,24 @@ IFOREST_DEFAULT_PARAMS = {
 }
 
 # ============================================================================
+# OC-SVM CONFIGURATION
+# ============================================================================
+# Hyperparameter grid (from AD-NLP paper Section 4.2, Table 4)
+OCSVM_PARAM_GRID = {
+    'nu': [0.05, 0.1, 0.2, 0.5],  # From AD-NLP paper
+    'kernel': ['rbf', 'poly', 'linear'],  # All three from paper
+    'gamma': ['scale', 'auto']  # RBF/poly kernel width
+}
+
+# Default parameters (if not tuning)
+OCSVM_DEFAULT_PARAMS = {
+    'nu': 0.1,  # Expect ~10% outliers
+    'kernel': 'rbf',
+    'gamma': 'scale',
+    'random_state': RANDOM_SEED
+}
+
+# ============================================================================
 # EVALUATION CONFIGURATION
 # ============================================================================
 # Metrics to compute

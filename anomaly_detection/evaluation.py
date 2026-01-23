@@ -19,6 +19,8 @@ from sklearn.metrics import (
     confusion_matrix
 )
 from sklearn.ensemble import IsolationForest
+from sklearn.svm import OneClassSVM
+from sklearn.preprocessing import StandardScaler
 
 import config
 
@@ -40,20 +42,29 @@ plt.rcParams['font.size'] = 11
 
 
 def compute_anomaly_scores(
-    model: IsolationForest,
-    X_test: np.ndarray
+    model,
+    X_test: np.ndarray,
+    scaler: StandardScaler = None
 ) -> np.ndarray:
     """
     Compute anomaly scores for test data.
 
+    Works with both Isolation Forest and OC-SVM.
+
     Args:
-        model: Trained Isolation Forest
+        model: Trained model (Isolation Forest or OC-SVM)
         X_test: Test embeddings
+        scaler: StandardScaler (required for OC-SVM, optional for IsolationForest)
 
     Returns:
         Anomaly scores (higher = more anomalous)
     """
-    # Sklearn returns negative scores (more negative = more anomalous)
+    # If scaler provided, normalize features (for OC-SVM)
+    if scaler is not None:
+        X_test = scaler.transform(X_test)
+
+    # Get decision scores
+    # Both IsolationForest and OC-SVM return negative scores (more negative = more anomalous)
     scores = model.decision_function(X_test)
 
     # Convert to positive (higher = more anomalous)

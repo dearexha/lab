@@ -1,12 +1,19 @@
 """
 OC-SVM Model Training Module for Anomaly Detection
 Alternative to Isolation Forest
+
+Based on AD-NLP paper (Bejan et al., 2023):
+- Hyperparameters from Table 4: kernel (rbf, poly, linear), nu (0.05-0.5)
+- CRITICAL: Feature normalization with StandardScaler
+- Evaluation: AUROC on validation set
 """
 import pickle
 import logging
 import numpy as np
 from typing import Dict, Tuple
 from sklearn.svm import OneClassSVM
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import roc_auc_score
 from tqdm import tqdm
 
 import config
@@ -23,34 +30,54 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-# Hyperparameter grid for OC-SVM (based on AD-NLP paper)
+# Hyperparameter grid for OC-SVM (based on AD-NLP paper Section 4.2)
 OCSVM_PARAM_GRID = {
-    'nu': [0.001, 0.01, 0.05, 0.1],  # Contamination levels
-    'kernel': ['rbf'],  # Can also try 'linear' for comparison
-    'gamma': ['scale', 'auto']  # RBF kernel width
+    'nu': [0.05, 0.1, 0.2, 0.5],  # From AD-NLP paper Table 4
+    'kernel': ['rbf', 'poly', 'linear'],  # All three from the paper
+    'gamma': ['scale', 'auto']  # RBF/poly kernel width
 }
 
 
 def train_ocsvm(
     X_train: np.ndarray,
-    nu: float = 0.01,
+    nu: float = 0.1,
     kernel: str = 'rbf',
     gamma: str = 'scale'
-) -> OneClassSVM:
+) -> Tuple[OneClassSVM, StandardScaler]:
     """
     Train One-Class SVM on training data (easy texts only).
+
+    CRITICAL: OC-SVM requires feature normalization (StandardScaler)!
+    Without normalization, features with different scales will dominate
+    the distance calculations, leading to poor performance.
 
     Args:
         X_train: Training embeddings (n_samples, n_features)
         nu: Upper bound on fraction of outliers (0 < nu <= 1)
-        kernel: Kernel type ('rbf', 'linear', 'poly', 'sigmoid')
-        gamma: Kernel coefficient for 'rbf', 'poly', 'sigmoid'
+            - nu=0.05: Very tight boundary (5% outliers expected)
+            - nu=0.1: Tight boundary (10% outliers)
+            - nu=0.2: Moderate boundary (20% outliers)
+            - nu=0.5: Loose boundary (50% outliers)
+        kernel: Kernel type ('rbf', 'linear', 'poly')
+        gamma: Kernel coefficient for 'rbf', 'poly'
+            - 'scale': 1 / (n_features * X.var()) [recommended]
+            - 'auto': 1 / n_features
 
     Returns:
-        Trained OC-SVM model
+        Tuple of (trained OC-SVM model, fitted StandardScaler)
     """
     logger.info(f"Training One-Class SVM with nu={nu}, kernel={kernel}, gamma={gamma}")
 
+    # CRITICAL: Normalize features first!
+    logger.info("Normalizing features with StandardScaler...")
+    scaler = StandardScaler()
+    X_train_scaled = scaler.fit_transform(X_train)
+
+    logger.info(f"Feature statistics after scaling:")
+    logger.info(f"  Mean: {X_train_scaled.mean(axis=0)[:5]}... (should be ~0)")
+    logger.info(f"  Std:  {X_train_scaled.std(axis=0)[:5]}... (should be ~1)")
+
+    # Train OC-SVM on normalized features
     model = OneClassSVM(
         kernel=kernel,
         nu=nu,
@@ -59,7 +86,7 @@ def train_ocsvm(
         verbose=False
     )
 
-    model.fit(X_train)
+    model.fit(X_train_scaled)
     logger.info("Training complete")
 
     # Log support vector info
@@ -67,7 +94,7 @@ def train_ocsvm(
     support_ratio = n_support / len(X_train) * 100
     logger.info(f"  Support vectors: {n_support} ({support_ratio:.1f}% of training data)")
 
-    return model
+    return model, scaler
 
 
 def tune_ocsvm_hyperparameters(
@@ -75,7 +102,7 @@ def tune_ocsvm_hyperparameters(
     X_val: np.ndarray,
     y_val: np.ndarray,
     param_grid: Dict = None
-) -> Tuple[OneClassSVM, Dict]:
+) -> Tuple[OneClassSVM, StandardScaler, Dict]:
     """
     Tune OC-SVM hyperparameters using validation set.
 
@@ -87,6 +114,7 @@ def tune_ocsvm_hyperparameters(
 
     Returns:
         best_model: OC-SVM with best hyperparameters
+        best_scaler: StandardScaler fitted on training data
         results: Dictionary of all results
     """
     if param_grid is None:
@@ -110,39 +138,53 @@ def tune_ocsvm_hyperparameters(
     results = []
     best_auroc = 0
     best_model = None
+    best_scaler = None
     best_params = None
 
     # Try each combination
     for nu, kernel, gamma in tqdm(param_combinations, desc="Hyperparameter search"):
         logger.info(f"Training OC-SVM with nu={nu}, kernel={kernel}, gamma={gamma}")
 
-        # Train model
-        model = train_ocsvm(X_train, nu=nu, kernel=kernel, gamma=gamma)
+        try:
+            # Train model (returns model AND scaler)
+            model, scaler = train_ocsvm(X_train, nu=nu, kernel=kernel, gamma=gamma)
 
-        # Evaluate on validation set
-        # OC-SVM decision_function: positive = inlier, negative = outlier
-        # We negate to get: positive = outlier (for AUROC calculation)
-        scores = -model.decision_function(X_val)
+            # Evaluate on validation set (MUST use same scaler!)
+            X_val_scaled = scaler.transform(X_val)
 
-        # Compute AUROC
-        from sklearn.metrics import roc_auc_score
-        auroc = roc_auc_score(y_val, scores)
+            # OC-SVM decision_function: positive = inlier, negative = outlier
+            # We negate to get: positive = outlier (for AUROC calculation)
+            scores = -model.decision_function(X_val_scaled)
 
-        logger.info(f"Params: nu={nu}, kernel={kernel}, gamma={gamma} -> AUROC: {auroc:.4f}")
+            # Compute AUROC
+            auroc = roc_auc_score(y_val, scores)
 
-        results.append({
-            'nu': nu,
-            'kernel': kernel,
-            'gamma': gamma,
-            'auroc': auroc,
-            'n_support_vectors': len(model.support_)
-        })
+            logger.info(f"Params: nu={nu}, kernel={kernel}, gamma={gamma} -> AUROC: {auroc:.4f}")
 
-        # Track best
-        if auroc > best_auroc:
-            best_auroc = auroc
-            best_model = model
-            best_params = {'nu': nu, 'kernel': kernel, 'gamma': gamma}
+            results.append({
+                'nu': nu,
+                'kernel': kernel,
+                'gamma': gamma,
+                'auroc': auroc,
+                'n_support_vectors': len(model.support_)
+            })
+
+            # Track best
+            if auroc > best_auroc:
+                best_auroc = auroc
+                best_model = model
+                best_scaler = scaler
+                best_params = {'nu': nu, 'kernel': kernel, 'gamma': gamma}
+
+        except Exception as e:
+            logger.error(f"Failed with nu={nu}, kernel={kernel}, gamma={gamma}: {e}")
+            results.append({
+                'nu': nu,
+                'kernel': kernel,
+                'gamma': gamma,
+                'auroc': 0.0,
+                'error': str(e)
+            })
 
     logger.info("="*60)
     logger.info(f"Best AUROC: {best_auroc:.4f}")
@@ -156,56 +198,55 @@ def tune_ocsvm_hyperparameters(
         'all_results': results
     }
 
-    logger.info(f"Saving hyperparameter results to {config.HYPERPARAMETER_RESULTS_JSON}")
-    with open(config.HYPERPARAMETER_RESULTS_JSON, 'w') as f:
+    output_file = config.OUTPUT_DIR / "hyperparameter_tuning_results_ocsvm.json"
+    logger.info(f"Saving hyperparameter results to {output_file}")
+    with open(output_file, 'w') as f:
         import json
         json.dump(results_dict, f, indent=2)
 
-    return best_model, results_dict
+    return best_model, best_scaler, results_dict
 
 
 def train_model(
     embeddings: Dict[str, np.ndarray],
+    labels: Dict[str, np.ndarray],
     tune_hyperparameters: bool = True
-) -> OneClassSVM:
+) -> Tuple[OneClassSVM, StandardScaler]:
     """
     Main training function for OC-SVM.
 
     Args:
         embeddings: Dictionary with 'train', 'val', 'test' embeddings
+        labels: Dictionary with 'train', 'val', 'test' labels
         tune_hyperparameters: If True, run hyperparameter tuning
 
     Returns:
-        Trained OC-SVM model
+        Tuple of (trained OC-SVM model, fitted StandardScaler)
     """
     X_train = embeddings['train']
+    X_test = embeddings['test']
+    y_test = np.array(labels['test'])
 
     logger.info(f"Training data shape: {X_train.shape}")
 
     if tune_hyperparameters:
         # Prepare validation set (mix of simple and normal)
-        # Sample 20% of normal texts to add to val set
-        from data_preparation import load_aligned_file
-        import numpy as np
+        # Sample 20% of normal texts for validation
+        test_normal_mask = (y_test == 1)
+        test_normal_indices = np.where(test_normal_mask)[0]
 
-        normal_texts_count = len(load_aligned_file(config.NORMAL_FILE))
-        n_normal_sample = int(normal_texts_count * 0.2)
+        # Take first 20% as validation sample (deterministic)
+        n_val_sample = int(len(test_normal_indices) * 0.2)
+        val_sample_indices = test_normal_indices[:n_val_sample]
+        X_test_normal_sample = X_test[val_sample_indices]
 
         # Create labels: 0=simple (inlier), 1=normal (outlier)
         X_val = embeddings['val']
         y_val_simple = np.zeros(len(X_val))
-
-        # Add sample of normal text embeddings
-        normal_indices = np.random.RandomState(config.RANDOM_SEED).choice(
-            len(embeddings['test']) - len(embeddings['val']),
-            size=n_normal_sample,
-            replace=False
-        )
-        X_val_normal = embeddings['test'][len(embeddings['val']):][normal_indices]
-        y_val_normal = np.ones(len(X_val_normal))
+        y_val_normal = np.ones(len(X_test_normal_sample))
 
         # Combine
-        X_eval = np.vstack([X_val, X_val_normal])
+        X_eval = np.vstack([X_val, X_test_normal_sample])
         y_eval = np.concatenate([y_val_simple, y_val_normal])
 
         logger.info(f"Using {len(X_eval):,} samples for validation")
@@ -213,14 +254,14 @@ def train_model(
         logger.info(f"  Normal (outlier): {len(y_val_normal):,}")
 
         # Tune hyperparameters
-        model, tuning_results = tune_ocsvm_hyperparameters(
+        model, scaler, tuning_results = tune_ocsvm_hyperparameters(
             X_train, X_eval, y_eval, OCSVM_PARAM_GRID
         )
 
         # Train final model with best parameters
         logger.info("Training final model with best parameters...")
         best_params = tuning_results['best_params']
-        model = train_ocsvm(
+        model, scaler = train_ocsvm(
             X_train,
             nu=best_params['nu'],
             kernel=best_params['kernel'],
@@ -229,14 +270,22 @@ def train_model(
     else:
         # Use default parameters
         logger.info("Training with default parameters (no tuning)")
-        model = train_ocsvm(X_train, **config.OCSVM_DEFAULT_PARAMS)
+        default_params = getattr(config, 'OCSVM_DEFAULT_PARAMS', {'nu': 0.1, 'kernel': 'rbf', 'gamma': 'scale'})
+        model, scaler = train_ocsvm(X_train, **default_params)
 
-    # Save model
-    logger.info(f"Saving model to {config.BEST_MODEL_FILE}")
-    with open(config.BEST_MODEL_FILE, 'wb') as f:
+    # Save model and scaler
+    model_file = config.OUTPUT_DIR / "best_ocsvm.pkl"
+    scaler_file = config.OUTPUT_DIR / "best_ocsvm_scaler.pkl"
+
+    logger.info(f"Saving model to {model_file}")
+    with open(model_file, 'wb') as f:
         pickle.dump(model, f)
 
-    return model
+    logger.info(f"Saving scaler to {scaler_file}")
+    with open(scaler_file, 'wb') as f:
+        pickle.dump(scaler, f)
+
+    return model, scaler
 
 
 if __name__ == "__main__":
