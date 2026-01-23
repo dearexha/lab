@@ -127,7 +127,13 @@ LOG_FILE = OUTPUT_DIR / "pipeline.log"
 SPLITS_FILE = OUTPUT_DIR / "data_splits.pkl"
 
 # Embeddings (cached for faster rerun)
-EMBEDDINGS_CACHE = OUTPUT_DIR / "sentence_embeddings.pkl"
+# Use different cache files for different embedding types
+if EMBEDDING_TYPE == "glove":
+    EMBEDDINGS_CACHE = OUTPUT_DIR / "sentence_embeddings_glove.pkl"
+elif EMBEDDING_TYPE == "bert":
+    EMBEDDINGS_CACHE = OUTPUT_DIR / f"sentence_embeddings_bert_{BERT_MODEL.replace('/', '_')}.pkl"
+else:
+    EMBEDDINGS_CACHE = OUTPUT_DIR / "sentence_embeddings.pkl"
 
 # Models
 BEST_MODEL_FILE = OUTPUT_DIR / "best_isolation_forest.pkl"
