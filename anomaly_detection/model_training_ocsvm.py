@@ -225,7 +225,7 @@ def train_model(
     """
     X_train = embeddings['train']
     X_test = embeddings['test']
-    y_test = np.array(labels['test'])
+    y_test = np.array(labels['test']['labels'])
 
     logger.info(f"Training data shape: {X_train.shape}")
 
