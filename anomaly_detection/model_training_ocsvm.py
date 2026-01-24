@@ -15,6 +15,7 @@ from sklearn.svm import OneClassSVM
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import roc_auc_score
 from tqdm import tqdm
+from joblib import Parallel, delayed
 
 import config
 
@@ -135,16 +136,9 @@ def tune_ocsvm_hyperparameters(
 
     logger.info(f"Total combinations to try: {len(param_combinations)}")
 
-    results = []
-    best_auroc = 0
-    best_model = None
-    best_scaler = None
-    best_params = None
-
-    # Try each combination
-    for nu, kernel, gamma in tqdm(param_combinations, desc="Hyperparameter search"):
-        logger.info(f"Training OC-SVM with nu={nu}, kernel={kernel}, gamma={gamma}")
-
+    # Define helper function for parallel execution
+    def train_and_evaluate(nu, kernel, gamma):
+        """Train single OC-SVM and return results"""
         try:
             # Train model (returns model AND scaler)
             model, scaler = train_ocsvm(X_train, nu=nu, kernel=kernel, gamma=gamma)
@@ -161,41 +155,58 @@ def tune_ocsvm_hyperparameters(
 
             logger.info(f"Params: nu={nu}, kernel={kernel}, gamma={gamma} -> AUROC: {auroc:.4f}")
 
-            results.append({
+            return {
                 'nu': nu,
                 'kernel': kernel,
                 'gamma': gamma,
                 'auroc': auroc,
-                'n_support_vectors': len(model.support_)
-            })
-
-            # Track best
-            if auroc > best_auroc:
-                best_auroc = auroc
-                best_model = model
-                best_scaler = scaler
-                best_params = {'nu': nu, 'kernel': kernel, 'gamma': gamma}
-
+                'n_support_vectors': len(model.support_),
+                'model': model,
+                'scaler': scaler
+            }
         except Exception as e:
             logger.error(f"Failed with nu={nu}, kernel={kernel}, gamma={gamma}: {e}")
-            results.append({
+            return {
                 'nu': nu,
                 'kernel': kernel,
                 'gamma': gamma,
                 'auroc': 0.0,
-                'error': str(e)
-            })
+                'error': str(e),
+                'model': None,
+                'scaler': None
+            }
+
+    # Run in parallel using all available CPUs
+    import os
+    n_jobs = int(os.environ.get('SLURM_CPUS_PER_TASK', -1))
+    logger.info(f"Running hyperparameter search with {n_jobs} parallel jobs")
+
+    results = Parallel(n_jobs=n_jobs, verbose=10)(
+        delayed(train_and_evaluate)(nu, kernel, gamma)
+        for nu, kernel, gamma in param_combinations
+    )
+
+    # Find best result
+    best_result = max(results, key=lambda x: x.get('auroc', 0))
+    best_auroc = best_result['auroc']
+    best_model = best_result['model']
+    best_scaler = best_result['scaler']
+    best_params = {'nu': best_result['nu'], 'kernel': best_result['kernel'], 'gamma': best_result['gamma']}
 
     logger.info("="*60)
     logger.info(f"Best AUROC: {best_auroc:.4f}")
     logger.info(f"Best params: {best_params}")
     logger.info("="*60)
 
-    # Save results
+    # Save results (filter out model/scaler for JSON serialization)
+    results_for_json = [
+        {k: v for k, v in r.items() if k not in ['model', 'scaler']}
+        for r in results
+    ]
     results_dict = {
         'best_params': best_params,
         'best_auroc': best_auroc,
-        'all_results': results
+        'all_results': results_for_json
     }
 
     output_file = config.OUTPUT_DIR / "hyperparameter_tuning_results_ocsvm.json"
