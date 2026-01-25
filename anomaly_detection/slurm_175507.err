@@ -1,0 +1,234 @@
+2026-01-24 11:52:19,189 - __main__ - INFO - ================================================================================
+2026-01-24 11:52:19,191 - __main__ - INFO - OC-SVM ANOMALY DETECTION PIPELINE
+2026-01-24 11:52:19,191 - __main__ - INFO - ================================================================================
+2026-01-24 11:52:19,191 - __main__ - INFO - Embedding type: glove
+2026-01-24 11:52:19,191 - __main__ - INFO - Output directory: /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection_ocsvm/outputs_glove
+2026-01-24 11:52:19,191 - __main__ - INFO - 
+2026-01-24 11:52:19,191 - __main__ - INFO - STEP 1/5: Data Preparation
+2026-01-24 11:52:19,191 - __main__ - INFO - --------------------------------------------------------------------------------
+2026-01-24 11:52:19,193 - data_preparation - INFO - Loading cached data splits from /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection_ocsvm/outputs_glove/data_splits.pkl
+2026-01-24 11:52:20,094 - data_preparation - INFO - Cached splits loaded successfully
+2026-01-24 11:52:20,094 - __main__ - INFO - Train set: 134,151 samples (all simple/easy)
+2026-01-24 11:52:20,094 - __main__ - INFO - Val set:   16,768 samples (all simple/easy)
+2026-01-24 11:52:20,094 - __main__ - INFO - Test set:  184,459 samples (simple + normal)
+2026-01-24 11:52:20,094 - __main__ - INFO - 
+2026-01-24 11:52:20,094 - __main__ - INFO - STEP 2/5: Embedding Extraction
+2026-01-24 11:52:20,094 - __main__ - INFO - --------------------------------------------------------------------------------
+2026-01-24 11:52:20,098 - embedding_extraction - INFO - Loading cached embeddings from /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection_ocsvm/outputs_glove/sentence_embeddings_glove.pkl
+2026-01-24 11:52:22,192 - embedding_extraction - INFO - Cached embeddings loaded successfully
+2026-01-24 11:52:22,192 - __main__ - INFO - Train embeddings shape: (134151, 300)
+2026-01-24 11:52:22,192 - __main__ - INFO - Val embeddings shape:   (16768, 300)
+2026-01-24 11:52:22,192 - __main__ - INFO - Test embeddings shape:  (184459, 300)
+2026-01-24 11:52:22,192 - __main__ - INFO - 
+2026-01-24 11:52:22,193 - __main__ - INFO - STEP 3/5: Model Training (OC-SVM)
+2026-01-24 11:52:22,193 - __main__ - INFO - --------------------------------------------------------------------------------
+2026-01-24 11:52:22,205 - model_training_ocsvm - INFO - Training data shape: (134151, 300)
+2026-01-24 11:52:22,246 - model_training_ocsvm - INFO - Using 50,305 samples for validation
+2026-01-24 11:52:22,246 - model_training_ocsvm - INFO -   Simple (inlier): 16,768
+2026-01-24 11:52:22,246 - model_training_ocsvm - INFO -   Normal (outlier): 33,537
+2026-01-24 11:52:22,246 - model_training_ocsvm - INFO - ============================================================
+2026-01-24 11:52:22,246 - model_training_ocsvm - INFO - HYPERPARAMETER TUNING - OC-SVM
+2026-01-24 11:52:22,246 - model_training_ocsvm - INFO - ============================================================
+2026-01-24 11:52:22,246 - model_training_ocsvm - INFO - Parameter grid: {'nu': [0.05, 0.1, 0.2, 0.5], 'kernel': ['rbf', 'poly', 'linear'], 'gamma': ['scale', 'auto']}
+2026-01-24 11:52:22,246 - model_training_ocsvm - INFO - Total combinations to try: 24
+2026-01-24 11:52:22,246 - model_training_ocsvm - INFO - Running hyperparameter search with 16 parallel jobs
+[Parallel(n_jobs=16)]: Using backend LokyBackend with 16 concurrent workers.
+2026-01-24 12:08:59,982 - model_training_ocsvm - INFO - Training One-Class SVM with nu=0.1, kernel=linear, gamma=auto
+2026-01-24 12:08:59,982 - model_training_ocsvm - INFO - Training One-Class SVM with nu=0.05, kernel=rbf, gamma=scale
+2026-01-24 12:08:59,982 - model_training_ocsvm - INFO - Training One-Class SVM with nu=0.1, kernel=rbf, gamma=auto
+2026-01-24 12:08:59,982 - model_training_ocsvm - INFO - Training One-Class SVM with nu=0.05, kernel=poly, gamma=auto
+2026-01-24 12:08:59,982 - model_training_ocsvm - INFO - Training One-Class SVM with nu=0.05, kernel=rbf, gamma=auto
+2026-01-24 12:08:59,982 - model_training_ocsvm - INFO - Training One-Class SVM with nu=0.05, kernel=linear, gamma=auto
+2026-01-24 12:08:59,983 - model_training_ocsvm - INFO - Training One-Class SVM with nu=0.1, kernel=poly, gamma=scale
+2026-01-24 12:08:59,983 - model_training_ocsvm - INFO - Training One-Class SVM with nu=0.2, kernel=poly, gamma=auto
+2026-01-24 12:08:59,983 - model_training_ocsvm - INFO - Training One-Class SVM with nu=0.05, kernel=linear, gamma=scale
+2026-01-24 12:08:59,983 - model_training_ocsvm - INFO - Training One-Class SVM with nu=0.1, kernel=poly, gamma=auto
+2026-01-24 12:08:59,983 - model_training_ocsvm - INFO - Training One-Class SVM with nu=0.1, kernel=linear, gamma=scale
+2026-01-24 12:08:59,983 - model_training_ocsvm - INFO - Training One-Class SVM with nu=0.1, kernel=rbf, gamma=scale
+2026-01-24 12:08:59,983 - model_training_ocsvm - INFO - Training One-Class SVM with nu=0.05, kernel=poly, gamma=scale
+2026-01-24 12:08:59,983 - model_training_ocsvm - INFO - Training One-Class SVM with nu=0.2, kernel=poly, gamma=scale
+2026-01-24 12:08:59,983 - model_training_ocsvm - INFO - Training One-Class SVM with nu=0.2, kernel=rbf, gamma=auto
+2026-01-24 12:08:59,985 - model_training_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-24 12:08:59,985 - model_training_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-24 12:08:59,985 - model_training_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-24 12:08:59,985 - model_training_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-24 12:08:59,985 - model_training_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-24 12:08:59,985 - model_training_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-24 12:08:59,985 - model_training_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-24 12:08:59,985 - model_training_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-24 12:08:59,985 - model_training_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-24 12:08:59,985 - model_training_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-24 12:08:59,985 - model_training_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-24 12:08:59,985 - model_training_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-24 12:08:59,985 - model_training_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-24 12:08:59,985 - model_training_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-24 12:08:59,985 - model_training_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-24 12:08:59,995 - model_training_ocsvm - INFO - Training One-Class SVM with nu=0.2, kernel=rbf, gamma=scale
+2026-01-24 12:08:59,995 - model_training_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-24 12:09:00,995 - model_training_ocsvm - INFO - Feature statistics after scaling:
+2026-01-24 12:09:00,995 - model_training_ocsvm - INFO - Feature statistics after scaling:
+2026-01-24 12:09:00,996 - model_training_ocsvm - INFO - Feature statistics after scaling:
+2026-01-24 12:09:00,996 - model_training_ocsvm - INFO - Feature statistics after scaling:
+2026-01-24 12:09:01,001 - model_training_ocsvm - INFO - Feature statistics after scaling:
+2026-01-24 12:09:01,005 - model_training_ocsvm - INFO - Feature statistics after scaling:
+2026-01-24 12:09:01,005 - model_training_ocsvm - INFO - Feature statistics after scaling:
+2026-01-24 12:09:01,006 - model_training_ocsvm - INFO - Feature statistics after scaling:
+2026-01-24 12:09:01,009 - model_training_ocsvm - INFO - Feature statistics after scaling:
+2026-01-24 12:09:01,011 - model_training_ocsvm - INFO - Feature statistics after scaling:
+2026-01-24 12:09:01,012 - model_training_ocsvm - INFO - Feature statistics after scaling:
+2026-01-24 12:09:01,020 - model_training_ocsvm - INFO - Feature statistics after scaling:
+2026-01-24 12:09:01,021 - model_training_ocsvm - INFO - Feature statistics after scaling:
+2026-01-24 12:09:01,021 - model_training_ocsvm - INFO - Feature statistics after scaling:
+2026-01-24 12:09:01,032 - model_training_ocsvm - INFO - Feature statistics after scaling:
+2026-01-24 12:09:01,033 - model_training_ocsvm - INFO - Feature statistics after scaling:
+2026-01-24 12:09:01,037 - model_training_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-24 12:09:01,037 - model_training_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-24 12:09:01,037 - model_training_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-24 12:09:01,038 - model_training_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-24 12:09:01,042 - model_training_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-24 12:09:01,044 - model_training_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-24 12:09:01,044 - model_training_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-24 12:09:01,044 - model_training_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-24 12:09:01,046 - model_training_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-24 12:09:01,049 - model_training_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-24 12:09:01,049 - model_training_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-24 12:09:01,056 - model_training_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-24 12:09:01,056 - model_training_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-24 12:09:01,056 - model_training_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-24 12:09:01,066 - model_training_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-24 12:09:01,067 - model_training_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-24 12:09:01,294 - model_training_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-24 12:09:01,294 - model_training_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-24 12:09:01,295 - model_training_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-24 12:09:01,297 - model_training_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-24 12:09:01,297 - model_training_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-24 12:09:01,302 - model_training_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-24 12:09:01,302 - model_training_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-24 12:09:01,304 - model_training_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-24 12:09:01,304 - model_training_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-24 12:09:01,308 - model_training_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-24 12:09:01,309 - model_training_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-24 12:09:01,311 - model_training_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-24 12:09:01,314 - model_training_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-24 12:09:01,315 - model_training_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-24 12:09:01,324 - model_training_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-24 12:09:01,324 - model_training_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-24 12:49:41,553 - model_training_ocsvm - INFO - Training complete
+2026-01-24 12:49:41,572 - model_training_ocsvm - INFO -   Support vectors: 6783 (5.1% of training data)
+2026-01-24 12:49:45,109 - model_training_ocsvm - INFO - Training complete
+2026-01-24 12:49:45,110 - model_training_ocsvm - INFO -   Support vectors: 6783 (5.1% of training data)
+2026-01-24 12:54:29,864 - model_training_ocsvm - INFO - Params: nu=0.05, kernel=rbf, gamma=scale -> AUROC: 0.4710
+[Parallel(n_jobs=16)]: Done   1 tasks      | elapsed: 62.1min
+2026-01-24 12:54:30,095 - model_training_ocsvm - INFO - Training One-Class SVM with nu=0.2, kernel=linear, gamma=scale
+2026-01-24 12:54:30,095 - model_training_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-24 12:54:31,196 - model_training_ocsvm - INFO - Feature statistics after scaling:
+2026-01-24 12:54:31,241 - model_training_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-24 12:54:31,514 - model_training_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-24 12:54:33,965 - model_training_ocsvm - INFO - Params: nu=0.05, kernel=rbf, gamma=auto -> AUROC: 0.4710
+[Parallel(n_jobs=16)]: Done   2 out of  24 | elapsed: 62.2min remaining: 684.2min
+2026-01-24 12:54:34,137 - model_training_ocsvm - INFO - Training One-Class SVM with nu=0.2, kernel=linear, gamma=auto
+2026-01-24 12:54:34,137 - model_training_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-24 12:54:35,239 - model_training_ocsvm - INFO - Feature statistics after scaling:
+2026-01-24 12:54:35,283 - model_training_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-24 12:54:35,556 - model_training_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-24 12:59:23,170 - model_training_ocsvm - INFO - Training complete
+2026-01-24 12:59:23,188 - model_training_ocsvm - INFO -   Support vectors: 13444 (10.0% of training data)
+2026-01-24 13:01:15,728 - model_training_ocsvm - INFO - Training complete
+2026-01-24 13:01:15,747 - model_training_ocsvm - INFO -   Support vectors: 13444 (10.0% of training data)
+2026-01-24 13:09:01,151 - model_training_ocsvm - INFO - Params: nu=0.1, kernel=rbf, gamma=scale -> AUROC: 0.4729
+2026-01-24 13:09:01,401 - model_training_ocsvm - INFO - Training One-Class SVM with nu=0.5, kernel=rbf, gamma=scale
+2026-01-24 13:09:01,401 - model_training_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-24 13:09:02,515 - model_training_ocsvm - INFO - Feature statistics after scaling:
+2026-01-24 13:09:02,557 - model_training_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-24 13:09:02,827 - model_training_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-24 13:09:50,482 - model_training_ocsvm - INFO - Training complete
+2026-01-24 13:09:50,483 - model_training_ocsvm - INFO -   Support vectors: 11385 (8.5% of training data)
+2026-01-24 13:10:01,909 - model_training_ocsvm - INFO - Training complete
+2026-01-24 13:10:01,909 - model_training_ocsvm - INFO -   Support vectors: 11385 (8.5% of training data)
+2026-01-24 13:10:49,190 - model_training_ocsvm - INFO - Params: nu=0.1, kernel=rbf, gamma=auto -> AUROC: 0.4729
+2026-01-24 13:10:49,403 - model_training_ocsvm - INFO - Training One-Class SVM with nu=0.5, kernel=rbf, gamma=auto
+2026-01-24 13:10:49,403 - model_training_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-24 13:10:50,504 - model_training_ocsvm - INFO - Feature statistics after scaling:
+2026-01-24 13:10:50,548 - model_training_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-24 13:10:50,822 - model_training_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-24 13:14:35,867 - model_training_ocsvm - INFO - Params: nu=0.05, kernel=poly, gamma=auto -> AUROC: 0.5255
+[Parallel(n_jobs=16)]: Done   5 out of  24 | elapsed: 82.2min remaining: 312.5min
+2026-01-24 13:14:36,100 - model_training_ocsvm - INFO - Training One-Class SVM with nu=0.5, kernel=poly, gamma=scale
+2026-01-24 13:14:36,100 - model_training_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-24 13:14:37,173 - model_training_ocsvm - INFO - Feature statistics after scaling:
+2026-01-24 13:14:37,217 - model_training_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-24 13:14:37,449 - model_training_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-24 13:14:50,533 - model_training_ocsvm - INFO - Params: nu=0.05, kernel=poly, gamma=scale -> AUROC: 0.5255
+2026-01-24 13:14:50,742 - model_training_ocsvm - INFO - Training One-Class SVM with nu=0.5, kernel=poly, gamma=auto
+2026-01-24 13:14:50,742 - model_training_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-24 13:14:51,722 - model_training_ocsvm - INFO - Feature statistics after scaling:
+2026-01-24 13:14:51,764 - model_training_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-24 13:14:51,987 - model_training_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-24 13:25:50,365 - model_training_ocsvm - INFO - Training complete
+2026-01-24 13:25:50,383 - model_training_ocsvm - INFO -   Support vectors: 16951 (12.6% of training data)
+2026-01-24 13:26:05,586 - model_training_ocsvm - INFO - Training complete
+2026-01-24 13:26:05,586 - model_training_ocsvm - INFO -   Support vectors: 16952 (12.6% of training data)
+2026-01-24 13:33:07,482 - model_training_ocsvm - INFO - Params: nu=0.1, kernel=poly, gamma=auto -> AUROC: 0.5238
+2026-01-24 13:33:07,700 - model_training_ocsvm - INFO - Training One-Class SVM with nu=0.5, kernel=linear, gamma=scale
+2026-01-24 13:33:07,700 - model_training_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-24 13:33:08,574 - model_training_ocsvm - INFO - Feature statistics after scaling:
+2026-01-24 13:33:08,616 - model_training_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-24 13:33:08,840 - model_training_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-24 13:33:22,958 - model_training_ocsvm - INFO - Params: nu=0.1, kernel=poly, gamma=scale -> AUROC: 0.5238
+[Parallel(n_jobs=16)]: Done   8 out of  24 | elapsed: 101.0min remaining: 202.0min
+2026-01-24 13:33:23,211 - model_training_ocsvm - INFO - Training One-Class SVM with nu=0.5, kernel=linear, gamma=auto
+2026-01-24 13:33:23,211 - model_training_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-24 13:33:24,274 - model_training_ocsvm - INFO - Feature statistics after scaling:
+2026-01-24 13:33:24,318 - model_training_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-24 13:33:24,585 - model_training_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-24 13:39:44,352 - model_training_ocsvm - INFO - Training complete
+2026-01-24 13:39:44,370 - model_training_ocsvm - INFO -   Support vectors: 26851 (20.0% of training data)
+2026-01-24 13:42:16,212 - model_training_ocsvm - INFO - Training complete
+2026-01-24 13:42:16,231 - model_training_ocsvm - INFO -   Support vectors: 26851 (20.0% of training data)
+2026-01-24 13:52:17,431 - model_training_ocsvm - INFO - Training complete
+2026-01-24 13:52:17,450 - model_training_ocsvm - INFO -   Support vectors: 29171 (21.7% of training data)
+2026-01-24 13:53:10,436 - model_training_ocsvm - INFO - Training complete
+2026-01-24 13:53:10,436 - model_training_ocsvm - INFO -   Support vectors: 29173 (21.7% of training data)
+2026-01-24 13:57:46,728 - model_training_ocsvm - INFO - Params: nu=0.2, kernel=rbf, gamma=scale -> AUROC: 0.4745
+2026-01-24 14:00:31,628 - model_training_ocsvm - INFO - Params: nu=0.2, kernel=rbf, gamma=auto -> AUROC: 0.4745
+2026-01-24 14:01:49,468 - model_training_ocsvm - INFO - Params: nu=0.2, kernel=poly, gamma=scale -> AUROC: 0.5226
+[Parallel(n_jobs=16)]: Done  11 out of  24 | elapsed: 129.5min remaining: 153.0min
+2026-01-24 14:05:32,751 - model_training_ocsvm - INFO - Params: nu=0.2, kernel=poly, gamma=auto -> AUROC: 0.5226
+2026-01-24 15:07:42,998 - model_training_ocsvm - INFO - Training complete
+2026-01-24 15:07:43,012 - model_training_ocsvm - INFO -   Support vectors: 67991 (50.7% of training data)
+2026-01-24 15:30:08,106 - model_training_ocsvm - INFO - Params: nu=0.5, kernel=poly, gamma=auto -> AUROC: 0.5211
+2026-01-24 15:35:43,952 - model_training_ocsvm - INFO - Training complete
+2026-01-24 15:35:43,967 - model_training_ocsvm - INFO -   Support vectors: 67083 (50.0% of training data)
+2026-01-24 15:49:34,317 - model_training_ocsvm - INFO - Training complete
+2026-01-24 15:49:34,332 - model_training_ocsvm - INFO -   Support vectors: 67993 (50.7% of training data)
+2026-01-24 15:53:58,837 - model_training_ocsvm - INFO - Training complete
+2026-01-24 15:53:58,855 - model_training_ocsvm - INFO -   Support vectors: 67083 (50.0% of training data)
+2026-01-24 15:57:01,660 - model_training_ocsvm - INFO - Params: nu=0.5, kernel=rbf, gamma=auto -> AUROC: 0.4773
+[Parallel(n_jobs=16)]: Done  14 out of  24 | elapsed: 244.7min remaining: 174.8min
+2026-01-24 16:03:51,222 - model_training_ocsvm - INFO - Params: nu=0.5, kernel=poly, gamma=scale -> AUROC: 0.5211
+2026-01-24 16:20:10,255 - model_training_ocsvm - INFO - Params: nu=0.5, kernel=rbf, gamma=scale -> AUROC: 0.4773
+slurmstepd: error: *** JOB 175507 ON node-01 CANCELLED AT 2026-01-25T10:48:45 ***
