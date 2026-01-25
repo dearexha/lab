@@ -20,7 +20,7 @@ import config
 from data_preparation import prepare_data
 from embedding_extraction import prepare_embeddings
 from model_training_sgd_ocsvm import train_model
-from evaluation import compute_anomaly_scores, evaluate_model
+from evaluation import evaluate_model
 
 # Set up logging
 logging.basicConfig(
@@ -104,13 +104,12 @@ def main(args):
     logger.info(f"  Simple (inliers):  {(y_test == 0).sum():,}")
     logger.info(f"  Normal (outliers): {(y_test == 1).sum():,}")
 
-    # Compute anomaly scores
-    scores = compute_anomaly_scores(model, X_test, scaler=scaler)
-
-    # Evaluate
+    # Evaluate (scores computed internally)
     results = evaluate_model(
-        y_true=y_test,
-        scores=scores,
+        model=model,
+        X_test=X_test,
+        y_test=y_test,
+        scaler=scaler,
         save_plots=not args.no_plots
     )
 

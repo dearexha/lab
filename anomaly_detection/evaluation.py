@@ -117,15 +117,19 @@ def find_optimal_threshold(
 def evaluate_model(
     model: IsolationForest,
     X_test: np.ndarray,
-    y_test: np.ndarray
+    y_test: np.ndarray,
+    scaler: StandardScaler = None,
+    save_plots: bool = True
 ) -> Dict:
     """
     Comprehensive model evaluation.
 
     Args:
-        model: Trained Isolation Forest
+        model: Trained Isolation Forest or OC-SVM
         X_test: Test embeddings
         y_test: Test labels (0=inlier, 1=outlier)
+        scaler: Optional StandardScaler for OC-SVM
+        save_plots: Whether to generate and save plots
 
     Returns:
         Dictionary with all evaluation metrics
@@ -135,7 +139,7 @@ def evaluate_model(
     logger.info("=" * 60)
 
     # Compute anomaly scores
-    scores = compute_anomaly_scores(model, X_test)
+    scores = compute_anomaly_scores(model, X_test, scaler=scaler)
 
     results = {}
 
