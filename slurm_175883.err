@@ -1,0 +1,438 @@
+2026-01-25 13:02:14,835 - __main__ - INFO - ================================================================================
+2026-01-25 13:02:14,839 - __main__ - INFO - SGD ONE-CLASS SVM ANOMALY DETECTION PIPELINE
+2026-01-25 13:02:14,839 - __main__ - INFO - ================================================================================
+2026-01-25 13:02:14,839 - __main__ - INFO - Embedding type: glove
+2026-01-25 13:02:14,839 - __main__ - INFO - Output directory: /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection_ocsvm/outputs_glove
+2026-01-25 13:02:14,839 - __main__ - INFO - 
+2026-01-25 13:02:14,839 - __main__ - INFO - STEP 1/5: Data Preparation
+2026-01-25 13:02:14,839 - __main__ - INFO - --------------------------------------------------------------------------------
+2026-01-25 13:02:14,843 - data_preparation - INFO - Loading cached data splits from /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection_ocsvm/outputs_glove/data_splits.pkl
+2026-01-25 13:02:15,946 - data_preparation - INFO - Cached splits loaded successfully
+2026-01-25 13:02:15,946 - __main__ - INFO - Train set: 134,151 texts (100% simple)
+2026-01-25 13:02:15,946 - __main__ - INFO - Val set:   16,768 texts (100% simple)
+2026-01-25 13:02:15,946 - __main__ - INFO - Test set:  184,459 texts
+2026-01-25 13:02:15,950 - __main__ - INFO -   Simple (inliers):  16,770
+2026-01-25 13:02:15,950 - __main__ - INFO -   Normal (outliers): 167,689
+2026-01-25 13:02:15,950 - __main__ - INFO - 
+2026-01-25 13:02:15,950 - __main__ - INFO - STEP 2/5: Embedding Extraction
+2026-01-25 13:02:15,950 - __main__ - INFO - --------------------------------------------------------------------------------
+2026-01-25 13:02:15,954 - embedding_extraction - INFO - Loading cached embeddings from /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection_ocsvm/outputs_glove/sentence_embeddings_glove.pkl
+2026-01-25 13:02:17,089 - embedding_extraction - INFO - Cached embeddings loaded successfully
+2026-01-25 13:02:17,089 - __main__ - INFO - Train embeddings shape: (134151, 300)
+2026-01-25 13:02:17,089 - __main__ - INFO - Val embeddings shape:   (16768, 300)
+2026-01-25 13:02:17,089 - __main__ - INFO - Test embeddings shape:  (184459, 300)
+2026-01-25 13:02:17,089 - __main__ - INFO - 
+2026-01-25 13:02:17,089 - __main__ - INFO - STEP 3/5: Model Training (SGD-OC-SVM)
+2026-01-25 13:02:17,089 - __main__ - INFO - --------------------------------------------------------------------------------
+2026-01-25 13:02:17,096 - model_training_sgd_ocsvm - INFO - Training data shape: (134151, 300)
+2026-01-25 13:02:17,122 - model_training_sgd_ocsvm - INFO - Using 50,305 samples for validation
+2026-01-25 13:02:17,122 - model_training_sgd_ocsvm - INFO -   Simple (inlier): 16,768
+2026-01-25 13:02:17,122 - model_training_sgd_ocsvm - INFO -   Normal (outlier): 33,537
+2026-01-25 13:02:17,122 - model_training_sgd_ocsvm - INFO - ============================================================
+2026-01-25 13:02:17,122 - model_training_sgd_ocsvm - INFO - HYPERPARAMETER TUNING - SGD-OC-SVM (Linear Kernel)
+2026-01-25 13:02:17,122 - model_training_sgd_ocsvm - INFO - ============================================================
+2026-01-25 13:02:17,122 - model_training_sgd_ocsvm - INFO - Parameter grid: {'nu': [0.05, 0.1, 0.2, 0.5], 'learning_rate': ['optimal', 'constant', 'adaptive'], 'eta0': [0.0, 0.01, 0.1]}
+2026-01-25 13:02:17,122 - model_training_sgd_ocsvm - INFO - Total combinations to try: 36
+2026-01-25 13:02:17,122 - model_training_sgd_ocsvm - INFO - Running hyperparameter search with 16 parallel jobs
+[Parallel(n_jobs=16)]: Using backend LokyBackend with 16 concurrent workers.
+2026-01-25 13:23:36,034 - model_training_sgd_ocsvm - INFO - Training SGD One-Class SVM with nu=0.1, learning_rate=constant, eta0=0.1
+2026-01-25 13:23:36,035 - model_training_sgd_ocsvm - INFO - Training SGD One-Class SVM with nu=0.05, learning_rate=adaptive, eta0=0.01
+2026-01-25 13:23:36,035 - model_training_sgd_ocsvm - INFO - Training SGD One-Class SVM with nu=0.05, learning_rate=optimal, eta0=0.01
+2026-01-25 13:23:36,034 - model_training_sgd_ocsvm - INFO - Training SGD One-Class SVM with nu=0.05, learning_rate=adaptive, eta0=0.0
+2026-01-25 13:23:36,035 - model_training_sgd_ocsvm - INFO - Training SGD One-Class SVM with nu=0.05, learning_rate=constant, eta0=0.1
+2026-01-25 13:23:36,034 - model_training_sgd_ocsvm - INFO - Training SGD One-Class SVM with nu=0.05, learning_rate=optimal, eta0=0.0
+2026-01-25 13:23:36,035 - model_training_sgd_ocsvm - INFO - Training SGD One-Class SVM with nu=0.1, learning_rate=adaptive, eta0=0.0
+2026-01-25 13:23:36,035 - model_training_sgd_ocsvm - INFO - Training SGD One-Class SVM with nu=0.05, learning_rate=optimal, eta0=0.1
+2026-01-25 13:23:36,034 - model_training_sgd_ocsvm - INFO - Training SGD One-Class SVM with nu=0.05, learning_rate=constant, eta0=0.01
+2026-01-25 13:23:36,035 - model_training_sgd_ocsvm - INFO - Training SGD One-Class SVM with nu=0.1, learning_rate=optimal, eta0=0.01
+2026-01-25 13:23:36,035 - model_training_sgd_ocsvm - INFO - Training SGD One-Class SVM with nu=0.1, learning_rate=optimal, eta0=0.0
+2026-01-25 13:23:36,034 - model_training_sgd_ocsvm - INFO - Training SGD One-Class SVM with nu=0.1, learning_rate=optimal, eta0=0.1
+2026-01-25 13:23:36,035 - model_training_sgd_ocsvm - INFO - Training SGD One-Class SVM with nu=0.05, learning_rate=adaptive, eta0=0.1
+2026-01-25 13:23:36,035 - model_training_sgd_ocsvm - INFO - Training SGD One-Class SVM with nu=0.05, learning_rate=constant, eta0=0.0
+2026-01-25 13:23:36,035 - model_training_sgd_ocsvm - INFO - Training SGD One-Class SVM with nu=0.1, learning_rate=constant, eta0=0.0
+2026-01-25 13:23:36,035 - model_training_sgd_ocsvm - INFO - Training SGD One-Class SVM with nu=0.1, learning_rate=constant, eta0=0.01
+2026-01-25 13:23:36,040 - model_training_sgd_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-25 13:23:36,040 - model_training_sgd_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-25 13:23:36,040 - model_training_sgd_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-25 13:23:36,040 - model_training_sgd_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-25 13:23:36,040 - model_training_sgd_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-25 13:23:36,040 - model_training_sgd_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-25 13:23:36,040 - model_training_sgd_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-25 13:23:36,040 - model_training_sgd_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-25 13:23:36,040 - model_training_sgd_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-25 13:23:36,040 - model_training_sgd_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-25 13:23:36,040 - model_training_sgd_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-25 13:23:36,040 - model_training_sgd_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-25 13:23:36,040 - model_training_sgd_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-25 13:23:36,040 - model_training_sgd_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-25 13:23:36,040 - model_training_sgd_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-25 13:23:36,040 - model_training_sgd_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-25 13:23:36,822 - model_training_sgd_ocsvm - INFO - Feature statistics after scaling:
+2026-01-25 13:23:36,829 - model_training_sgd_ocsvm - INFO - Feature statistics after scaling:
+2026-01-25 13:23:36,830 - model_training_sgd_ocsvm - INFO - Feature statistics after scaling:
+2026-01-25 13:23:36,830 - model_training_sgd_ocsvm - INFO - Feature statistics after scaling:
+2026-01-25 13:23:36,831 - model_training_sgd_ocsvm - INFO - Feature statistics after scaling:
+2026-01-25 13:23:36,833 - model_training_sgd_ocsvm - INFO - Feature statistics after scaling:
+2026-01-25 13:23:36,834 - model_training_sgd_ocsvm - INFO - Feature statistics after scaling:
+2026-01-25 13:23:36,835 - model_training_sgd_ocsvm - INFO - Feature statistics after scaling:
+2026-01-25 13:23:36,836 - model_training_sgd_ocsvm - INFO - Feature statistics after scaling:
+2026-01-25 13:23:36,841 - model_training_sgd_ocsvm - INFO - Feature statistics after scaling:
+2026-01-25 13:23:36,841 - model_training_sgd_ocsvm - INFO - Feature statistics after scaling:
+2026-01-25 13:23:36,842 - model_training_sgd_ocsvm - INFO - Feature statistics after scaling:
+2026-01-25 13:23:36,847 - model_training_sgd_ocsvm - INFO - Feature statistics after scaling:
+2026-01-25 13:23:36,848 - model_training_sgd_ocsvm - INFO - Feature statistics after scaling:
+2026-01-25 13:23:36,853 - model_training_sgd_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-25 13:23:36,858 - model_training_sgd_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-25 13:23:36,858 - model_training_sgd_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-25 13:23:36,858 - model_training_sgd_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-25 13:23:36,859 - model_training_sgd_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-25 13:23:36,862 - model_training_sgd_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-25 13:23:36,862 - model_training_sgd_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-25 13:23:36,863 - model_training_sgd_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-25 13:23:36,864 - model_training_sgd_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-25 13:23:36,869 - model_training_sgd_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-25 13:23:36,869 - model_training_sgd_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-25 13:23:36,873 - model_training_sgd_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-25 13:23:36,874 - model_training_sgd_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-25 13:23:36,875 - model_training_sgd_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-25 13:23:36,892 - model_training_sgd_ocsvm - INFO - Feature statistics after scaling:
+2026-01-25 13:23:36,922 - model_training_sgd_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-25 13:23:36,923 - model_training_sgd_ocsvm - INFO - Feature statistics after scaling:
+2026-01-25 13:23:36,956 - model_training_sgd_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-25 13:23:37,011 - model_training_sgd_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-25 13:23:37,045 - model_training_sgd_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-25 13:23:37,045 - model_training_sgd_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-25 13:23:37,046 - model_training_sgd_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-25 13:23:37,046 - model_training_sgd_ocsvm - ERROR - Failed with nu=0.1, lr=optimal, eta0=0.0: The 'eta0' parameter of SGDOneClassSVM must be a float in the range (0.0, inf). Got 0.0 instead.
+2026-01-25 13:23:37,048 - model_training_sgd_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-25 13:23:37,049 - model_training_sgd_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-25 13:23:37,050 - model_training_sgd_ocsvm - ERROR - Failed with nu=0.1, lr=constant, eta0=0.0: The 'eta0' parameter of SGDOneClassSVM must be a float in the range (0.0, inf). Got 0.0 instead.
+2026-01-25 13:23:37,050 - model_training_sgd_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-25 13:23:37,050 - model_training_sgd_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-25 13:23:37,051 - model_training_sgd_ocsvm - ERROR - Failed with nu=0.1, lr=adaptive, eta0=0.0: The 'eta0' parameter of SGDOneClassSVM must be a float in the range (0.0, inf). Got 0.0 instead.
+2026-01-25 13:23:37,051 - model_training_sgd_ocsvm - ERROR - Failed with nu=0.05, lr=optimal, eta0=0.0: The 'eta0' parameter of SGDOneClassSVM must be a float in the range (0.0, inf). Got 0.0 instead.
+2026-01-25 13:23:37,052 - model_training_sgd_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-25 13:23:37,053 - model_training_sgd_ocsvm - ERROR - Failed with nu=0.05, lr=adaptive, eta0=0.0: The 'eta0' parameter of SGDOneClassSVM must be a float in the range (0.0, inf). Got 0.0 instead.
+2026-01-25 13:23:37,055 - model_training_sgd_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-25 13:23:37,057 - model_training_sgd_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-25 13:23:37,058 - model_training_sgd_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-25 13:23:37,063 - model_training_sgd_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-25 13:23:37,063 - model_training_sgd_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-25 13:23:37,064 - model_training_sgd_ocsvm - ERROR - Failed with nu=0.05, lr=constant, eta0=0.0: The 'eta0' parameter of SGDOneClassSVM must be a float in the range (0.0, inf). Got 0.0 instead.
+2026-01-25 13:23:37,119 - model_training_sgd_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-25 13:23:37,132 - model_training_sgd_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-25 13:23:37,155 - model_training_sgd_ocsvm - INFO - Training SGD One-Class SVM with nu=0.1, learning_rate=adaptive, eta0=0.01
+2026-01-25 13:23:37,155 - model_training_sgd_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-25 13:23:37,156 - model_training_sgd_ocsvm - INFO - Training SGD One-Class SVM with nu=0.1, learning_rate=adaptive, eta0=0.1
+2026-01-25 13:23:37,156 - model_training_sgd_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-25 13:23:37,158 - model_training_sgd_ocsvm - INFO - Training SGD One-Class SVM with nu=0.2, learning_rate=optimal, eta0=0.0
+2026-01-25 13:23:37,158 - model_training_sgd_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-25 13:23:37,159 - model_training_sgd_ocsvm - INFO - Training SGD One-Class SVM with nu=0.2, learning_rate=optimal, eta0=0.01
+2026-01-25 13:23:37,159 - model_training_sgd_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-25 13:23:37,161 - model_training_sgd_ocsvm - INFO - Training SGD One-Class SVM with nu=0.2, learning_rate=optimal, eta0=0.1
+2026-01-25 13:23:37,161 - model_training_sgd_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-25 13:23:37,166 - model_training_sgd_ocsvm - INFO - Training SGD One-Class SVM with nu=0.2, learning_rate=constant, eta0=0.0
+2026-01-25 13:23:37,166 - model_training_sgd_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-25 13:23:37,736 - model_training_sgd_ocsvm - INFO - Feature statistics after scaling:
+2026-01-25 13:23:37,741 - model_training_sgd_ocsvm - INFO - Feature statistics after scaling:
+2026-01-25 13:23:37,741 - model_training_sgd_ocsvm - INFO - Feature statistics after scaling:
+2026-01-25 13:23:37,754 - model_training_sgd_ocsvm - INFO - Feature statistics after scaling:
+2026-01-25 13:23:37,755 - model_training_sgd_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-25 13:23:37,760 - model_training_sgd_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-25 13:23:37,762 - model_training_sgd_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-25 13:23:37,774 - model_training_sgd_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-25 13:23:37,872 - model_training_sgd_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-25 13:23:37,873 - model_training_sgd_ocsvm - INFO - Feature statistics after scaling:
+2026-01-25 13:23:37,873 - model_training_sgd_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-25 13:23:37,874 - model_training_sgd_ocsvm - INFO - Feature statistics after scaling:
+2026-01-25 13:23:37,887 - model_training_sgd_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-25 13:23:37,896 - model_training_sgd_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-25 13:23:37,897 - model_training_sgd_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-25 13:23:37,899 - model_training_sgd_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-25 13:23:37,900 - model_training_sgd_ocsvm - ERROR - Failed with nu=0.2, lr=constant, eta0=0.0: The 'eta0' parameter of SGDOneClassSVM must be a float in the range (0.0, inf). Got 0.0 instead.
+2026-01-25 13:23:37,908 - model_training_sgd_ocsvm - INFO - Training SGD One-Class SVM with nu=0.2, learning_rate=constant, eta0=0.01
+2026-01-25 13:23:37,908 - model_training_sgd_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-25 13:23:37,926 - model_training_sgd_ocsvm - INFO - Training complete
+2026-01-25 13:23:37,926 - model_training_sgd_ocsvm - INFO -   Converged: 804907.0
+2026-01-25 13:23:37,926 - model_training_sgd_ocsvm - INFO -   Final offset: -1.2670
+2026-01-25 13:23:38,033 - model_training_sgd_ocsvm - INFO - Training complete
+2026-01-25 13:23:38,033 - model_training_sgd_ocsvm - INFO -   Converged: 804907.0
+2026-01-25 13:23:38,033 - model_training_sgd_ocsvm - INFO -   Final offset: -0.9940
+2026-01-25 13:23:38,040 - model_training_sgd_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-25 13:23:38,041 - model_training_sgd_ocsvm - ERROR - Failed with nu=0.2, lr=optimal, eta0=0.0: The 'eta0' parameter of SGDOneClassSVM must be a float in the range (0.0, inf). Got 0.0 instead.
+2026-01-25 13:23:38,042 - model_training_sgd_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-25 13:23:38,050 - model_training_sgd_ocsvm - INFO - Training SGD One-Class SVM with nu=0.2, learning_rate=constant, eta0=0.1
+2026-01-25 13:23:38,051 - model_training_sgd_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-25 13:23:38,064 - model_training_sgd_ocsvm - INFO - Params: nu=0.05, lr=constant, eta0=0.01 -> AUROC: 0.4832
+[Parallel(n_jobs=16)]: Done   9 out of  36 | elapsed: 21.3min remaining: 64.0min
+2026-01-25 13:23:38,156 - model_training_sgd_ocsvm - INFO - Training SGD One-Class SVM with nu=0.2, learning_rate=adaptive, eta0=0.0
+2026-01-25 13:23:38,157 - model_training_sgd_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-25 13:23:38,191 - model_training_sgd_ocsvm - INFO - Params: nu=0.1, lr=constant, eta0=0.01 -> AUROC: 0.4937
+2026-01-25 13:23:38,320 - model_training_sgd_ocsvm - INFO - Training complete
+2026-01-25 13:23:38,320 - model_training_sgd_ocsvm - INFO -   Converged: 1073209.0
+2026-01-25 13:23:38,320 - model_training_sgd_ocsvm - INFO -   Final offset: -9.1600
+2026-01-25 13:23:38,322 - model_training_sgd_ocsvm - INFO - Training SGD One-Class SVM with nu=0.2, learning_rate=adaptive, eta0=0.01
+2026-01-25 13:23:38,322 - model_training_sgd_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-25 13:23:38,470 - model_training_sgd_ocsvm - INFO - Feature statistics after scaling:
+2026-01-25 13:23:38,495 - model_training_sgd_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-25 13:23:38,502 - model_training_sgd_ocsvm - INFO - Params: nu=0.05, lr=constant, eta0=0.1 -> AUROC: 0.4930
+2026-01-25 13:23:38,504 - model_training_sgd_ocsvm - INFO - Training complete
+2026-01-25 13:23:38,504 - model_training_sgd_ocsvm - INFO -   Converged: 1475662.0
+2026-01-25 13:23:38,504 - model_training_sgd_ocsvm - INFO -   Final offset: -0.0015
+2026-01-25 13:23:38,543 - model_training_sgd_ocsvm - INFO - Training complete
+2026-01-25 13:23:38,543 - model_training_sgd_ocsvm - INFO -   Converged: 1341511.0
+2026-01-25 13:23:38,543 - model_training_sgd_ocsvm - INFO -   Final offset: -7.3000
+2026-01-25 13:23:38,579 - model_training_sgd_ocsvm - INFO - Training SGD One-Class SVM with nu=0.2, learning_rate=adaptive, eta0=0.1
+2026-01-25 13:23:38,579 - model_training_sgd_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-25 13:23:38,664 - model_training_sgd_ocsvm - INFO - Params: nu=0.1, lr=optimal, eta0=0.1 -> AUROC: 0.4875
+2026-01-25 13:23:38,667 - model_training_sgd_ocsvm - INFO - Feature statistics after scaling:
+2026-01-25 13:23:38,685 - model_training_sgd_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-25 13:23:38,744 - model_training_sgd_ocsvm - INFO - Training SGD One-Class SVM with nu=0.5, learning_rate=optimal, eta0=0.0
+2026-01-25 13:23:38,744 - model_training_sgd_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-25 13:23:38,761 - model_training_sgd_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-25 13:23:38,782 - model_training_sgd_ocsvm - INFO - Params: nu=0.1, lr=constant, eta0=0.1 -> AUROC: 0.5079
+2026-01-25 13:23:38,785 - model_training_sgd_ocsvm - INFO - Feature statistics after scaling:
+[Parallel(n_jobs=16)]: Done  13 out of  36 | elapsed: 21.4min remaining: 37.8min
+2026-01-25 13:23:38,790 - model_training_sgd_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-25 13:23:38,803 - model_training_sgd_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-25 13:23:38,842 - model_training_sgd_ocsvm - INFO - Training complete
+2026-01-25 13:23:38,842 - model_training_sgd_ocsvm - INFO -   Converged: 1475662.0
+2026-01-25 13:23:38,842 - model_training_sgd_ocsvm - INFO -   Final offset: -0.0015
+2026-01-25 13:23:38,848 - model_training_sgd_ocsvm - INFO - Feature statistics after scaling:
+2026-01-25 13:23:38,868 - model_training_sgd_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-25 13:23:38,889 - model_training_sgd_ocsvm - INFO - Training SGD One-Class SVM with nu=0.5, learning_rate=optimal, eta0=0.01
+2026-01-25 13:23:38,889 - model_training_sgd_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-25 13:23:38,917 - model_training_sgd_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-25 13:23:38,917 - model_training_sgd_ocsvm - ERROR - Failed with nu=0.2, lr=adaptive, eta0=0.0: The 'eta0' parameter of SGDOneClassSVM must be a float in the range (0.0, inf). Got 0.0 instead.
+2026-01-25 13:23:38,939 - model_training_sgd_ocsvm - INFO - Training SGD One-Class SVM with nu=0.5, learning_rate=optimal, eta0=0.1
+2026-01-25 13:23:38,939 - model_training_sgd_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-25 13:23:39,009 - model_training_sgd_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-25 13:23:39,052 - model_training_sgd_ocsvm - INFO - Feature statistics after scaling:
+2026-01-25 13:23:39,058 - model_training_sgd_ocsvm - INFO - Params: nu=0.1, lr=optimal, eta0=0.01 -> AUROC: 0.4875
+2026-01-25 13:23:39,067 - model_training_sgd_ocsvm - INFO - Training complete
+2026-01-25 13:23:39,067 - model_training_sgd_ocsvm - INFO -   Converged: 939058.0
+2026-01-25 13:23:39,067 - model_training_sgd_ocsvm - INFO -   Final offset: -0.0010
+2026-01-25 13:23:39,068 - model_training_sgd_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-25 13:23:39,161 - model_training_sgd_ocsvm - INFO - Training complete
+2026-01-25 13:23:39,161 - model_training_sgd_ocsvm - INFO -   Converged: 939058.0
+2026-01-25 13:23:39,161 - model_training_sgd_ocsvm - INFO -   Final offset: -0.0010
+2026-01-25 13:23:39,163 - model_training_sgd_ocsvm - INFO - Training SGD One-Class SVM with nu=0.5, learning_rate=constant, eta0=0.0
+2026-01-25 13:23:39,163 - model_training_sgd_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-25 13:23:39,169 - model_training_sgd_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-25 13:23:39,305 - model_training_sgd_ocsvm - INFO - Params: nu=0.2, lr=optimal, eta0=0.01 -> AUROC: 0.4936
+2026-01-25 13:23:39,334 - model_training_sgd_ocsvm - INFO - Params: nu=0.2, lr=optimal, eta0=0.1 -> AUROC: 0.4936
+[Parallel(n_jobs=16)]: Done  17 out of  36 | elapsed: 21.4min remaining: 23.9min
+2026-01-25 13:23:39,384 - model_training_sgd_ocsvm - INFO - Training SGD One-Class SVM with nu=0.5, learning_rate=constant, eta0=0.01
+2026-01-25 13:23:39,384 - model_training_sgd_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-25 13:23:39,385 - model_training_sgd_ocsvm - INFO - Feature statistics after scaling:
+2026-01-25 13:23:39,404 - model_training_sgd_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-25 13:23:39,488 - model_training_sgd_ocsvm - INFO - Training SGD One-Class SVM with nu=0.5, learning_rate=constant, eta0=0.1
+2026-01-25 13:23:39,488 - model_training_sgd_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-25 13:23:39,518 - model_training_sgd_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-25 13:23:39,518 - model_training_sgd_ocsvm - ERROR - Failed with nu=0.5, lr=optimal, eta0=0.0: The 'eta0' parameter of SGDOneClassSVM must be a float in the range (0.0, inf). Got 0.0 instead.
+2026-01-25 13:23:39,529 - model_training_sgd_ocsvm - INFO - Training SGD One-Class SVM with nu=0.5, learning_rate=adaptive, eta0=0.0
+2026-01-25 13:23:39,529 - model_training_sgd_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-25 13:23:39,533 - model_training_sgd_ocsvm - INFO - Feature statistics after scaling:
+2026-01-25 13:23:39,552 - model_training_sgd_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-25 13:23:39,667 - model_training_sgd_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-25 13:23:39,728 - model_training_sgd_ocsvm - INFO - Feature statistics after scaling:
+2026-01-25 13:23:39,730 - model_training_sgd_ocsvm - INFO - Feature statistics after scaling:
+2026-01-25 13:23:39,746 - model_training_sgd_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-25 13:23:39,752 - model_training_sgd_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-25 13:23:39,803 - model_training_sgd_ocsvm - INFO - Training complete
+2026-01-25 13:23:39,804 - model_training_sgd_ocsvm - INFO -   Converged: 804907.0
+2026-01-25 13:23:39,804 - model_training_sgd_ocsvm - INFO -   Final offset: -0.8280
+2026-01-25 13:23:39,809 - model_training_sgd_ocsvm - INFO - Training complete
+2026-01-25 13:23:39,810 - model_training_sgd_ocsvm - INFO -   Converged: 939058.0
+2026-01-25 13:23:39,810 - model_training_sgd_ocsvm - INFO -   Final offset: -4.8600
+2026-01-25 13:23:39,859 - model_training_sgd_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-25 13:23:39,902 - model_training_sgd_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-25 13:23:39,902 - model_training_sgd_ocsvm - ERROR - Failed with nu=0.5, lr=constant, eta0=0.0: The 'eta0' parameter of SGDOneClassSVM must be a float in the range (0.0, inf). Got 0.0 instead.
+2026-01-25 13:23:39,911 - model_training_sgd_ocsvm - INFO - Training SGD One-Class SVM with nu=0.5, learning_rate=adaptive, eta0=0.01
+2026-01-25 13:23:39,911 - model_training_sgd_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-25 13:23:39,966 - model_training_sgd_ocsvm - INFO - Params: nu=0.2, lr=constant, eta0=0.01 -> AUROC: 0.5350
+2026-01-25 13:23:39,986 - model_training_sgd_ocsvm - INFO - Params: nu=0.2, lr=constant, eta0=0.1 -> AUROC: 0.4887
+[Parallel(n_jobs=16)]: Done  21 out of  36 | elapsed: 21.4min remaining: 15.3min
+2026-01-25 13:23:40,022 - model_training_sgd_ocsvm - INFO - Feature statistics after scaling:
+2026-01-25 13:23:40,045 - model_training_sgd_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-25 13:23:40,048 - model_training_sgd_ocsvm - INFO - Training SGD One-Class SVM with nu=0.5, learning_rate=adaptive, eta0=0.1
+2026-01-25 13:23:40,048 - model_training_sgd_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-25 13:23:40,128 - model_training_sgd_ocsvm - INFO - Feature statistics after scaling:
+2026-01-25 13:23:40,138 - model_training_sgd_ocsvm - INFO - Feature statistics after scaling:
+2026-01-25 13:23:40,146 - model_training_sgd_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-25 13:23:40,154 - model_training_sgd_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-25 13:23:40,170 - model_training_sgd_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-25 13:23:40,253 - model_training_sgd_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-25 13:23:40,262 - model_training_sgd_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-25 13:23:40,262 - model_training_sgd_ocsvm - ERROR - Failed with nu=0.5, lr=adaptive, eta0=0.0: The 'eta0' parameter of SGDOneClassSVM must be a float in the range (0.0, inf). Got 0.0 instead.
+2026-01-25 13:23:40,451 - model_training_sgd_ocsvm - INFO - Feature statistics after scaling:
+2026-01-25 13:23:40,468 - model_training_sgd_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-25 13:23:40,562 - model_training_sgd_ocsvm - INFO - Feature statistics after scaling:
+2026-01-25 13:23:40,575 - model_training_sgd_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-25 13:23:40,579 - model_training_sgd_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-25 13:23:40,677 - model_training_sgd_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-25 13:23:41,014 - model_training_sgd_ocsvm - INFO - Training complete
+2026-01-25 13:23:41,015 - model_training_sgd_ocsvm - INFO -   Converged: 939058.0
+2026-01-25 13:23:41,015 - model_training_sgd_ocsvm - INFO -   Final offset: -0.0000
+2026-01-25 13:23:41,103 - model_training_sgd_ocsvm - INFO - Params: nu=0.5, lr=optimal, eta0=0.01 -> AUROC: 0.4895
+2026-01-25 13:23:41,219 - model_training_sgd_ocsvm - INFO - Training complete
+2026-01-25 13:23:41,219 - model_training_sgd_ocsvm - INFO -   Converged: 939058.0
+2026-01-25 13:23:41,219 - model_training_sgd_ocsvm - INFO -   Final offset: -0.0000
+2026-01-25 13:23:41,353 - model_training_sgd_ocsvm - INFO - Params: nu=0.5, lr=optimal, eta0=0.1 -> AUROC: 0.4895
+2026-01-25 13:23:41,431 - model_training_sgd_ocsvm - INFO - Training complete
+2026-01-25 13:23:41,432 - model_training_sgd_ocsvm - INFO -   Converged: 804907.0
+2026-01-25 13:23:41,432 - model_training_sgd_ocsvm - INFO -   Final offset: -0.2000
+2026-01-25 13:23:41,535 - model_training_sgd_ocsvm - INFO - Params: nu=0.5, lr=constant, eta0=0.1 -> AUROC: 0.5077
+[Parallel(n_jobs=16)]: Done  25 out of  36 | elapsed: 21.4min remaining:  9.4min
+2026-01-25 13:23:41,573 - model_training_sgd_ocsvm - INFO - Training complete
+2026-01-25 13:23:41,573 - model_training_sgd_ocsvm - INFO -   Converged: 939058.0
+2026-01-25 13:23:41,573 - model_training_sgd_ocsvm - INFO -   Final offset: 0.0150
+2026-01-25 13:23:41,661 - model_training_sgd_ocsvm - INFO - Params: nu=0.5, lr=constant, eta0=0.01 -> AUROC: 0.4858
+2026-01-25 13:23:42,324 - model_training_sgd_ocsvm - INFO - Training complete
+2026-01-25 13:23:42,324 - model_training_sgd_ocsvm - INFO -   Converged: 5366041.0
+2026-01-25 13:23:42,324 - model_training_sgd_ocsvm - INFO -   Final offset: -0.0001
+2026-01-25 13:23:42,421 - model_training_sgd_ocsvm - INFO - Params: nu=0.05, lr=adaptive, eta0=0.01 -> AUROC: 0.5073
+2026-01-25 13:23:42,810 - model_training_sgd_ocsvm - INFO - Training complete
+2026-01-25 13:23:42,810 - model_training_sgd_ocsvm - INFO -   Converged: 5500192.0
+2026-01-25 13:23:42,810 - model_training_sgd_ocsvm - INFO -   Final offset: -0.0001
+2026-01-25 13:23:42,942 - model_training_sgd_ocsvm - INFO - Params: nu=0.1, lr=adaptive, eta0=0.01 -> AUROC: 0.5189
+2026-01-25 13:23:43,584 - model_training_sgd_ocsvm - INFO - Training complete
+2026-01-25 13:23:43,585 - model_training_sgd_ocsvm - INFO -   Converged: 7512457.0
+2026-01-25 13:23:43,585 - model_training_sgd_ocsvm - INFO -   Final offset: -0.0000
+2026-01-25 13:23:43,732 - model_training_sgd_ocsvm - INFO - Params: nu=0.05, lr=adaptive, eta0=0.1 -> AUROC: 0.4931
+[Parallel(n_jobs=16)]: Done  29 out of  36 | elapsed: 21.4min remaining:  5.2min
+2026-01-25 13:23:44,107 - model_training_sgd_ocsvm - INFO - Training complete
+2026-01-25 13:23:44,107 - model_training_sgd_ocsvm - INFO -   Converged: 5500192.0
+2026-01-25 13:23:44,107 - model_training_sgd_ocsvm - INFO -   Final offset: -0.0001
+2026-01-25 13:23:44,226 - model_training_sgd_ocsvm - INFO - Params: nu=0.2, lr=adaptive, eta0=0.01 -> AUROC: 0.5098
+2026-01-25 13:23:44,471 - model_training_sgd_ocsvm - INFO - Training complete
+2026-01-25 13:23:44,471 - model_training_sgd_ocsvm - INFO -   Converged: 7646608.0
+2026-01-25 13:23:44,471 - model_training_sgd_ocsvm - INFO -   Final offset: -0.0000
+2026-01-25 13:23:44,550 - model_training_sgd_ocsvm - INFO - Params: nu=0.1, lr=adaptive, eta0=0.1 -> AUROC: 0.4939
+2026-01-25 13:23:46,050 - model_training_sgd_ocsvm - INFO - Training complete
+2026-01-25 13:23:46,050 - model_training_sgd_ocsvm - INFO -   Converged: 7914910.0
+2026-01-25 13:23:46,050 - model_training_sgd_ocsvm - INFO -   Final offset: -0.0000
+2026-01-25 13:23:46,138 - model_training_sgd_ocsvm - INFO - Params: nu=0.2, lr=adaptive, eta0=0.1 -> AUROC: 0.5128
+2026-01-25 13:23:46,729 - model_training_sgd_ocsvm - INFO - Training complete
+2026-01-25 13:23:46,730 - model_training_sgd_ocsvm - INFO -   Converged: 5634343.0
+2026-01-25 13:23:46,731 - model_training_sgd_ocsvm - INFO -   Final offset: -0.0000
+2026-01-25 13:23:46,836 - model_training_sgd_ocsvm - INFO - Params: nu=0.5, lr=adaptive, eta0=0.01 -> AUROC: 0.4989
+[Parallel(n_jobs=16)]: Done  33 out of  36 | elapsed: 21.5min remaining:  2.0min
+2026-01-25 13:23:47,400 - model_training_sgd_ocsvm - INFO - Training complete
+2026-01-25 13:23:47,401 - model_training_sgd_ocsvm - INFO -   Converged: 14220007.0
+2026-01-25 13:23:47,401 - model_training_sgd_ocsvm - INFO -   Final offset: -8.7137
+2026-01-25 13:23:47,474 - model_training_sgd_ocsvm - INFO - Params: nu=0.05, lr=optimal, eta0=0.01 -> AUROC: 0.4938
+2026-01-25 13:23:47,687 - model_training_sgd_ocsvm - INFO - Training complete
+2026-01-25 13:23:47,687 - model_training_sgd_ocsvm - INFO -   Converged: 7512457.0
+2026-01-25 13:23:47,687 - model_training_sgd_ocsvm - INFO -   Final offset: 0.0000
+2026-01-25 13:23:47,755 - model_training_sgd_ocsvm - INFO - Params: nu=0.5, lr=adaptive, eta0=0.1 -> AUROC: 0.4858
+2026-01-25 13:23:48,047 - model_training_sgd_ocsvm - INFO - Training complete
+2026-01-25 13:23:48,048 - model_training_sgd_ocsvm - INFO -   Converged: 14220007.0
+2026-01-25 13:23:48,048 - model_training_sgd_ocsvm - INFO -   Final offset: -8.7137
+2026-01-25 13:23:48,152 - model_training_sgd_ocsvm - INFO - Params: nu=0.05, lr=optimal, eta0=0.1 -> AUROC: 0.4938
+[Parallel(n_jobs=16)]: Done  36 out of  36 | elapsed: 21.5min finished
+2026-01-25 13:23:48,264 - model_training_sgd_ocsvm - INFO - ============================================================
+2026-01-25 13:23:48,265 - model_training_sgd_ocsvm - INFO - Best AUROC: 0.5350
+2026-01-25 13:23:48,265 - model_training_sgd_ocsvm - INFO - Best params: {'nu': 0.2, 'learning_rate': 'constant', 'eta0': 0.01}
+2026-01-25 13:23:48,265 - model_training_sgd_ocsvm - INFO - ============================================================
+2026-01-25 13:23:48,266 - model_training_sgd_ocsvm - INFO - Saving hyperparameter results to /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection_ocsvm/outputs_glove/hyperparameter_tuning_results_sgd_ocsvm.json
+2026-01-25 13:23:48,897 - model_training_sgd_ocsvm - INFO - Training final model with best parameters...
+2026-01-25 13:23:48,898 - model_training_sgd_ocsvm - INFO - Training SGD One-Class SVM with nu=0.2, learning_rate=constant, eta0=0.01
+2026-01-25 13:23:48,898 - model_training_sgd_ocsvm - INFO - Normalizing features with StandardScaler...
+2026-01-25 13:23:49,302 - model_training_sgd_ocsvm - INFO - Feature statistics after scaling:
+2026-01-25 13:23:49,316 - model_training_sgd_ocsvm - INFO -   Mean: [ 1.0596351e-08 -9.4260386e-09 -1.5625053e-08  1.3582171e-08
+  6.4564922e-09]... (should be ~0)
+2026-01-25 13:23:49,399 - model_training_sgd_ocsvm - INFO -   Std:  [0.9999822  0.99998504 0.9999869  0.99998605 0.9999861 ]... (should be ~1)
+2026-01-25 13:23:49,954 - model_training_sgd_ocsvm - INFO - Training complete
+2026-01-25 13:23:49,954 - model_training_sgd_ocsvm - INFO -   Converged: 804907.0
+2026-01-25 13:23:49,955 - model_training_sgd_ocsvm - INFO -   Final offset: -0.8280
+2026-01-25 13:23:49,955 - model_training_sgd_ocsvm - INFO - Saving model to /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection_ocsvm/outputs_glove/best_sgd_ocsvm.pkl
+2026-01-25 13:23:50,249 - model_training_sgd_ocsvm - INFO - Saving scaler to /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection_ocsvm/outputs_glove/best_sgd_ocsvm_scaler.pkl
+2026-01-25 13:23:50,740 - __main__ - INFO - SGD-OC-SVM training complete
+2026-01-25 13:23:50,740 - __main__ - INFO - Nu parameter: 0.2
+2026-01-25 13:23:50,740 - __main__ - INFO - Learning rate: constant
+2026-01-25 13:23:50,740 - __main__ - INFO - Iterations: 804907.0
+2026-01-25 13:23:50,740 - __main__ - INFO - 
+2026-01-25 13:23:50,740 - __main__ - INFO - STEP 4/5: Evaluation
+2026-01-25 13:23:50,740 - __main__ - INFO - --------------------------------------------------------------------------------
+2026-01-25 13:23:50,756 - __main__ - INFO - Test set: 184,459 samples
+2026-01-25 13:23:50,756 - __main__ - INFO -   Simple (inliers):  16,770
+2026-01-25 13:23:50,757 - __main__ - INFO -   Normal (outliers): 167,689
+2026-01-25 13:23:50,757 - evaluation - INFO - ============================================================
+2026-01-25 13:23:50,757 - evaluation - INFO - MODEL EVALUATION
+2026-01-25 13:23:50,757 - evaluation - INFO - ============================================================
+2026-01-25 13:23:50,978 - evaluation - INFO - AUROC: 0.5306
+2026-01-25 13:23:51,030 - evaluation - INFO - AUPR (Outlier): 0.9181
+2026-01-25 13:23:51,030 - evaluation - INFO - AUPR (Inlier): 0.1003
+2026-01-25 13:23:51,203 - evaluation - INFO - Optimal threshold: -2.0000
+2026-01-25 13:23:51,204 - evaluation - INFO - Best F1: 0.9069
+2026-01-25 13:23:51,204 - evaluation - INFO - Precision at optimal: 0.9114
+2026-01-25 13:23:51,204 - evaluation - INFO - Recall at optimal: 0.9023
+2026-01-25 13:23:51,302 - evaluation - INFO - Confusion Matrix:
+2026-01-25 13:23:51,303 - evaluation - INFO -   TN=2069, FP=14701
+2026-01-25 13:23:51,303 - evaluation - INFO -   FN=16377, TP=151312
+2026-01-25 13:23:51,303 - evaluation - INFO - TPR (Recall): 0.9023
+2026-01-25 13:23:51,303 - evaluation - INFO - FPR: 0.8766
+2026-01-25 13:23:51,312 - evaluation - INFO - Score Distribution:
+2026-01-25 13:23:51,312 - evaluation - INFO -   Inlier (simple):  mean=-0.8186, std=1.0358
+2026-01-25 13:23:51,312 - evaluation - INFO -   Outlier (normal): mean=-0.6983, std=1.0352
+2026-01-25 13:23:51,312 - evaluation - INFO -   Separation: 0.1202
+2026-01-25 13:23:51,312 - evaluation - INFO - ============================================================
+2026-01-25 13:23:51,312 - evaluation - INFO - Saving evaluation results to /home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection_ocsvm/outputs_glove/evaluation_results.json
+2026-01-25 13:23:52,087 - __main__ - INFO - 
+2026-01-25 13:23:52,087 - __main__ - INFO - ================================================================================
+2026-01-25 13:23:52,087 - __main__ - INFO - EVALUATION RESULTS (SGD-OC-SVM)
+2026-01-25 13:23:52,087 - __main__ - INFO - ================================================================================
+2026-01-25 13:23:52,087 - __main__ - INFO - AUROC: 0.5306
+2026-01-25 13:23:52,087 - __main__ - INFO - Best F1 Score: 0.9069
+2026-01-25 13:23:52,088 - __main__ - ERROR - Pipeline failed with error: 'best_threshold'
+Traceback (most recent call last):
+  File "/home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection_ocsvm/main_sgd_ocsvm.py", line 240, in <module>
+    main(args)
+  File "/home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection_ocsvm/main_sgd_ocsvm.py", line 123, in main
+    logger.info(f"  Threshold: {results['best_threshold']:.4f}")
+                                ~~~~~~~^^^^^^^^^^^^^^^^^^
+KeyError: 'best_threshold'
+Traceback (most recent call last):
+  File "/home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection_ocsvm/main_sgd_ocsvm.py", line 240, in <module>
+    main(args)
+  File "/home/s07drexh/mlai-lab/lab_beyond_shallow_heuristics-main/anomaly_detection_ocsvm/main_sgd_ocsvm.py", line 123, in main
+    logger.info(f"  Threshold: {results['best_threshold']:.4f}")
+                                ~~~~~~~^^^^^^^^^^^^^^^^^^
+KeyError: 'best_threshold'
